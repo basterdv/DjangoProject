@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from django.template.response import TemplateResponse
 
-# Create your views here.
+
+def index(request):
+    return TemplateResponse(request, 'index.html')
+
+
+def sign_in(request):
+    return TemplateResponse(request, "sing-in.html")
+
+
+def register(request):
+    return TemplateResponse(request, "register.html")

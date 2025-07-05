@@ -17,6 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from exchange_things import views
+
 urlpatterns = [
+    path('', views.index, name='index'),
+    path('sign_in/', views.sign_in, name='sign_in'),
+    path('register/', views.register, name='register'),
     path("admin/", admin.site.urls),
 ]
