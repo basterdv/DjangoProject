@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DeveloperToolsToolWindowSettingsV1" lastSelectedContentNodeId="base64-encoder-decoder" pluginVersion="7.1.0">
+    <developerToolsConfigurations>
+      <developerToolConfiguration developerToolId="base64-encoder-decoder" id="78ae6103-c1cd-4ca7-a5ed-6cc346ef733f" name="Workbench">
+        <properties>
+          <property key="sourceText" type="INPUT" value="kotlin.String|def register(request):&#10;    return TemplateResponse(request, &quot;register.html&quot;)&#10;" />
+          <property key="targetText" type="INPUT" value="kotlin.String|ZGVmIHJlZ2lzdGVyKHJlcXVlc3QpOgogICAgcmV0dXJuIFRlbXBsYXRlUmVzcG9uc2UocmVxdWVzdCwgInJlZ2lzdGVyLmh0bWwiKQo=" />
+        </properties>
+      </developerToolConfiguration>
+    </developerToolsConfigurations>
+  </component>
+</project>
