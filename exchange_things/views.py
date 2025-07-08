@@ -9,12 +9,15 @@ from django.contrib.auth import login
 from .forms import RegisterUserForm
 from .models import Ad
 
+
 class Login(LoginView):
     template_name = 'accounts/login.html'
 
 
 class Logout(LogoutView):
     next_page = '/'
+
+
 class RegisterUser(FormView):
     template_name = 'accounts/register.html'
     form_class = RegisterUserForm
@@ -25,12 +28,15 @@ class RegisterUser(FormView):
         login(self.request, username)
         return super().form_valid(form)
 
+
 def profile(request):
     return render(request, 'accounts/profile.html')
 
 
 def custom_404_view(request, *args, **kwargs):
-    return TemplateResponse(request, '404.html',status=404)
+    return TemplateResponse(request, '404.html', status=404)
+
+
 def index(request):
     try:
         ad_db = Ad.objects.all()
@@ -38,25 +44,23 @@ def index(request):
         #     print(f'{card.id}: {card.title}')
 
         context = {'ad_db': ad_db}
-        return render(request, 'index.html',context=context)
+        return render(request, 'index.html', context=context)
     except Ad.DoesNotExist:
         return TemplateResponse(request, '404.html')
     except OperationalError:
         return TemplateResponse(request, '404.html')
 
 
-
-
-def sign_in(request):
-    return TemplateResponse(request, "accounts/sing-in.html")
-
-
-def register(request):
-    return TemplateResponse(request, "accounts/register.html")
+# def sign_in(request):
+#     return TemplateResponse(request, "accounts/sing-in.html")
+#
+#
+# def register(request):
+#     return TemplateResponse(request, "accounts/register.html")
 
 
 def ad(request):
-    return TemplateResponse(request, "ad.html")
+    return TemplateResponse(request, "ad/ad.html")
 
 
 def account(request):
@@ -64,4 +68,4 @@ def account(request):
 
 
 def exchange(request):
-    return TemplateResponse(request, "exchange.html")
+    return TemplateResponse(request, "ad/exchange.html")
