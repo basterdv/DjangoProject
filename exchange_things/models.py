@@ -1,21 +1,34 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 
-# class AccountManager(BaseUserManager):
-#     def create_user(self, username, email, password, **extra_fields):
-#         pass
-#     def create_superuser(self, username, email, password, **extra_fields):
-#         pass
-#     def create_account(self, username, email, password, **extra_fields):
-#         pass
-#     def create_user_account(self, username, email, password, **extra_fields):
-#         pass
+
+
+class CustomUser(AbstractUser):
+    pass
+    # username = None
+    # email = models.EmailField(
+    #     verbose_name='email address',
+    #     max_length=255,
+    #     unique=True,
+    # )
+    #
+    # USERNAME_FIELD = 'email'
+    # REQUIRED_FIELDS = []
+    #
+    # # objects = MyUserManager()
+    #
+    # def __str__(self):
+    #     return self.email
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
     username = models.CharField()
     email = models.EmailField()
     password = models.CharField(max_length=128)
+
+    USERNAME_FIELD = 'email'
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)

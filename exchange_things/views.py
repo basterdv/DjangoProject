@@ -1,8 +1,33 @@
+from django.contrib.auth.admin import UserAdmin
 from django.db.utils import OperationalError
 from django.shortcuts import render
 from django.template.response import TemplateResponse
-
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views import View
+from django.views.generic import TemplateView, FormView
+from django.contrib.auth import login
+from .forms import RegisterUserForm
 from .models import Ad
+
+class Login(LoginView):
+    template_name = 'accounts/login.html'
+
+
+class Logout(LogoutView):
+    next_page = '/'
+class RegisterUser(FormView):
+    template_name = 'accounts/register.html'
+    form_class = RegisterUserForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        username = form.save()
+        login(self.request, username)
+        return super().form_valid(form)
+
+def profile(request):
+    return render(request, 'accounts/profile.html')
+
 
 def custom_404_view(request, *args, **kwargs):
     return TemplateResponse(request, '404.html',status=404)
@@ -23,11 +48,11 @@ def index(request):
 
 
 def sign_in(request):
-    return TemplateResponse(request, "sing-in.html")
+    return TemplateResponse(request, "accounts/sing-in.html")
 
 
 def register(request):
-    return TemplateResponse(request, "register.html")
+    return TemplateResponse(request, "accounts/register.html")
 
 
 def ad(request):
@@ -35,7 +60,7 @@ def ad(request):
 
 
 def account(request):
-    return TemplateResponse(request, "account.html")
+    return TemplateResponse(request, "accounts/profile.html")
 
 
 def exchange(request):
