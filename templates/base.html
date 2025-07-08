@@ -91,15 +91,18 @@
                     <ul class="list-unstyled">
                         {% if user.is_authenticated %}
                             <form method="post" action="{% url 'logout' %}">
-{#                            <form method="post">#}
+                                {#                            <form method="post">#}
                                 {% csrf_token %}
+                                {% if  user.is_staff %}
+                                    <li><a href="/admin/" class="text-white">Админка</a></li>
+                                {% endif %}
                                 <li><a href="{% url 'profile' %}" class="text-white">Профиль</a></li>
-                                <p>Пользователь - {{ user }}</p>
-{#                                <li><a href="{% url 'logout' %}" class="text-white">Выход</a></li>#}
+                                <p>Пользователь - {{ user.username }}</p>
+                                {#                                <li><a href="{% url 'logout' %}" class="text-white">Выход</a></li>#}
+
                                 <button data-bs-toggle="modal" type="submit">Выход</button>
                                 {% else %}
-                                <li><a href="/admin/" class="text-white">Админка</a></li>
-{#                                <li><a href="/sign_in/" class="text-white">Вход</a></li>#}
+
                                 <li><a href="{% url 'login' %}" class="text-white">Вход</a></li>
                                 <li><a href="{% url 'register' %}" class="text-white">Регистрация</a></li>
                             </form>

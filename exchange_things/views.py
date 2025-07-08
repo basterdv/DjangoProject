@@ -6,8 +6,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth import login
-from .forms import RegisterUserForm
-from .models import Ad
+from .forms import RegisterUserForm,AdForm
+from .models import Ad,Category
 
 
 class Login(LoginView):
@@ -51,16 +51,20 @@ def index(request):
         return TemplateResponse(request, '404.html')
 
 
-# def sign_in(request):
-#     return TemplateResponse(request, "accounts/sing-in.html")
-#
-#
-# def register(request):
-#     return TemplateResponse(request, "accounts/register.html")
-
-
 def ad(request):
-    return TemplateResponse(request, "ad/ad.html")
+    outperform = AdForm()
+    # try:
+    categories = Category.objects.all()
+    context = {'categories': categories}
+    # success_url = '/'
+    if request.method == "POST":
+        outperform = AdForm(request.POST)
+        if outperform.is_valid():
+            pass
+    return render(request, "ad/ad.html", {"form": outperform})
+    # return TemplateResponse(request, "ad/ad.html")
+
+    # except Category.DoesNotExist:
 
 
 def account(request):
