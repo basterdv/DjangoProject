@@ -9,7 +9,7 @@ from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth import login
 from .forms import RegisterUserForm,AdForm
-from .models import Ad,Category,CustomUser
+from .models import Advert,Category,CustomUser
 
 
 class Login(LoginView):
@@ -41,13 +41,13 @@ def custom_404_view(request, *args, **kwargs):
 
 def index(request):
     try:
-        ad_db = Ad.objects.all()
+        ad_db = Advert.objects.all()
         # for card in ad_db:
         #     print(f'{card.id}: {card.title}')
 
         context = {'ad_db': ad_db}
         return render(request, 'index.html', context=context)
-    except Ad.DoesNotExist:
+    except Advert.DoesNotExist:
         return TemplateResponse(request, '404.html')
     except OperationalError:
         return TemplateResponse(request, '404.html')
@@ -56,7 +56,7 @@ def index(request):
 def ad(request):
 
     if request.method == 'POST' and 'submit_ad_form' in request.POST:
-        ad_form = AdForm(request.POST)
+        ad_form = AdForm(request.POST, request.FILES)
         if ad_form.is_valid():
 
             if request.user.is_authenticated:
@@ -65,14 +65,6 @@ def ad(request):
                 my_instance = ad_form.save(commit=False)
                 parent_instance = CustomUser.objects.get(id=request.user.id)
                 my_instance.user_id = parent_instance
-
-                # my_instance.created_at = now()
-                # my_instance.parent = CustomUser.objects.get(id=request.user.id).id
-                # my_instance.user = CustomUser.objects.aget(id=request.user.id)
-                # # Save the form data and associate it with the user
-                # instance = ad_form.save(commit=False)  # Don't save yet to add user
-                # instance.user = user_id  # Assign the user to a ForeignKey field in your model
-
                 my_instance.save()  # Saves the data to the database
                 return redirect('/')
     else:

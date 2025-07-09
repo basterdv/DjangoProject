@@ -31,8 +31,9 @@ class CustomUser(AbstractUser):
 #     USERNAME_FIELD = 'email'
 
 class Category(models.Model):
+    """ Категории объявлений """
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128,unique=True)
+    name = models.CharField('Название категории',max_length=128,unique=True)
     # slug = models.SlugField(max_length=128, unique=True)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
 
@@ -42,17 +43,19 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Ad(models.Model):
+class Advert(models.Model):
+    """ Объявления """
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey('CustomUser', null=False, on_delete=models.CASCADE)
     category_id = models.ForeignKey('Category', null=False, on_delete=models.CASCADE)
-    title = models.TextField()
-    description = models.TextField()
-    image = models.ImageField(null=True)
-    conditions = models.BooleanField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    title = models.TextField("Заголовок")
+    description = models.TextField('Описание',null=True)
+    image = models.ImageField("Картинка",upload_to='images/', default=None,null=True)
+    conditions = models.BooleanField('Состояние',default=0)
+    created_at = models.DateTimeField('Дата создания',auto_now_add=True)
 
 class ExchangeProposal(models.Model):
+    """ Обмен   """
     # status choice
     ChoiceField = (
         ('1','ожидает'),
@@ -60,8 +63,8 @@ class ExchangeProposal(models.Model):
         ('3','отклонена')
     )
     id = models.AutoField(primary_key=True)
-    sender_id = models.ForeignKey('Ad', null=False,on_delete=models.CASCADE,related_name='sender_id')
-    receiver_id = models.ForeignKey('Ad',null=False, on_delete=models.CASCADE,related_name='receiver_id')
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=300, choices=ChoiceField)
+    sender_id = models.ForeignKey('Advert', null=False,on_delete=models.CASCADE,related_name='sender_id')
+    receiver_id = models.ForeignKey('Advert',null=False, on_delete=models.CASCADE,related_name='receiver_id')
+    comment = models.TextField('Комментарий к сделки')
+    created_at = models.DateTimeField('Дата создания сделки',auto_now_add=True)
+    status = models.CharField('Статус сделки',max_length=300, choices=ChoiceField)
