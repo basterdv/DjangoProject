@@ -1,13 +1,15 @@
+from urllib.parse import uses_query
+
 from django.contrib.auth.admin import UserAdmin
 from django.db.utils import OperationalError
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.response import TemplateResponse
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth import login
 from .forms import RegisterUserForm,AdForm
-from .models import Ad,Category
+from .models import Ad,Category,CustomUser
 
 
 class Login(LoginView):
@@ -52,19 +54,48 @@ def index(request):
 
 
 def ad(request):
-    outperform = AdForm()
-    # try:
-    categories = Category.objects.all()
-    context = {'categories': categories}
-    # success_url = '/'
-    if request.method == "POST":
-        outperform = AdForm(request.POST)
-        if outperform.is_valid():
-            pass
-    return render(request, "ad/ad.html", {"form": outperform})
-    # return TemplateResponse(request, "ad/ad.html")
 
-    # except Category.DoesNotExist:
+    if request.method == 'POST' and 'submit_ad_form' in request.POST:
+        ad_form = AdForm(request.POST)
+        if ad_form.is_valid():
+
+            if request.user.is_authenticated:
+                us_id = CustomUser.objects.get(id=request.user.id)
+                # user_id = request.user.id
+                my_instance = ad_form.save(commit=False)
+                parent_instance = CustomUser.objects.get(id=request.user.id)
+                my_instance.user_id = parent_instance
+
+                # my_instance.created_at = now()
+                # my_instance.parent = CustomUser.objects.get(id=request.user.id).id
+                # my_instance.user = CustomUser.objects.aget(id=request.user.id)
+                # # Save the form data and associate it with the user
+                # instance = ad_form.save(commit=False)  # Don't save yet to add user
+                # instance.user = user_id  # Assign the user to a ForeignKey field in your model
+
+                my_instance.save()  # Saves the data to the database
+                return redirect('/')
+    else:
+        ad_form = AdForm()
+
+    return render(request, "ad/ad.html", {'ad_form': ad_form})
+    # ad_form = AdForm()
+    #
+    # categories = Category.objects.all()
+    #
+    # # context = {'categories': categories}
+    # # success_url = '/'
+    # if request.method == "POST":
+    #     print('post')
+    #     if 'submit_ad_form' in request.POST:
+    #         outperform = AdForm(request.POST)
+    #         if outperform.is_valid():
+    #             return redirect('/')
+    # context = {'ad_form':ad_form}
+    # return render(request, "ad/ad.html", context=context)
+    # # return TemplateResponse(request, "ad/ad.html")
+    #
+    # # except Category.DoesNotExist:
 
 
 def account(request):

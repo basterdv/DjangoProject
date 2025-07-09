@@ -3,5 +3,8 @@
 {% block title %}Обмен предложениями{% endblock title %}
 
 {% block content %}
-
+    <form>
+        {% csrf_token %}
+        <button type="submit" formaction="{% url 'logout' %}" formmethod="post">Logout</button>
+    </form>
 {% endblock %}

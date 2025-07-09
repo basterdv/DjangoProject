@@ -20,53 +20,55 @@
 
             <div class="row g-5">
                 <div class="col-md-7 col-lg-8 text-center">
-                    <form method="post" class="needs-validation" novalidate>
+                    <form method="post" class="needs-validation" novalidate action="{% url 'ad' %}">
                         {% csrf_token %}
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="title" class="form-label">Заголовок</label>
-                                <input type="text" class="form-control" id="title" placeholder="" value="" required>
-                                <div class="invalid-feedback">
-                                    Valid first name is required.
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label for="lastName" class="form-label">Категория</label>
-
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected></option>
-                                    {% for cat in categories %}
-                                        <option value={{ cat.id }}>{{ cat.id }}:{{ cat.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-12"><label for="username" class="form-label">Описание</label>
+                        {{ ad_form }}
+                        <button type="submit" name='submit_ad_form'>Submit</button>
+{#                        <div class="row g-3">#}
+{#                            <div class="col-sm-6">#}
+{#                                <label for="title" class="form-label">Заголовок</label>#}
+{#                                <input type="text" class="form-control" id="title" placeholder="" value="" required>#}
+{#                                <div class="invalid-feedback">#}
+{#                                    Valid first name is required.#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <div class="col-sm-6">#}
+{#                                <label for="lastName" class="form-label">Категория</label>#}
+{##}
+{#                                <select class="form-select" aria-label="Default select example">#}
+{#                                    <option selected></option>#}
+{#                                    {% for cat in categories %}#}
+{#                                        <option value={{ cat.id }}>{{ cat.id }}:{{ cat.name }}</option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="col-12"><label for="username" class="form-label">Описание</label>#}
                             {#                            <span class="input-group-text">With textarea</span>#}
-                            <textarea class="form-control" aria-label="With textarea"></textarea>
-                        </div>
-
-                        <div class="col-12">
-                            <label for="email" class="form-label">Картинка </label>
+{#                            <textarea class="form-control" aria-label="With textarea"></textarea>#}
+{#                        </div>#}
+{##}
+{#                        <div class="col-12">#}
+{#                            <label for="email" class="form-label">Картинка </label>#}
                             {#                            <label class="input-group-text" for="inputGroupFile01">Картинка</label>#}
-                            <input type="file" class="form-control" id="inputGroupFile01">
-                        </div>
-                        <div class="col-12">
-                            <label for="conditions" class="form-label">Состояние товара </label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="conditions1">
-                                <label class="form-check-label" for="conditions1"> Новый </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                       id="conditions2" checked>
-                                <label class="form-check-label" for="conditions2"> Б.у. </label>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary w-100 py-2" type="submit">Сохранить</button>
+{#                            <input type="file" class="form-control" id="inputGroupFile01">#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                            <label for="conditions" class="form-label">Состояние товара </label>#}
+{#                            <div class="form-check">#}
+{#                                <input class="form-check-input" type="radio" name="flexRadioDefault"#}
+{#                                       id="conditions1">#}
+{#                                <label class="form-check-label" for="conditions1"> Новый </label>#}
+{#                            </div>#}
+{#                            <div class="form-check">#}
+{#                                <input class="form-check-input" type="radio" name="flexRadioDefault"#}
+{#                                       id="conditions2" checked>#}
+{#                                <label class="form-check-label" for="conditions2"> Б.у. </label>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <button class="btn btn-primary w-100 py-2" type="submit" name='ad_form'>Сохранить</button>
                     </form>
                 </div>
             </div>
