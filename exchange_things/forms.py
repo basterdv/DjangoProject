@@ -16,7 +16,7 @@ class RegisterUserForm(UserCreationForm):
         ]
 
 
-class AdForm(forms.ModelForm):
+class AdvertForm(forms.ModelForm):
     class Meta:
         model = Advert
         # fields = '__all__'

@@ -8,7 +8,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth import login
-from .forms import RegisterUserForm,AdForm
+from .forms import RegisterUserForm,AdvertForm
 from .models import Advert,Category,CustomUser
 
 
@@ -53,24 +53,26 @@ def index(request):
         return TemplateResponse(request, '404.html')
 
 
-def ad(request):
-
-    if request.method == 'POST' and 'submit_ad_form' in request.POST:
-        ad_form = AdForm(request.POST, request.FILES)
-        if ad_form.is_valid():
-
-            if request.user.is_authenticated:
+def advert(request):
+    advert_form = AdvertForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        # advert_form = AdvertForm(request.POST, request.FILES)
+        # if advert_form.is_valid():
+        #     print('wwwwwwwwwwwww')
+        if request.user.is_authenticated:
                 us_id = CustomUser.objects.get(id=request.user.id)
                 # user_id = request.user.id
-                my_instance = ad_form.save(commit=False)
+                my_instance = advert_form.save(commit=False)
                 parent_instance = CustomUser.objects.get(id=request.user.id)
                 my_instance.user_id = parent_instance
                 my_instance.save()  # Saves the data to the database
+                print('fffffffffffffffffffffff')
                 return redirect('/')
-    else:
-        ad_form = AdForm()
+    # else:
+    #     print('nnnnnnnnnnnnnnnnnnnnnnnnnn')
+    #     advert_form = AdvertForm()
 
-    return render(request, "ad/ad.html", {'ad_form': ad_form})
+    return render(request, "advert/advert.html", {'advert_form': advert_form})
     # ad_form = AdForm()
     #
     # categories = Category.objects.all()
@@ -84,8 +86,8 @@ def ad(request):
     #         if outperform.is_valid():
     #             return redirect('/')
     # context = {'ad_form':ad_form}
-    # return render(request, "ad/ad.html", context=context)
-    # # return TemplateResponse(request, "ad/ad.html")
+    # return render(request, "advert/advert.html", context=context)
+    # # return TemplateResponse(request, "advert/advert.html")
     #
     # # except Category.DoesNotExist:
 
@@ -95,4 +97,4 @@ def account(request):
 
 
 def exchange(request):
-    return TemplateResponse(request, "ad/exchange.html")
+    return TemplateResponse(request, "advert/exchange.html")

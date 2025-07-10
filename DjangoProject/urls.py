@@ -25,7 +25,7 @@ urlpatterns = [
     path('users/',include('exchange_things.urls')),
     # path('sign_in/', views.sign_in, name='sign_in'),
     # path('register/', views.register, name='register'),
-    path('ad/', views.ad, name='ad'),
+    path('advert/', views.advert, name='advert'),
     # path('accounts/', views.account, name='accounts'),
     path('exchange/', views.exchange, name='exchange'),
     path("admin/", admin.site.urls),

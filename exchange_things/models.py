@@ -48,9 +48,9 @@ class Advert(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey('CustomUser', null=False, on_delete=models.CASCADE)
     category_id = models.ForeignKey('Category', null=False, on_delete=models.CASCADE)
-    title = models.TextField("Заголовок")
+    title = models.CharField("Заголовок",max_length=350)
     description = models.TextField('Описание',null=True)
-    image = models.ImageField("Картинка",upload_to='images/', default=None,null=True)
+    image = models.ImageField("Картинка", null=True)
     conditions = models.BooleanField('Состояние',default=0)
     created_at = models.DateTimeField('Дата создания',auto_now_add=True)
 
