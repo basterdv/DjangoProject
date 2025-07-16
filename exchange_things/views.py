@@ -8,8 +8,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth import login
-from .forms import RegisterUserForm,AdvertForm
-from .models import Advert,Category,CustomUser
+from .forms import RegisterUserForm, AdvertForm
+from .models import Advert, Category, CustomUser
 
 
 class Login(LoginView):
@@ -54,23 +54,31 @@ def index(request):
 
 
 def advert(request):
-    advert_form = AdvertForm(data=request.POST, files=request.FILES)
-    if request.method == 'POST':
-        # advert_form = AdvertForm(request.POST, request.FILES)
-        if advert_form.is_valid():
-            print('form valid')
+    advert_form = AdvertForm(data=request.POST, files=request.FILES,)
+    #                          instance=CustomUser.objects.get(id=request.user.id))
 
-            if request.user.is_authenticated:
-                    # us_id = CustomUser.objects.get(id=request.user.id)
-                    # user_id = request.user.id
-                    my_instance = advert_form.save(commit=False)
-                    parent_instance = CustomUser.objects.get(id=request.user.id)
-                    my_instance.user_id = parent_instance
-                    my_instance.save()  # Saves the data to the database
-                    print('save form')
-                    return redirect('/')
-        else:
-            print('nnnnnnnnnnnnnnnnnnnnnnnnnn')
+    if request.method == 'POST':
+        advert_form = AdvertForm(request.POST,request.FILES)
+        print(f'form data - {advert_form.data}, files - {advert_form.files}')
+
+        if advert_form.is_valid():
+            print(f'form valid - ')
+            advert_form.save()
+            # if request.user.is_authenticated:
+                # us_id = CustomUser.objects.get(id=request.user.id)
+                # user_id = request.user.id
+                # my_instance = advert_form.save(commit=False)
+                # parent_instance = CustomUser.objects.get(id=request.user.id)
+                # my_instance.user_id = parent_instance
+                # instance = Advert.objects.get(id=1)
+                # advert_form.image = advert_form.data['image']
+                # advert_form.save()  # Saves the data to the database
+
+            return redirect('/')
+        # else:
+        #     print('nnnnnnnnnnnnnnnnnnnnnnnnnn')
+
+    # else:
     #     advert_form = AdvertForm()
 
     return render(request, "advert/advert.html", {'advert_form': advert_form})

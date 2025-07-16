@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from exchange_things import views
+
 # from DjangoProject import settings
 
 urlpatterns = [

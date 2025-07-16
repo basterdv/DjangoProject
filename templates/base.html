@@ -91,7 +91,7 @@
                     <ul class="list-unstyled">
                         {% if user.is_authenticated %}
 {#                            <form method="post" action="{% url 'logout' %}">#}
-                                                            <form method="post">
+                            <form method="post">
                                 {% csrf_token %}
                                 {% if  user.is_staff %}
                                     <li><a href="/admin/" class="text-white">Админка</a></li>

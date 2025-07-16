@@ -20,20 +20,60 @@
 
             <div class="row g-5">
                 <div class="col-md-7 col-lg-8 text-center">
-                    <form method="post" class="needs-validation"  enctype="multipart/form-data">
+                    <form  method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div>
-                            {% for field in advert_form %}
-                                <div class="form-group">
-                                    {{ field.label_tag }}
-
-                                        {{ field }}
-
-                                </div>
-                                <div class="error">{{ field.errors }}</div>
-                            {% endfor %}
+{#                        <div class="col-md-12 mb-3">#}
+{#                            <label for="id_title" class="form-label">Заголовок</label>#}
+{#                            <input type="text" class="form-control" id="id_title" name="title"#}
+{#                                   placeholder="Введите заголовок" value="{{ advert_form.title.value }}">#}
+{#                            {% if  advert_form.title.errors %}#}
+{#                                <div class="alert alert-danger alert-dismissible fade show">{{ advert_form.title.errors }}</div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                        <div class="col-md-12 mb-3">#}
+{#                            <label for="id_category" class="form-control" id="id_category">Категория</label>#}
+{#                            <select class="custom-select d-block w-100" id="id_category" name="category">#}
+{#                                <option value="{{ advert_form.category_id }}"></option>#}
+{#                            </select>#}
+{#                            {{ advert_form.category_id }}#}
+{#                            {% if  advert_form.category_id.errors %}#}
+{#                                <div class="alert alert-danger alert-dismissible fade show">{{ advert_form.category_id.errors }}</div>#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                        <div class="col-md-12 mb-3">#}
+{#                            <label for="id_description" class="form-control">Описание</label>#}
+{#                            <input type="text" class="form-control" id="id_description" name="description"#}
+{#                                   value="{{ advert_form.description.value }}">#}
+{#                        </div>#}
+                        <div class="col-md-12 mb-3">
+{#                            <input type="file" class="form-control mt-3" id="id_image" name="image" accept="image/*">#}
+{#                            {% if  advert_form.image.errors %}#}
+{#                                <div class="alert alert-danger alert-dismissible fade show">{{ advert_form.image.errors }}</div>#}
+{#                            {% endif %}#}
+{#                            {% if advert_form.image.errors %}#}
+{#                                <div class="alert alert-danger alert-dismissible fade show">{{ advert_form.image.errors }}</div>#}
+{#                            {% endif %}#}
+                            {{ advert_form.image }}
                         </div>
-                        <button class="btn btn-primary w-100 py-2" type="submit" >Сохранить</button>
+
+
+
+
+
+                        {#                        <div>#}
+                        {#                            {% for field in advert_form %}#}
+                        {#                                <div class="form-group">#}
+                        {#                                    {{ field.label_tag }}#}
+                        {##}
+                        {#                                    {{ field }}#}
+                        {##}
+                        {#                                </div>#}
+                        {#                                <div class="error">{{ field.errors }}</div>#}
+                        {#                            {% endfor %}#}
+                        {#                        </div>#}
+                        <button class="btn btn-primary w-100 py-2" type="submit" formaction="{% url 'advert' %}">
+                            Сохранить
+                        </button>
 
                         {#                        <button type="submit" name='submit_advert_form'>Submit</button>#}
                     </form>

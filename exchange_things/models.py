@@ -47,17 +47,21 @@ class Category(models.Model):
 class Advert(models.Model):
     """ Объявления """
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey('CustomUser', null=False, on_delete=models.CASCADE)
-    category_id = models.ForeignKey('Category', null=False, on_delete=models.CASCADE)
-    title = models.CharField("Заголовок", max_length=350)
-    description = models.TextField('Описание', null=True)
-    # image = models.ImageField(upload_to='users_images', blank=True, null=True, verbose_name='Аватар')
-    image = models.ImageField("Картинка", upload_to='advert_images/', blank=True, null=True)
-    conditions = models.BooleanField('Состояние', default=0)
+    # user_id = models.ForeignKey('CustomUser', null=False, on_delete=models.CASCADE)
+    # category_id = models.ForeignKey('Category', null=False, on_delete=models.CASCADE)
+    # title = models.CharField("Заголовок", max_length=350)
+    # description = models.TextField('Описание', null=True)
+    image = models.ImageField("Картинка", upload_to='advert_images') #, blank=True, null=True)
+    # conditions = models.BooleanField('Состояние', default=0)
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
 
-    def __str__(self):
-        return self.title
+    class Meta:
+        db_table = 'adverts'
+        verbose_name = 'Объявление'
+        verbose_name_plural = 'Объявления'
+
+    # def __str__(self):
+    #     return self.title
 
 
 class ExchangeProposal(models.Model):
