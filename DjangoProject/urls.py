@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from exchange_things import views
-from DjangoProject import settings
+# from DjangoProject import settings
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('users/',include('exchange_things.urls')),
@@ -16,9 +17,10 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    # urlpatterns += [
-    #     path("__debug__/",include("debug_toolbar.urls")),
-    #     ]
-        urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [
+        path("__debug__/",include("debug_toolbar.urls")),
+        ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'exchange_things.views.custom_404_view'
