@@ -54,20 +54,20 @@ def index(request):
 
 
 def advert(request):
-    advert_form = AdvertForm(request.POST, request.FILES)
+    advert_form = AdvertForm(data=request.POST, files=request.FILES)
     if request.method == 'POST':
         # advert_form = AdvertForm(request.POST, request.FILES)
         if advert_form.is_valid():
-            print('wwwwwwwwwwwww')
+            print('form valid')
 
             if request.user.is_authenticated:
-                    us_id = CustomUser.objects.get(id=request.user.id)
+                    # us_id = CustomUser.objects.get(id=request.user.id)
                     # user_id = request.user.id
                     my_instance = advert_form.save(commit=False)
                     parent_instance = CustomUser.objects.get(id=request.user.id)
                     my_instance.user_id = parent_instance
                     my_instance.save()  # Saves the data to the database
-                    print('fffffffffffffffffffffff')
+                    print('save form')
                     return redirect('/')
         else:
             print('nnnnnnnnnnnnnnnnnnnnnnnnnn')

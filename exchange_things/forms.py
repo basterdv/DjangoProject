@@ -32,7 +32,7 @@ class AdvertForm(forms.ModelForm):
     title = forms.CharField()
     # category_id = forms.IntegerField()
     description = forms.CharField()
-    conditions = forms.CharField()
+    # conditions = forms.CharField()
 
 
 
