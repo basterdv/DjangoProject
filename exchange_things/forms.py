@@ -28,6 +28,12 @@ class AdvertForm(forms.ModelForm):
             'image',
         ]
 
+    image = forms.ImageField(required=False)
+    title = forms.CharField()
+    # category_id = forms.IntegerField()
+    description = forms.CharField()
+    conditions = forms.CharField()
+
 
 
 class ExchangeProposalForm(CustomUser):
