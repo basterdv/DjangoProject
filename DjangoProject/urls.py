@@ -12,6 +12,7 @@ urlpatterns = [
     # path('sign_in/', views.sign_in, name='sign_in'),
     # path('register/', views.register, name='register'),
     path('advert/', views.advert, name='advert'),
+    path('advert_edit/', views.advert_edit, name='advert_edit'),
     # path('accounts/', views.account, name='accounts'),
     path('exchange/', views.exchange, name='exchange'),
     path("admin/", admin.site.urls),

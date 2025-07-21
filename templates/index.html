@@ -18,58 +18,76 @@
             </div>
         </section>
 
-        <div class="album py-5 bg-body-tertiary">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {% for post in ad_db %}
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                {% if  post.image %}
-                                    <img src="{{ post.image.url }}" alt="Картинка товара"
-                                         class="img-fluid rounded-circle"
-                                         style="max-width: 150px;">
-                                {% else %}
-                                    <img src="{% static "images/noimage.jpg" %}"
-                                         alt="Картинка " class="img-fluid rounded-circle"
-                                         style="max-width: 150px;">
+        <form method="GET">
+            <div class="album py-5 bg-body-tertiary">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        {% for post in ad_db %}
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    {% if  post.image %}
+                                        <img src="{{ post.image.url }}" alt="Картинка товара"
+                                             class="img-fluid rounded-circle"
+                                             style="max-width: 150px;">
+                                    {% else %}
+                                        <img src="{% static "images/noimage.jpg" %}"
+                                             alt="Картинка " class="img-fluid rounded-circle"
+                                             style="max-width: 150px;">
 
-                                {% endif %}
-                                {#                                <svg>#}
-                                {##}
-                                {#                                    <title>Placeholder</title>#}
-                                {#                                    <rect width="100%" height="100%" fill="#55595c"></rect>#}
-                                {#                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>#}
-                                {#                                </svg>#}
-                                <div class="card-body">
-                                    <p class="card-text">{{ post.title }}</p>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">{{ post.description }}</p>
-                                    <p class="card-text">Оформил - {{ post.user_id }}</p>
-                                    <p class="card-text">Категория - {{ post.category_id }}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Просмотреть
-                                            </button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">
-                                                Редактировать
-                                            </button>
+                                    {% endif %}
+                                    {#                                <svg>#}
+                                    {##}
+                                    {#                                    <title>Placeholder</title>#}
+                                    {#                                    <rect width="100%" height="100%" fill="#55595c"></rect>#}
+                                    {#                                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>#}
+                                    {#                                </svg>#}
+                                    <div class="card-body">
+                                        <p class="card-text">{{ post.title }}</p>
+                                    </div>
+                                    <div class="card-text">
+                                        <p class="card-text" id="card_id">{{ post.id }}</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">{{ post.description }}</p>
+                                        <p class="card-text">Оформил - {{ post.user_id }}</p>
+                                        <p class="card-text">Категория - {{ post.category_id }}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                {#                                                <p>#}
+                                                {#                                                    <a href="{% url 'advert_edit' %}"#}
+                                                {#                                                       class="btn btn-sm btn-outline-secondary"                                                       #}
+                                                {#                                                       data-card-id="{{ post.user_id }}">Просмотреть</a>#}
+                                                {#                                                </p>#}
+
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                                        formaction="{% url 'advert_edit' %}"
+                                                        name="q">Просмотреть
+                                                </button>
+                                                {#                                            {% if post.user_id.id == user.id %}#}
+                                                {#                                                <button type="button" class="btn btn-sm btn-outline-secondary">#}
+                                                {#                                                    Редактировать#}
+                                                {#                                                </button>#}
+                                                {#                                            {% endif %}#}
+
+                                            </div>
+                                            <small class="text-body-secondary">Создан {{ post.created_at }}</small>
                                         </div>
-                                        <small class="text-body-secondary">Создан {{ post.created_at }}</small></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% empty %}
-                        <div class="row align-items-center"></div>
-                        <div class="col">
-                            <div class="card shadow-sm">
-                                <div class="card-body"><p class="card-text">В базе данных нет ни одной записи.</p></div>
+                        {% empty %}
+                            <div class="row align-items-center"></div>
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <div class="card-body"><p class="card-text">В базе данных нет ни одной записи.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
 
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </main>
 {% endblock %}
