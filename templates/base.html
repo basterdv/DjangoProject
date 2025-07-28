@@ -1,155 +1,149 @@
 <!DOCTYPE html>
 {% load static %}
 
-<html lang="en" data-bs-theme="auto">
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="generator" content="Astro v5.9.2">
-    <title>{% block title %}Title default{% endblock title %}</title>
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Бартерная платформа для обмена вещами между пользователями. Размещайте объявления, находите нужные товары и предлагайте обмен.">
+    <title>Обменяй - Бартерная платформа для обмена вещами</title>
+    {#        <script src="https://cdn.tailwindcss.com"></script>#}
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
-    <meta name="theme-color" content="#712cf9">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
-<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
-    <symbol id="check2" viewBox="0 0 16 16">
-        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
-    </symbol>
-    <symbol id="circle-half" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
-    </symbol>
-    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
-        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
-    </symbol>
-    <symbol id="sun-fill" viewBox="0 0 16 16">
-        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
-    </symbol>
-</svg>
-<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-        <svg class="bi my-1 theme-icon-active" aria-hidden="true">
-            <use href="#circle-half"></use>
-        </svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span></button>
-    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                    aria-pressed="false">
-                <svg class="bi me-2 opacity-50" aria-hidden="true">
-                    <use href="#sun-fill"></use>
-                </svg>
-                Light
-                <svg class="bi ms-auto d-none" aria-hidden="true">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-        <li>
-            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                    aria-pressed="false">
-                <svg class="bi me-2 opacity-50" aria-hidden="true">
-                    <use href="#moon-stars-fill"></use>
-                </svg>
-                Dark
-                <svg class="bi ms-auto d-none" aria-hidden="true">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-        <li>
-            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
-                    aria-pressed="true">
-                <svg class="bi me-2 opacity-50" aria-hidden="true">
-                    <use href="#circle-half"></use>
-                </svg>
-                Auto
-                <svg class="bi ms-auto d-none" aria-hidden="true">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-    </ul>
-</div>
+<!-- Header -->
 
-<header data-bs-theme="dark">
-    <div class="collapse text-bg-dark" id="navbarHeader">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-7 py-4"><h4>О проекте</h4>
-                    <p class="text-body-secondary">Монолитное веб-приложение на Django для организации обмена вещами
-                        между пользователями. Пользователи смогут размещать объявления о товарах для обмена,
-                        просматривать чужие объявления и отправлять предложения на обмен.</p>
-                </div>
+<header class="bg-white shadow-sm sticky top-0 z-10">
+    <nav class="container mx-auto px-6 py-4 ">
+        <div class="flex items-center justify-between">
 
-                <div class="col-sm-4 offset-md-1 py-4">
-                    <h4>Личный кабинет.</h4>
-                    <ul class="list-unstyled">
-                        {% if user.is_authenticated %}
-                            {#                            <form method="post" action="{% url 'logout' %}">#}
-                            {#                            <form method="post">#}
-                            {% csrf_token %}
-                            {% if  user.is_staff %}
-                                <li><a href="/admin/" class="text-white">Админка</a></li>
-                            {% endif %}
-                            <li><a href="{% url 'profile' %}" class="text-white">Профиль</a></li>
-                            <p>Пользователь - {{ user.username }}</p>
-                            <li><a href="{% url 'logout' %}" class="text-white">Выход</a></li>
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-exchange-alt text-2xl"></i>
+                <h1 class="text-2xl font-bold">Обменяй</h1>
+            </div>
 
-                            {#                                <button data-bs-toggle="modal" type="submit" name="logout_submit" formaction="{% url 'logout' %}">Выход</button>#}
-                        {% else %}
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="hover:text-purple-200 smooth-transition">Главная</a>
+                <a href="#" class="hover:text-purple-200 smooth-transition">Каталог</a>
+                <a href="#" class="hover:text-purple-200 smooth-transition">Мои объявления</a>
+                <a href="#" class="hover:text-purple-200 smooth-transition">О нас</a>
+            </div>
 
-                            <li><a href="{% url 'login' %}" class="text-white">Вход</a></li>
-                            <li><a href="{% url 'register' %}" class="text-white">Регистрация</a></li>
-                            {#                            </form>#}
-                        {% endif %}
+            <div class="flex items-center space-x-4">
+                {% if user.is_authenticated %}
+                    <div class="flex items-center space-x-4">
+{#                        <button class="p-2 text-gray-600 hover:text-blue-600">#}
+{#                            <i class="fas fa-search"></i>#}
+{#                        </button>#}
+                        <a href="{% url 'users:profile' %}" class="p-2 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-user"></i>
+                        </a>
+{#                        <a href="#" class="p-2 text-gray-600 hover:text-blue-600 relative">#}
+{#                            <i class="fas fa-heart"></i>#}
+{#                            <span class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>#}
+{#                        </a>#}
+                        <button class="md:hidden p-2 text-gray-600" id="mobile-menu-button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                {% else %}
+                    {#                <button class="bg-white text-purple-800 px-4 py-2 rounded-lg font-medium hover:bg-purple-100 smooth-transition">#}
+                    {#                    Войти#}
+                    {#                </button>#}
+                    <li><a href="{% url 'users:login' %}"
+                           class="bg-white text-purple-800 px-4 py-2 rounded-lg font-medium hover:bg-purple-100 smooth-transition">Вход</a>
+                    </li>
+                    {#                <button class="hidden md:block bg-purple-700 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-600 smooth-transition">#}
+                    {#                    Регистрация#}
+                    {#                </button>#}
+                    <li><a href="{% url 'users:register' %}"
+                           class="hidden md:block bg-purple-700 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-600 smooth-transition">Регистрация</a>
+                    </li>
 
-                    </ul>
-                </div>
+                    <button class="md:hidden text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
 
+
+                {% endif %}
             </div>
         </div>
-    </div>
-    <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container"><a href="/" class="navbar-brand d-flex align-items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
-                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
-                 viewBox="0 0 24 24">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
-                <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
-                <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-            </svg>
-            <strong>Обмен</strong> </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
-                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"><span
-                    class="navbar-toggler-icon"></span></button>
-        </div>
-    </div>
+    </nav>
 </header>
 
-{% block content %}{% endblock %}
-</body>
 
-{#<footer class="text-body-secondary py-5" >#}
-{#<footer class="footer mt-auto py-3 bg-body-tertiary">#}
-{#    <div class="container"><span class="text-body-secondary">Place sticky footer content here.</span></div>#}
-{#</footer>#}
-<footer>
-    <div class="navbar fixed-bottom bg-body-tertiary">
-        <div class="container">
-            <p class="float-end mb-1"><a href="#">На верх.</a></p>
-            <p class="mb-1">© Все права защищены. Ланшаков В. Г., 2025</p>
+{#<body >#}
+<body class="bg-gray-100">
+
+{% block content %}{% endblock %}
+
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-gray-300 py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center space-x-2 mb-4">
+                    <i class="fas fa-exchange-alt text-xl text-purple-400"></i>
+                    <h3 class="text-xl font-bold text-white">Обменяй</h3>
+                </div>
+                <p class="mb-4">Лучшая платформа для обмена вещами без денег</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white smooth-transition">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white smooth-transition">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white smooth-transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Компания</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white smooth-transition">О нас</a></li>
+                    <li><a href="#" class="hover:text-white smooth-transition">Контакты</a></li>
+                    <li><a href="#" class="hover:text-white smooth-transition">Вакансии</a></li>
+                    <li><a href="#" class="hover:text-white smooth-transition">Партнеры</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Помощь</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white smooth-transition">FAQ</a></li>
+                    <li><a href="#" class="hover:text-white smooth-transition">Правила</a></li>
+                    <li><a href="#" class="hover:text-white smooth-transition">Безопасность</a></li>
+                    <li><a href="#" class="hover:text-white smooth-transition">Поддержка</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Подписка</h4>
+                <p class="mb-4">Подпишитесь на рассылку новых предложений</p>
+                <div class="flex">
+                    <input type="email" placeholder="Ваш email"
+                           class="bg-gray-700 text-white px-4 py-2 rounded-l-lg w-full focus:outline-none">
+                    <button class="bg-purple-600 text-white px-4 py-2 rounded-r-lg hover:bg-purple-700 smooth-transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr class="border-gray-700 my-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <p>© 2025 Обменяй. Все права защищены.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white smooth-transition">Политика конфиденциальности</a>
+                <a href="#" class="hover:text-white smooth-transition">Условия использования</a>
+            </div>
         </div>
     </div>
 </footer>
 
-<script src="{% static 'js/color-modes.js' %}"></script>
-<script src="{% static 'js/bootstrap.bundle.min.js' %}" class="astro-vvvwv3sm"></script>
+<script src="{% static "js/jquery_login.js" %}"></script>
+</body>
 </html>

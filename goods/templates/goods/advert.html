@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Объявление{% endblock title %}
 
@@ -18,22 +19,31 @@
                 {#                </p>#}
             </div>
             <div class="row g-5">
-{#                {% if request.GET.q %}#}
-                    <h2>sdfsdfdsf - {{ request.GET.q }}</h2>
-{#                {% endif %}#}
+                {% if request.GET.id %}
+                    <h2>ID объявления - {{ request.GET.id }}</h2>
+                {% endif %}
             </div>
             <div class="row g-5">
                 <div class="col-md-7 col-lg-8 text-center">
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
+
                         <div class="col-md-12 mb-3">
                             <label for="id_title" class="form-label">Заголовок</label>
-                            <input type="text" class="form-control" id="id_title" name="title"
-                                   placeholder="Введите заголовок" value="{{ advert_form.title.value }}">
-                            {% if  advert_form.title.errors %}
-                                <div class="alert alert-danger alert-dismissible fade show">{{ advert_form.title.errors }}</div>
+                            {% if request.GET.id %}
+                                <input type="text" class="form-control" id="id_title" name="title"
+                                       placeholder="Введите заголовок" value="{{ advert_form.title.value }}">
+                            {% else %}
+                                <input type="text" class="form-control" id="id_title" name="title"
+                                       placeholder="Введите заголовок" value="{{ advert_form.title.value }}">
                             {% endif %}
+                            {{ advert_form.title.value}}
+                            {#                            {% if  advert_form.title.errors %}#}
+                            {#                                <div class="alert alert-danger alert-dismissible fade show">{{ advert_form.title.errors }}</div>#}
+                            {#                            {% endif %}#}
                         </div>
+
+
                         <div class="col-md-12 mb-3">
                             <label for="id_category" class="form-control" id="id_category">Категория</label>
                             <select class="custom-select d-block w-100" id="id_category"
@@ -50,8 +60,33 @@
                             <input type="text" class="form-control" id="id_description" name="description"
                                    value="{{ advert_form.description.value }}">
                         </div>
+                        {# Картинка                    #}
+
+                        <div class="col-md-12 mb-3 text-center">
+                            {% if advert_form.image %}
+                                <p>image - {{ advert_form.image.url }}</p>
+                                <img src="{{ advert_form.image.url }}"
+                                     alt="Фото товара" class="img-fluid rounded-circle"
+                                     style="max-width: 150px;">
+                            {% else %}
+                                <p>No image</p>
+                                <img src="{% static "images/noimage.jpg" %}"
+                                     alt="Фото товара" class="img-fluid rounded-circle"
+                                     style="max-width: 150px;">
+                            {% endif %}
+                        </div>
+
+                        <div class="container mt-3">
+                            <div class="input-group custom-file-button">
+                                <input type="file" class="d-none" id="review-image" name="images[]" multiple
+                                       accept="image/*">
+                            </div>
+                        </div>
+
                         <div class="col-md-12 mb-3">
-                            <input type="file" class="form-control mt-3" id="id_image" name="image" accept="image/*">
+                            <input type="file" class="form-control mt-3" id="id_image" name="image" accept="image/*"
+                                   aria-label="{{ advert_form.image.value }}">
+                            <p>{{ advert_form.image.value }}</p>
                             {% if  advert_form.image.errors %}
                                 <div class="alert alert-danger alert-dismissible fade show">{{ advert_form.image.errors }}</div>
                             {% endif %}
@@ -75,10 +110,22 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary w-100 py-2" name="advert_submit" type="submit"
-                                formaction="{% url 'advert' %}">
-                            Сохранить
-                        </button>
+                        {% if request.GET.id %}
+                            <button class="btn btn-primary w-100 py-2" name="advert_submit" type="submit"
+                                    formaction="{% url 'advert_edit' %}?id={{ request.GET.id }}">
+                                Сохранить
+                            </button>
+                            <button class="btn btn-primary w-100 py-2" name="advert_delete" type="submit"
+                                    formaction="{% url 'advert_edit' %}?id={{ request.GET.id }}">
+                                УДАЛИТЬ
+                            </button>
+                        {% else %}
+                            <button class="btn btn-primary w-100 py-2" name="advert_submit" type="submit"
+                                    formaction="{% url 'advert' %}">
+                                Сохранить
+                            </button>
+                        {% endif %}
+
 
                         {#                        <button type="submit" name='submit_advert_form'>Submit</button>#}
                     </form>

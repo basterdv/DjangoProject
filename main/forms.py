@@ -2,7 +2,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms import forms
 from django import forms
 
-from .models import CustomUser, Advert
+from users.models import CustomUser
+from main.models import  Advert
 
 
 class RegisterUserForm(UserCreationForm):
@@ -31,10 +32,9 @@ class AdvertForm(forms.ModelForm):
 
     # image = forms.ImageField(required=False)
     # title = forms.CharField()
-    # # category_id = forms.IntegerField()
+    # category_id = forms.IntegerField()
     # description = forms.CharField()
     # conditions = forms.CharField()
-
 
 
 class ExchangeProposalForm(CustomUser):
