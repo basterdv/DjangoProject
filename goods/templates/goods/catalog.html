@@ -1,0 +1,425 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <link href="{% static 'css/catalog_styles.css' %}" rel="stylesheet">
+    <!-- Mobile Menu (hidden by default) -->
+    <div class=&quot;md:hidden hidden bg-white shadow-md&quot; id=&quot;mobile-menu&quot;>
+        <div class=&quot;px-4 py-3 space-y-2&quot;>
+            <a href=&quot;index.html&quot; class=&quot;block px-3 py-2 text-gray-600
+               hover:text-blue-600&quot;>Главная</a>
+            <a href=&quot;#&quot; class=&quot;block px-3 py-2 text-blue-600 font-medium&quot;>Каталог</a>
+            <a href=&quot;#&quot; class=&quot;block px-3 py-2 text-gray-600 hover:text-blue-600&quot;>Как это
+                работает</a>
+            <a href=&quot;#&quot; class=&quot;block px-3 py-2 text-gray-600 hover:text-blue-600&quot;>Отзывы</a>
+        </div>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <div class=&quot;container mx-auto px-4 py-4&quot;>
+        <nav class=&quot;flex&quot; aria-label=&quot;Breadcrumb&quot;>
+            <ol class=&quot;inline-flex items-center space-x-1 md:space-x-3&quot;>
+                <li class=&quot;inline-flex items-center&quot;>
+                    <a href=&quot;index.html&quot; class=&quot;inline-flex items-center text-sm text-gray-700
+                       hover:text-blue-600&quot;>
+                        <i class=&quot;fas fa-home mr-2&quot;></i>
+                        Главная
+                    </a>
+                </li>
+                <li aria-current=&quot;page&quot;>
+                    <div class=&quot;flex items-center&quot;>
+                        <i class=&quot;fas fa-chevron-right text-gray-400 mx-2&quot;></i>
+                        <span class=&quot;text-sm font-medium text-gray-500&quot;>Каталог товаров</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Page Title -->
+    <section class=&quot;container mx-auto px-4 py-8&quot;>
+        <h1 class=&quot;text-3xl font-bold text-gray-800 mb-2&quot;>Каталог товаров на обмен</h1>
+        <p class=&quot;text-gray-600&quot;>Выберите интересующие вас товары для обмена</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class=&quot;container mx-auto px-4 pb-12&quot;>
+        <div class=&quot;flex flex-col md:flex-row gap-6&quot;>
+            <!-- Filters Sidebar - Desktop -->
+            <aside class=&quot;hidden md:block w-64 flex-shrink-0&quot;>
+                <div class=&quot;bg-white rounded-lg shadow p-6 sticky top-6&quot;>
+                    <div class=&quot;mb-6&quot;>
+                        <h3 class=&quot;font-bold text-lg mb-4&quot;>Категории</h3>
+                        <ul class=&quot;space-y-2&quot; id=&quot;category-list&quot;>
+                            <li>
+                                <button class=&quot;category-item active px-3 py-2 rounded-full text-sm w-full
+                                        text-left&quot; data-category=&quot;all&quot;>
+                                    Все товары
+                                </button>
+                            </li>
+                            <li>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
+                                        data-category=&quot;electronics&quot;>
+                                    Электроника
+                                </button>
+                            </li>
+                            <li>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
+                                        data-category=&quot;clothing&quot;>
+                                    Одежда
+                                </button>
+                            </li>
+                            <li>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
+                                        data-category=&quot;home&quot;>
+                                    Для дома
+                                </button>
+                            </li>
+                            <li>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
+                                        data-category=&quot;books&quot;>
+                                    Книги
+                                </button>
+                            </li>
+                            <li>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
+                                        data-category=&quot;sport&quot;>
+                                    Спорт
+                                </button>
+                            </li>
+                            <li>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
+                                        data-category=&quot;other&quot;>
+                                    Другое
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class=&quot;mb-6&quot;>
+                        <h3 class=&quot;font-bold text-lg mb-4&quot;>Состояние</h3>
+                        <div class=&quot;space-y-2&quot;>
+                            <label class=&quot;flex items-center&quot;>
+                                <input type=&quot;checkbox&quot; class=&quot;rounded text-blue-600&quot; checked>
+                                <span class=&quot;ml-2 text-gray-700&quot;>Новое</span>
+                            </label>
+                            <label class=&quot;flex items-center&quot;>
+                                <input type=&quot;checkbox&quot; class=&quot;rounded text-blue-600&quot; checked>
+                                <span class=&quot;ml-2 text-gray-700&quot;>Б/у в отличном состоянии</span>
+                            </label>
+                            <label class=&quot;flex items-center&quot;>
+                                <input type=&quot;checkbox&quot; class=&quot;rounded text-blue-600&quot; checked>
+                                <span class=&quot;ml-2 text-gray-700&quot;>Б/у с дефектами</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class=&quot;font-bold text-lg mb-4&quot;>Ценовой диапазон</h3>
+                        <div class=&quot;mb-2&quot;>
+                            <input type=&quot;range&quot; min=&quot;0&quot; max=&quot;100000&quot;
+                                   value=&quot;25000&quot;
+                                   step=&quot;1000&quot; class=&quot;w-full&quot;>
+                        </div>
+                        <div class=&quot;flex justify-between text-sm text-gray-600&quot;>
+                            <span>0 ₽</span>
+                            <span>100 000 ₽</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Products Section -->
+            <div class=&quot;flex-1&quot;>
+                <div class=&quot;bg-white rounded-lg shadow p-4 mb-6&quot;>
+                    <div class=&quot;flex flex-col md:flex-row md:items-center md:justify-between&quot;>
+                        <div class=&quot;mb-4 md:mb-0&quot;>
+                        <span class=&quot;text-gray-600&quot;>Показано <span class=&quot;font-medium&quot;>24</span> из <span
+                                class=&quot;font-medium&quot;>87</span> товаров</span>
+                        </div>
+                        <div class=&quot;flex items-center space-x-4&quot;>
+                            <button class=&quot;md:hidden px-4 py-2 bg-blue-100 text-blue-600 rounded-full&quot;
+                                    id=&quot;filter-mobile-button&quot;>
+                                <i class=&quot;fas fa-filter mr-2&quot;></i> Фильтры
+                            </button>
+                            <div class=&quot;relative&quot;>
+                                <select class=&quot;appearance-none bg-gray-100 border border-gray-200 rounded-full py-2
+                                        pl-4 pr-8 text-gray-700&quot;>
+                                    <option>Сначала популярные</option>
+                                    <option>Сначала дешевле</option>
+                                    <option>Сначала дороже</option>
+                                    <option>Сначала новые</option>
+                                </select>
+                                <div class=&quot;pointer-events-none absolute inset-y-0 right-0 flex items-center px-2
+                                     text-gray-700&quot;>
+                                    <i class=&quot;fas fa-chevron-down&quot;></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Grid -->
+                <div class=&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6&quot; id=&quot;product-grid&quot;>
+                    <!-- Product Item 1 -->
+                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all
+                         duration-300&quot; data-category=&quot;electronics&quot;>
+                        <div class=&quot;relative pb-2
+                        /3 h-48&quot;>
+                        <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Монитор&amp;font=kelson&quot;
+                             alt=&quot;Монитор&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                        <div class=&quot;absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded&quot;>
+                            Новый
+                        </div>
+                    </div>
+                    <div class=&quot;p-4&quot;>
+                        <h3 class=&quot;font-bold text-lg mb-1&quot;>Монитор Dell 27&quot;</h3>
+                        <p class=&quot;text-gray-600 text-sm mb-3&quot;>Отличный монитор для работы и игр</p>
+                        <div class=&quot;flex justify-between items-center&quot;>
+                            <span class=&quot;font-bold text-gray-800&quot;>25 000 ₽</span>
+                            <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
+                                    transition&quot;>
+                                Обменять
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Item 2 -->
+                <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all
+                     duration-300&quot;
+                     data-category=&quot;clothing&quot;>
+                    <div class=&quot;relative pb-2
+                    /3 h-48&quot;>
+                    <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Куртка&amp;font=kelson&quot;
+                         alt=&quot;Куртка&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                    <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у
+                        отличное
+                    </div>
+                </div>
+                <div class=&quot;p-4&quot;>
+                    <h3 class=&quot;font-bold text-lg mb-1&quot;>Куртка зимняя The North Face</h3>
+                    <p class=&quot;text-gray-600 text-sm mb-3&quot;>Размер M, отличное состояние</p>
+                    <div class=&quot;flex justify-between items-center&quot;>
+                        <span class=&quot;font-bold text-gray-800&quot;>15 000 ₽</span>
+                        <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
+                                transition&quot;>
+                            Обменять
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Item 3 -->
+            <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
+                 data-category=&quot;home&quot;>
+                <div class=&quot;relative pb-2
+                /3 h-48&quot;>
+                <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Диван&amp;font=kelson&quot;
+                     alt=&quot;Диван&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                <div class=&quot;absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у с
+                    дефектами
+                </div>
+            </div>
+            <div class=&quot;p-4&quot;>
+                <h3 class=&quot;font-bold text-lg mb-1&quot;>Диван угловой</h3>
+                <p class=&quot;text-gray-600 text-sm mb-3&quot;>Небольшие потертости на обивке</p>
+                <div class=&quot;flex justify-between items-center&quot;>
+                    <span class=&quot;font-bold text-gray-800&quot;>12 000 ₽</span>
+                    <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
+                            transition&quot;>
+                        Обменять
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Item 4 -->
+        <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
+             data-category=&quot;books&quot;>
+            <div class=&quot;relative pb-2
+            /3 h-48&quot;>
+            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Книги&amp;font=kelson&quot;
+                 alt=&quot;Книги&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+            <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у отличное
+            </div>
+        </div>
+        <div class=&quot;p-4&quot;>
+            <h3 class=&quot;font-bold text-lg mb-1&quot;>Коллекция книг по программированию</h3>
+            <p class=&quot;text-gray-600 text-sm mb-3&quot;>10 книг в отличном состоянии</p>
+            <div class=&quot;flex justify-between items-center&quot;>
+                <span class=&quot;font-bold text-gray-800&quot;>8 500 ₽</span>
+                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
+                        transition&quot;>
+                    Обменять
+                </button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Product Item 5 -->
+        <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
+             data-category=&quot;electronics&quot;>
+            <div class=&quot;relative pb-2
+            /3 h-48&quot;>
+            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Наушники&amp;font=kelson&quot;
+                 alt=&quot;Наушники&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+            <div class=&quot;absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded&quot;>Новый</div>
+        </div>
+        <div class=&quot;p-4&quot;>
+            <h3 class=&quot;font-bold text-lg mb-1&quot;>Наушники Sony WH-1000XM4</h3>
+            <p class=&quot;text-gray-600 text-sm mb-3&quot;>Беспроводные с шумоподавлением</p>
+            <div class=&quot;flex justify-between items-center&quot;>
+                <span class=&quot;font-bold text-gray-800&quot;>22 000 ₽</span>
+                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
+                        transition&quot;>
+                    Обменять
+                </button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Product Item 6 -->
+        <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
+             data-category=&quot;sport&quot;>
+            <div class=&quot;relative pb-2
+            /3 h-48&quot;>
+            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Велосипед&amp;font=kelson&quot;
+                 alt=&quot;Велосипед&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+            <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у отличное
+            </div>
+        </div>
+        <div class=&quot;p-4&quot;>
+            <h3 class=&quot;font-bold text-lg mb-1&quot;>Горный велосипед GT</h3>
+            <p class=&quot;text-gray-600 text-sm mb-3&quot;>2019 года, пробег 500 км</p>
+            <div class=&quot;flex justify-between items-center&quot;>
+                <span class=&quot;font-bold text-gray-800&quot;>35 000 ₽</span>
+                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
+                        transition&quot;>
+                    Обменять
+                </button>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class=&quot;mt-10 flex justify-center&quot;>
+            <nav class=&quot;flex items-center space-x-1&quot;>
+                <button class=&quot;p-2 rounded-full hover:bg-gray-100 text-gray-600&quot;>
+                    <i class=&quot;fas fa-chevron-left&quot;></i>
+                </button>
+                <button class=&quot;w-10 h-10 rounded-full bg-blue-600 text-white&quot;>1</button>
+                <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>2</button>
+                <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>3</button>
+                <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>4</button>
+                <button class=&quot;p-2 rounded-full hover:bg-gray-100 text-gray-600&quot;>
+                    <i class=&quot;fas fa-chevron-right&quot;></i>
+                </button>
+            </nav>
+        </div>
+        </div>
+        </div>
+    </main>
+
+    <!-- Mobile Filter Sidebar (hidden by default) -->
+    <div class=&quot;fixed inset-0 z-50 hidden&quot; id=&quot;mobile-filter-container&quot;>
+        <div class=&quot;absolute inset-0 bg-gray-900 bg-opacity-50 filter-overlay&quot;
+             id=&quot;filter-overlay&quot;></div>
+        <div class=&quot;absolute left-0 top-0 bottom-0 w-72 bg-white mobile-filter&quot; id=&quot;mobile-filter&quot;>
+            <div class=&quot;p-6 h-full overflow-y-auto&quot;>
+                <div class=&quot;flex justify-between items-center mb-6&quot;>
+                    <h3 class=&quot;text-xl font-bold&quot;>Фильтры</h3>
+                    <button class=&quot;text-gray-500 hover:text-gray-700&quot; id=&quot;close-mobile-filter&quot;>
+                        <i class=&quot;fas fa-times&quot;></i>
+                    </button>
+                </div>
+
+                <div class=&quot;mb-6&quot;>
+                    <h3 class=&quot;font-bold text-lg mb-4&quot;>Категории</h3>
+                    <ul class=&quot;space-y-2&quot;>
+                        <li>
+                            <button class=&quot;category-item-mobile active px-3 py-2 rounded-full text-sm w-full
+                                    text-left
+                                    bg-blue-600 text-white&quot; data-category=&quot;all&quot;>
+                                Все товары
+                            </button>
+                        </li>
+                        <li>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
+                                    bg-gray-100&quot; data-category=&quot;electronics&quot;>
+                                Электроника
+                            </button>
+                        </li>
+                        <li>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
+                                    bg-gray-100&quot; data-category=&quot;clothing&quot;>
+                                Одежда
+                            </button>
+                        </li>
+                        <li>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
+                                    bg-gray-100&quot; data-category=&quot;home&quot;>
+                                Для дома
+                            </button>
+                        </li>
+                        <li>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
+                                    bg-gray-100&quot; data-category=&quot;books&quot;>
+                                Книги
+                            </button>
+                        </li>
+                        <li>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
+                                    bg-gray-100&quot; data-category=&quot;sport&quot;>
+                                Спорт
+                            </button>
+                        </li>
+                        <li>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
+                                    bg-gray-100&quot; data-category=&quot;other&quot;>
+                                Другое
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class=&quot;mb-6&quot;>
+                    <h3 class=&quot;font-bold text-lg mb-4&quot;>Состояние</h3>
+                    <div class=&quot;space-y-2&quot;>
+                        <label class=&quot;flex items-center&quot;>
+                            <input type=&quot;checkbox&quot; class=&quot;rounded text-blue-600&quot; checked>
+                            <span class=&quot;ml-2 text-gray-700&quot;>Новое</span>
+                        </label>
+                        <label class=&quot;flex items-center&quot;>
+                            <input type=&quot;checkbox&quot; class=&quot;rounded text-blue-600&quot; checked>
+                            <span class=&quot;ml-2 text-gray-700&quot;>Б/у в отличном состоянии</span>
+                        </label>
+                        <label class=&quot;flex items-center&quot;>
+                            <input type=&quot;checkbox&quot; class=&quot;rounded text-blue-600&quot; checked>
+                            <span class=&quot;ml-2 text-gray-700&quot;>Б/у с дефектами</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class=&quot;mb-6&quot;>
+                    <h3 class=&quot;font-bold text-lg mb-4&quot;>Ценовой диапазон</h3>
+                    <div class=&quot;mb-2&quot;>
+                        <input type=&quot;range&quot; min=&quot;0&quot; max=&quot;100000&quot; value=&quot;25000&quot;
+                               step=&quot;1000&quot; class=&quot;w-full&quot;>
+                    </div>
+                    <div class=&quot;flex justify-between text-sm text-gray-600&quot;>
+                        <span>0 ₽</span>
+                        <span>100 000 ₽</span>
+                    </div>
+                </div>
+
+                <button class=&quot;w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium&quot;>
+                    Применить фильтры
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="{% static "js/jquery_catalog.js" %}"></script>
+{% endblock %}
