@@ -3,7 +3,7 @@ from django.forms import forms
 from django import forms
 
 from users.models import CustomUser
-from main.models import  Advert
+from goods.models import  Advert
 
 
 class RegisterUserForm(UserCreationForm):
