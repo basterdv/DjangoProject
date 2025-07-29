@@ -4,14 +4,80 @@
 
 {% block content %}
     <link href="{% static 'css/catalog_styles.css' %}" rel="stylesheet">
+<html lang=&quot;ru&quot;>
+<head>
+    <meta charset=&quot;UTF-8&quot;>
+    <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+    <title>Каталог товаров на обмен | Торговая площадка</title>
+    <meta name=&quot;description&quot; content=&quot;Каталог товаров доступных для обмена на нашей торговой площадке. Большой выбор категорий, удобный интерфейс.&quot;>
+    <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css&quot;>
+    <style>
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .category-item.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .filter-section {
+            transition: all 0.3s ease;
+        }
+        .mobile-filter {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-filter.active {
+            transform: translateX(0);
+        }
+        .filter-overlay {
+            background-color: rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class=&quot;bg-gray-50&quot;>
+    <!-- Header -->
+    <header class=&quot;bg-white shadow-sm&quot;>
+        <div class=&quot;container mx-auto px-4 py-4&quot;>
+            <div class=&quot;flex justify-between items-center&quot;>
+                <div class=&quot;flex items-center space-x-8&quot;>
+                    <a href=&quot;index.html&quot; class=&quot;text-2xl font-bold text-blue-600&quot;>Обменник</a>
+                    <nav class=&quot;hidden md:flex space-x-6&quot;>
+                        <a href=&quot;index.html&quot; class=&quot;text-gray-600 hover:text-blue-600&quot;>Главная</a>
+                        <a href=&quot;#&quot; class=&quot;text-blue-600 font-medium&quot;>Каталог</a>
+                        <a href=&quot;#&quot; class=&quot;text-gray-600 hover:text-blue-600&quot;>Как это работает</a>
+                        <a href=&quot;#&quot; class=&quot;text-gray-600 hover:text-blue-600&quot;>Отзывы</a>
+                    </nav>
+                </div>
+                <div class=&quot;flex items-center space-x-4&quot;>
+                    <button class=&quot;p-2 text-gray-600 hover:text-blue-600&quot;>
+                        <i class=&quot;fas fa-search&quot;></i>
+                    </button>
+                    <a href=&quot;#&quot; class=&quot;p-2 text-gray-600 hover:text-blue-600&quot;>
+                        <i class=&quot;fas fa-user&quot;></i>
+                    </a>
+                    <a href=&quot;#&quot; class=&quot;p-2 text-gray-600 hover:text-blue-600 relative&quot;>
+                        <i class=&quot;fas fa-heart&quot;></i>
+                        <span class=&quot;absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center&quot;>3</span>
+                    </a>
+                    <button class=&quot;md:hidden p-2 text-gray-600&quot; id=&quot;mobile-menu-button&quot;>
+                        <i class=&quot;fas fa-bars&quot;></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- Mobile Menu (hidden by default) -->
     <div class=&quot;md:hidden hidden bg-white shadow-md&quot; id=&quot;mobile-menu&quot;>
         <div class=&quot;px-4 py-3 space-y-2&quot;>
-            <a href=&quot;index.html&quot; class=&quot;block px-3 py-2 text-gray-600
-               hover:text-blue-600&quot;>Главная</a>
+            <a href=&quot;index.html&quot; class=&quot;block px-3 py-2 text-gray-600 hover:text-blue-600&quot;>Главная</a>
             <a href=&quot;#&quot; class=&quot;block px-3 py-2 text-blue-600 font-medium&quot;>Каталог</a>
-            <a href=&quot;#&quot; class=&quot;block px-3 py-2 text-gray-600 hover:text-blue-600&quot;>Как это
-                работает</a>
+            <a href=&quot;#&quot; class=&quot;block px-3 py-2 text-gray-600 hover:text-blue-600&quot;>Как это работает</a>
             <a href=&quot;#&quot; class=&quot;block px-3 py-2 text-gray-600 hover:text-blue-600&quot;>Отзывы</a>
         </div>
     </div>
@@ -21,8 +87,7 @@
         <nav class=&quot;flex&quot; aria-label=&quot;Breadcrumb&quot;>
             <ol class=&quot;inline-flex items-center space-x-1 md:space-x-3&quot;>
                 <li class=&quot;inline-flex items-center&quot;>
-                    <a href=&quot;index.html&quot; class=&quot;inline-flex items-center text-sm text-gray-700
-                       hover:text-blue-600&quot;>
+                    <a href=&quot;index.html&quot; class=&quot;inline-flex items-center text-sm text-gray-700 hover:text-blue-600&quot;>
                         <i class=&quot;fas fa-home mr-2&quot;></i>
                         Главная
                     </a>
@@ -53,44 +118,37 @@
                         <h3 class=&quot;font-bold text-lg mb-4&quot;>Категории</h3>
                         <ul class=&quot;space-y-2&quot; id=&quot;category-list&quot;>
                             <li>
-                                <button class=&quot;category-item active px-3 py-2 rounded-full text-sm w-full
-                                        text-left&quot; data-category=&quot;all&quot;>
+                                <button class=&quot;category-item active px-3 py-2 rounded-full text-sm w-full text-left&quot; data-category=&quot;all&quot;>
                                     Все товары
                                 </button>
                             </li>
                             <li>
-                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
-                                        data-category=&quot;electronics&quot;>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot; data-category=&quot;electronics&quot;>
                                     Электроника
                                 </button>
                             </li>
                             <li>
-                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
-                                        data-category=&quot;clothing&quot;>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot; data-category=&quot;clothing&quot;>
                                     Одежда
                                 </button>
                             </li>
                             <li>
-                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
-                                        data-category=&quot;home&quot;>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot; data-category=&quot;home&quot;>
                                     Для дома
                                 </button>
                             </li>
                             <li>
-                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
-                                        data-category=&quot;books&quot;>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot; data-category=&quot;books&quot;>
                                     Книги
                                 </button>
                             </li>
                             <li>
-                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
-                                        data-category=&quot;sport&quot;>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot; data-category=&quot;sport&quot;>
                                     Спорт
                                 </button>
                             </li>
                             <li>
-                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot;
-                                        data-category=&quot;other&quot;>
+                                <button class=&quot;category-item px-3 py-2 rounded-full text-sm w-full text-left&quot; data-category=&quot;other&quot;>
                                     Другое
                                 </button>
                             </li>
@@ -118,9 +176,7 @@
                     <div>
                         <h3 class=&quot;font-bold text-lg mb-4&quot;>Ценовой диапазон</h3>
                         <div class=&quot;mb-2&quot;>
-                            <input type=&quot;range&quot; min=&quot;0&quot; max=&quot;100000&quot;
-                                   value=&quot;25000&quot;
-                                   step=&quot;1000&quot; class=&quot;w-full&quot;>
+                            <input type=&quot;range&quot; min=&quot;0&quot; max=&quot;100000&quot; value=&quot;25000&quot; step=&quot;1000&quot; class=&quot;w-full&quot;>
                         </div>
                         <div class=&quot;flex justify-between text-sm text-gray-600&quot;>
                             <span>0 ₽</span>
@@ -135,24 +191,20 @@
                 <div class=&quot;bg-white rounded-lg shadow p-4 mb-6&quot;>
                     <div class=&quot;flex flex-col md:flex-row md:items-center md:justify-between&quot;>
                         <div class=&quot;mb-4 md:mb-0&quot;>
-                        <span class=&quot;text-gray-600&quot;>Показано <span class=&quot;font-medium&quot;>24</span> из <span
-                                class=&quot;font-medium&quot;>87</span> товаров</span>
+                            <span class=&quot;text-gray-600&quot;>Показано <span class=&quot;font-medium&quot;>24</span> из <span class=&quot;font-medium&quot;>87</span> товаров</span>
                         </div>
                         <div class=&quot;flex items-center space-x-4&quot;>
-                            <button class=&quot;md:hidden px-4 py-2 bg-blue-100 text-blue-600 rounded-full&quot;
-                                    id=&quot;filter-mobile-button&quot;>
+                            <button class=&quot;md:hidden px-4 py-2 bg-blue-100 text-blue-600 rounded-full&quot; id=&quot;filter-mobile-button&quot;>
                                 <i class=&quot;fas fa-filter mr-2&quot;></i> Фильтры
                             </button>
                             <div class=&quot;relative&quot;>
-                                <select class=&quot;appearance-none bg-gray-100 border border-gray-200 rounded-full py-2
-                                        pl-4 pr-8 text-gray-700&quot;>
+                                <select class=&quot;appearance-none bg-gray-100 border border-gray-200 rounded-full py-2 pl-4 pr-8 text-gray-700&quot;>
                                     <option>Сначала популярные</option>
                                     <option>Сначала дешевле</option>
                                     <option>Сначала дороже</option>
                                     <option>Сначала новые</option>
                                 </select>
-                                <div class=&quot;pointer-events-none absolute inset-y-0 right-0 flex items-center px-2
-                                     text-gray-700&quot;>
+                                <div class=&quot;pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700&quot;>
                                     <i class=&quot;fas fa-chevron-down&quot;></i>
                                 </div>
                             </div>
@@ -163,170 +215,136 @@
                 <!-- Product Grid -->
                 <div class=&quot;grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6&quot; id=&quot;product-grid&quot;>
                     <!-- Product Item 1 -->
-                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all
-                         duration-300&quot; data-category=&quot;electronics&quot;>
-                        <div class=&quot;relative pb-2
-                        /3 h-48&quot;>
-                        <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Монитор&amp;font=kelson&quot;
-                             alt=&quot;Монитор&quot; class=&quot;absolute h-full w-full object-cover&quot;>
-                        <div class=&quot;absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded&quot;>
-                            Новый
+                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot; data-category=&quot;electronics&quot;>
+                        <div class=&quot;relative pb-2/3 h-48&quot;>
+                            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Монитор&amp;font=kelson&quot; alt=&quot;Монитор&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                            <div class=&quot;absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded&quot;>Новый</div>
+                        </div>
+                        <div class=&quot;p-4&quot;>
+                            <h3 class=&quot;font-bold text-lg mb-1&quot;>Монитор Dell 27&quot;</h3>
+                            <p class=&quot;text-gray-600 text-sm mb-3&quot;>Отличный монитор для работы и игр</p>
+                            <div class=&quot;flex justify-between items-center&quot;>
+                                <span class=&quot;font-bold text-gray-800&quot;>25 000 ₽</span>
+                                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm transition&quot;>
+                                    Обменять
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class=&quot;p-4&quot;>
-                        <h3 class=&quot;font-bold text-lg mb-1&quot;>Монитор Dell 27&quot;</h3>
-                        <p class=&quot;text-gray-600 text-sm mb-3&quot;>Отличный монитор для работы и игр</p>
-                        <div class=&quot;flex justify-between items-center&quot;>
-                            <span class=&quot;font-bold text-gray-800&quot;>25 000 ₽</span>
-                            <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
-                                    transition&quot;>
-                                Обменять
-                            </button>
+
+                    <!-- Product Item 2 -->
+                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot; data-category=&quot;clothing&quot;>
+                        <div class=&quot;relative pb-2/3 h-48&quot;>
+                            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Куртка&amp;font=kelson&quot; alt=&quot;Куртка&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                            <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у отличное</div>
+                        </div>
+                        <div class=&quot;p-4&quot;>
+                            <h3 class=&quot;font-bold text-lg mb-1&quot;>Куртка зимняя The North Face</h3>
+                            <p class=&quot;text-gray-600 text-sm mb-3&quot;>Размер M, отличное состояние</p>
+                            <div class=&quot;flex justify-between items-center&quot;>
+                                <span class=&quot;font-bold text-gray-800&quot;>15 000 ₽</span>
+                                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm transition&quot;>
+                                    Обменять
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Item 3 -->
+                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot; data-category=&quot;home&quot;>
+                        <div class=&quot;relative pb-2/3 h-48&quot;>
+                            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Диван&amp;font=kelson&quot; alt=&quot;Диван&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                            <div class=&quot;absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у с дефектами</div>
+                        </div>
+                        <div class=&quot;p-4&quot;>
+                            <h3 class=&quot;font-bold text-lg mb-1&quot;>Диван угловой</h3>
+                            <p class=&quot;text-gray-600 text-sm mb-3&quot;>Небольшие потертости на обивке</p>
+                            <div class=&quot;flex justify-between items-center&quot;>
+                                <span class=&quot;font-bold text-gray-800&quot;>12 000 ₽</span>
+                                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm transition&quot;>
+                                    Обменять
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Item 4 -->
+                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot; data-category=&quot;books&quot;>
+                        <div class=&quot;relative pb-2/3 h-48&quot;>
+                            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Книги&amp;font=kelson&quot; alt=&quot;Книги&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                            <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у отличное</div>
+                        </div>
+                        <div class=&quot;p-4&quot;>
+                            <h3 class=&quot;font-bold text-lg mb-1&quot;>Коллекция книг по программированию</h3>
+                            <p class=&quot;text-gray-600 text-sm mb-3&quot;>10 книг в отличном состоянии</p>
+                            <div class=&quot;flex justify-between items-center&quot;>
+                                <span class=&quot;font-bold text-gray-800&quot;>8 500 ₽</span>
+                                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm transition&quot;>
+                                    Обменять
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Item 5 -->
+                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot; data-category=&quot;electronics&quot;>
+                        <div class=&quot;relative pb-2/3 h-48&quot;>
+                            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Наушники&amp;font=kelson&quot; alt=&quot;Наушники&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                            <div class=&quot;absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded&quot;>Новый</div>
+                        </div>
+                        <div class=&quot;p-4&quot;>
+                            <h3 class=&quot;font-bold text-lg mb-1&quot;>Наушники Sony WH-1000XM4</h3>
+                            <p class=&quot;text-gray-600 text-sm mb-3&quot;>Беспроводные с шумоподавлением</p>
+                            <div class=&quot;flex justify-between items-center&quot;>
+                                <span class=&quot;font-bold text-gray-800&quot;>22 000 ₽</span>
+                                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm transition&quot;>
+                                    Обменять
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Item 6 -->
+                    <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot; data-category=&quot;sport&quot;>
+                        <div class=&quot;relative pb-2/3 h-48&quot;>
+                            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Велосипед&amp;font=kelson&quot; alt=&quot;Велосипед&quot; class=&quot;absolute h-full w-full object-cover&quot;>
+                            <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у отличное</div>
+                        </div>
+                        <div class=&quot;p-4&quot;>
+                            <h3 class=&quot;font-bold text-lg mb-1&quot;>Горный велосипед GT</h3>
+                            <p class=&quot;text-gray-600 text-sm mb-3&quot;>2019 года, пробег 500 км</p>
+                            <div class=&quot;flex justify-between items-center&quot;>
+                                <span class=&quot;font-bold text-gray-800&quot;>35 000 ₽</span>
+                                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm transition&quot;>
+                                    Обменять
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Product Item 2 -->
-                <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all
-                     duration-300&quot;
-                     data-category=&quot;clothing&quot;>
-                    <div class=&quot;relative pb-2
-                    /3 h-48&quot;>
-                    <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Куртка&amp;font=kelson&quot;
-                         alt=&quot;Куртка&quot; class=&quot;absolute h-full w-full object-cover&quot;>
-                    <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у
-                        отличное
-                    </div>
-                </div>
-                <div class=&quot;p-4&quot;>
-                    <h3 class=&quot;font-bold text-lg mb-1&quot;>Куртка зимняя The North Face</h3>
-                    <p class=&quot;text-gray-600 text-sm mb-3&quot;>Размер M, отличное состояние</p>
-                    <div class=&quot;flex justify-between items-center&quot;>
-                        <span class=&quot;font-bold text-gray-800&quot;>15 000 ₽</span>
-                        <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
-                                transition&quot;>
-                            Обменять
+                <!-- Pagination -->
+                <div class=&quot;mt-10 flex justify-center&quot;>
+                    <nav class=&quot;flex items-center space-x-1&quot;>
+                        <button class=&quot;p-2 rounded-full hover:bg-gray-100 text-gray-600&quot;>
+                            <i class=&quot;fas fa-chevron-left&quot;></i>
                         </button>
-                    </div>
+                        <button class=&quot;w-10 h-10 rounded-full bg-blue-600 text-white&quot;>1</button>
+                        <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>2</button>
+                        <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>3</button>
+                        <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>4</button>
+                        <button class=&quot;p-2 rounded-full hover:bg-gray-100 text-gray-600&quot;>
+                            <i class=&quot;fas fa-chevron-right&quot;></i>
+                        </button>
+                    </nav>
                 </div>
             </div>
-
-            <!-- Product Item 3 -->
-            <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
-                 data-category=&quot;home&quot;>
-                <div class=&quot;relative pb-2
-                /3 h-48&quot;>
-                <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Диван&amp;font=kelson&quot;
-                     alt=&quot;Диван&quot; class=&quot;absolute h-full w-full object-cover&quot;>
-                <div class=&quot;absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у с
-                    дефектами
-                </div>
-            </div>
-            <div class=&quot;p-4&quot;>
-                <h3 class=&quot;font-bold text-lg mb-1&quot;>Диван угловой</h3>
-                <p class=&quot;text-gray-600 text-sm mb-3&quot;>Небольшие потертости на обивке</p>
-                <div class=&quot;flex justify-between items-center&quot;>
-                    <span class=&quot;font-bold text-gray-800&quot;>12 000 ₽</span>
-                    <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
-                            transition&quot;>
-                        Обменять
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product Item 4 -->
-        <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
-             data-category=&quot;books&quot;>
-            <div class=&quot;relative pb-2
-            /3 h-48&quot;>
-            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Книги&amp;font=kelson&quot;
-                 alt=&quot;Книги&quot; class=&quot;absolute h-full w-full object-cover&quot;>
-            <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у отличное
-            </div>
-        </div>
-        <div class=&quot;p-4&quot;>
-            <h3 class=&quot;font-bold text-lg mb-1&quot;>Коллекция книг по программированию</h3>
-            <p class=&quot;text-gray-600 text-sm mb-3&quot;>10 книг в отличном состоянии</p>
-            <div class=&quot;flex justify-between items-center&quot;>
-                <span class=&quot;font-bold text-gray-800&quot;>8 500 ₽</span>
-                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
-                        transition&quot;>
-                    Обменять
-                </button>
-            </div>
-        </div>
-        </div>
-
-        <!-- Product Item 5 -->
-        <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
-             data-category=&quot;electronics&quot;>
-            <div class=&quot;relative pb-2
-            /3 h-48&quot;>
-            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Наушники&amp;font=kelson&quot;
-                 alt=&quot;Наушники&quot; class=&quot;absolute h-full w-full object-cover&quot;>
-            <div class=&quot;absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded&quot;>Новый</div>
-        </div>
-        <div class=&quot;p-4&quot;>
-            <h3 class=&quot;font-bold text-lg mb-1&quot;>Наушники Sony WH-1000XM4</h3>
-            <p class=&quot;text-gray-600 text-sm mb-3&quot;>Беспроводные с шумоподавлением</p>
-            <div class=&quot;flex justify-between items-center&quot;>
-                <span class=&quot;font-bold text-gray-800&quot;>22 000 ₽</span>
-                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
-                        transition&quot;>
-                    Обменять
-                </button>
-            </div>
-        </div>
-        </div>
-
-        <!-- Product Item 6 -->
-        <div class=&quot;bg-white rounded-lg shadow overflow-hidden product-card transition-all duration-300&quot;
-             data-category=&quot;sport&quot;>
-            <div class=&quot;relative pb-2
-            /3 h-48&quot;>
-            <img src=&quot;https://imgholder.ru/600x300/8493a8/adb9ca&amp;text=Велосипед&amp;font=kelson&quot;
-                 alt=&quot;Велосипед&quot; class=&quot;absolute h-full w-full object-cover&quot;>
-            <div class=&quot;absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded&quot;>Б/у отличное
-            </div>
-        </div>
-        <div class=&quot;p-4&quot;>
-            <h3 class=&quot;font-bold text-lg mb-1&quot;>Горный велосипед GT</h3>
-            <p class=&quot;text-gray-600 text-sm mb-3&quot;>2019 года, пробег 500 км</p>
-            <div class=&quot;flex justify-between items-center&quot;>
-                <span class=&quot;font-bold text-gray-800&quot;>35 000 ₽</span>
-                <button class=&quot;bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-full text-sm
-                        transition&quot;>
-                    Обменять
-                </button>
-            </div>
-        </div>
-        </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class=&quot;mt-10 flex justify-center&quot;>
-            <nav class=&quot;flex items-center space-x-1&quot;>
-                <button class=&quot;p-2 rounded-full hover:bg-gray-100 text-gray-600&quot;>
-                    <i class=&quot;fas fa-chevron-left&quot;></i>
-                </button>
-                <button class=&quot;w-10 h-10 rounded-full bg-blue-600 text-white&quot;>1</button>
-                <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>2</button>
-                <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>3</button>
-                <button class=&quot;w-10 h-10 rounded-full hover:bg-gray-100&quot;>4</button>
-                <button class=&quot;p-2 rounded-full hover:bg-gray-100 text-gray-600&quot;>
-                    <i class=&quot;fas fa-chevron-right&quot;></i>
-                </button>
-            </nav>
-        </div>
-        </div>
         </div>
     </main>
 
     <!-- Mobile Filter Sidebar (hidden by default) -->
     <div class=&quot;fixed inset-0 z-50 hidden&quot; id=&quot;mobile-filter-container&quot;>
-        <div class=&quot;absolute inset-0 bg-gray-900 bg-opacity-50 filter-overlay&quot;
-             id=&quot;filter-overlay&quot;></div>
+        <div class=&quot;absolute inset-0 bg-gray-900 bg-opacity-50 filter-overlay&quot; id=&quot;filter-overlay&quot;></div>
         <div class=&quot;absolute left-0 top-0 bottom-0 w-72 bg-white mobile-filter&quot; id=&quot;mobile-filter&quot;>
             <div class=&quot;p-6 h-full overflow-y-auto&quot;>
                 <div class=&quot;flex justify-between items-center mb-6&quot;>
@@ -340,45 +358,37 @@
                     <h3 class=&quot;font-bold text-lg mb-4&quot;>Категории</h3>
                     <ul class=&quot;space-y-2&quot;>
                         <li>
-                            <button class=&quot;category-item-mobile active px-3 py-2 rounded-full text-sm w-full
-                                    text-left
-                                    bg-blue-600 text-white&quot; data-category=&quot;all&quot;>
+                            <button class=&quot;category-item-mobile active px-3 py-2 rounded-full text-sm w-full text-left bg-blue-600 text-white&quot; data-category=&quot;all&quot;>
                                 Все товары
                             </button>
                         </li>
                         <li>
-                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
-                                    bg-gray-100&quot; data-category=&quot;electronics&quot;>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left bg-gray-100&quot; data-category=&quot;electronics&quot;>
                                 Электроника
                             </button>
                         </li>
                         <li>
-                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
-                                    bg-gray-100&quot; data-category=&quot;clothing&quot;>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left bg-gray-100&quot; data-category=&quot;clothing&quot;>
                                 Одежда
                             </button>
                         </li>
                         <li>
-                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
-                                    bg-gray-100&quot; data-category=&quot;home&quot;>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left bg-gray-100&quot; data-category=&quot;home&quot;>
                                 Для дома
                             </button>
                         </li>
                         <li>
-                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
-                                    bg-gray-100&quot; data-category=&quot;books&quot;>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left bg-gray-100&quot; data-category=&quot;books&quot;>
                                 Книги
                             </button>
                         </li>
                         <li>
-                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
-                                    bg-gray-100&quot; data-category=&quot;sport&quot;>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left bg-gray-100&quot; data-category=&quot;sport&quot;>
                                 Спорт
                             </button>
                         </li>
                         <li>
-                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left
-                                    bg-gray-100&quot; data-category=&quot;other&quot;>
+                            <button class=&quot;category-item-mobile px-3 py-2 rounded-full text-sm w-full text-left bg-gray-100&quot; data-category=&quot;other&quot;>
                                 Другое
                             </button>
                         </li>
@@ -406,8 +416,7 @@
                 <div class=&quot;mb-6&quot;>
                     <h3 class=&quot;font-bold text-lg mb-4&quot;>Ценовой диапазон</h3>
                     <div class=&quot;mb-2&quot;>
-                        <input type=&quot;range&quot; min=&quot;0&quot; max=&quot;100000&quot; value=&quot;25000&quot;
-                               step=&quot;1000&quot; class=&quot;w-full&quot;>
+                        <input type=&quot;range&quot; min=&quot;0&quot; max=&quot;100000&quot; value=&quot;25000&quot; step=&quot;1000&quot; class=&quot;w-full&quot;>
                     </div>
                     <div class=&quot;flex justify-between text-sm text-gray-600&quot;>
                         <span>0 ₽</span>
@@ -421,5 +430,188 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class=&quot;bg-gray-800 text-white pt-12 pb-6&quot;>
+        <div class=&quot;container mx-auto px-4&quot;>
+            <div class=&quot;grid grid-cols-1 md:grid-cols-4 gap-8&quot;>
+                <div>
+                    <h3 class=&quot;text-xl font-bold mb-4&quot;>Обменник</h3>
+                    <p class=&quot;text-gray-400&quot;>Площадка для безопасного и удобного обмена товарами между пользователями.</p>
+                </div>
+                <div>
+                    <h4 class=&quot;font-bold mb-4&quot;>Меню</h4>
+                    <ul class=&quot;space-y-2&quot;>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Главная</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Каталог</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Как это работает</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Отзывы</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class=&quot;font-bold mb-4&quot;>Категории</h4>
+                    <ul class=&quot;space-y-2&quot;>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Электроника</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Одежда</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Для дома</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Книги</a></li>
+                        <li><a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;>Спорт</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class=&quot;font-bold mb-4&quot;>Контакты</h4>
+                    <ul class=&quot;space-y-2&quot;>
+                        <li class=&quot;flex items-center&quot;>
+                            <i class=&quot;fas fa-map-marker-alt mr-2 text-gray-400&quot;></i>
+                            <span class=&quot;text-gray-400&quot;>Москва, ул. Примерная, 123</span>
+                        </li>
+                        <li class=&quot;flex items-center&quot;>
+                            <i class=&quot;fas fa-phone-alt mr-2 text-gray-400&quot;></i>
+                            <span class=&quot;text-gray-400&quot;>+7 (123) 456-78-90</span>
+                        </li>
+                        <li class=&quot;flex items-center&quot;>
+                            <i class=&quot;fas fa-envelope mr-2 text-gray-400&quot;></i>
+                            <span class=&quot;text-gray-400&quot;>info@obmennik.ru</span>
+                        </li>
+                    </ul>
+                    <div class=&quot;mt-4 flex space-x-4&quot;>
+                        <a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;><i class=&quot;fab fa-vk&quot;></i></a>
+                        <a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;><i class=&quot;fab fa-telegram&quot;></i></a>
+                        <a href=&quot;#&quot; class=&quot;text-gray-400 hover:text-white&quot;><i class=&quot;fab fa-instagram&quot;></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class=&quot;border-t border-gray-700 mt-8 pt-6 text-center text-gray-400&quot;>
+                <p>© 2023 Обменник. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Filter functionality
+        const categoryItems = document.querySelectorAll('.category-item');
+        const categoryItemsMobile = document.querySelectorAll('.category-item-mobile');
+        const productCards = document.querySelectorAll('.product-card');
+
+        function filterProducts(category) {
+            productCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update active state for desktop filters
+            categoryItems.forEach(item => {
+                if (item.dataset.category === category) {
+                    item.classList.add('active', 'bg-blue-600', 'text-white');
+                    item.classList.remove('bg-gray-100');
+                } else {
+                    item.classList.remove('active', 'bg-blue-600', 'text-white');
+                    item.classList.add('bg-gray-100');
+                }
+            });
+
+            // Update active state for mobile filters
+            categoryItemsMobile.forEach(item => {
+                if (item.dataset.category === category) {
+                    item.classList.add('active', 'bg-blue-600', 'text-white');
+                    item.classList.remove('bg-gray-100');
+                } else {
+                    item.classList.remove('active', 'bg-blue-600', 'text-white');
+                    item.classList.add('bg-gray-100');
+                }
+            });
+        }
+
+        // Desktop category filtering
+        categoryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const category = this.dataset.category;
+                filterProducts(category);
+            });
+        });
+
+        // Mobile category filtering
+        categoryItemsMobile.forEach(item => {
+            item.addEventListener('click', function() {
+                const category = this.dataset.category;
+                filterProducts(category);
+            });
+        });
+
+        // Mobile filter toggle
+        const mobileFilterButton = document.getElementById('filter-mobile-button');
+        const mobileFilterContainer = document.getElementById('mobile-filter-container');
+        const mobileFilter = document.getElementById('mobile-filter');
+        const filterOverlay = document.getElementById('filter-overlay');
+        const closeMobileFilter = document.getElementById('close-mobile-filter');
+
+        mobileFilterButton.addEventListener('click', function() {
+            mobileFilterContainer.classList.remove('hidden');
+            setTimeout(() => {
+                mobileFilter.classList.add('active');
+            }, 10);
+        });
+
+        closeMobileFilter.addEventListener('click', function() {
+            mobileFilter.classList.remove('active');
+            setTimeout(() => {
+                mobileFilterContainer.classList.add('hidden');
+            }, 300);
+        });
+
+        filterOverlay.addEventListener('click', function() {
+            mobileFilter.classList.remove('active');
+            setTimeout(() => {
+                mobileFilterContainer.classList.add('hidden');
+            }, 300);
+        });
+    </script>
+</body>
+</html>" style="width: 100%; height: 100%; border: none;" class="fade-in"></iframe></div><!----></main><div data-v-8fe4d55d="" id="panel" class="hidden fixed bottom-5 left-1/2 transform -translate-x-1/2 w-full sm:w-[70%] px-4 z-50 rounded-xl"><div data-v-8fe4d55d="" class="sm:flex sm:items-center backdrop-blur-sm rounded-xl shadow-xl p-2 sm:p-1"><div data-v-8fe4d55d="" class="flex items-center gap-2 w-full"><button data-v-8fe4d55d="" id="expandPromptBtn" class="text-gray-500 hover:text-gray-200 ml-3 mr-1" title="Развернуть для редактирования"><i data-v-8fe4d55d="" class="fas fa-expand text-sm"></i></button><textarea data-v-8fe4d55d="" id="prompt" rows="1" placeholder="Опишите, что вы хотите создать..." class="text-gray-300 placeholder-gray-500 w-full px-3 py-2 bg-transparent focus:outline-none resize-none transition min-h-[40px] max-h-[150px] overflow-y-auto scrollbar-hide" style="height: 136px; overflow-y: hidden;"></textarea></div><div data-v-8fe4d55d="" class="flex items-center justify-end gap-1 sm:gap-2 mt-2 sm:mt-0"><button data-v-8fe4d55d="" id="sendBtn" class="control-btn p-1 rounded-lg hover:bg-indigo-100 transition-all"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-8fe4d55d=""><path d="M9.401 12.2986L15.516 8.54758C15.913 8.34058 16.303 8.52958 16.129 9.06258L16.128 9.06358L14.198 16.3806C14.075 16.8166 13.743 16.9296 13.401 16.7326L11.48 15.3126L10.441 16.2606C10.33 16.3656 10.239 16.4506 10.033 16.4506L10.21 14.5236L13.938 11.1486C14.098 11.0036 13.92 10.9196 13.715 11.0636L9.096 14.5246L7.194 13.9086C6.761 13.7606 6.753 13.3866 7.308 13.1686L16.001 8.18358L9.401 12.2986Z" fill="url(#telegramGradient)" data-v-8fe4d55d=""></path><defs data-v-8fe4d55d=""><linearGradient id="telegramGradient" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse" data-v-8fe4d55d=""><stop stop-color="#6366F1" data-v-8fe4d55d=""></stop><stop offset="1" stop-color="#8B5CF6" data-v-8fe4d55d=""></stop></linearGradient></defs></svg></button><div data-v-8fe4d55d="" class="h-5 sm:h-6 w-px bg-gray-700 mx-0 sm:mx-1"></div><button data-v-8fe4d55d="" id="downloadBtn" class="control-btn p-1 sm:p-2 text-gray-500 hover:text-gray-200 rounded-lg transition" title="Скачать результат"><i data-v-8fe4d55d="" class="fas fa-download text-sm sm:text-base"></i></button><button data-v-8fe4d55d="" id="settingsBtn" class="control-btn p-1 sm:p-2 text-gray-500 hover:text-gray-200 rounded-lg transition" title="Настройки"><i data-v-8fe4d55d="" class="fas fa-cog text-sm sm:text-base"></i></button><button data-v-8fe4d55d="" id="historyBtn" title="История" class="prompt-label flex items-center gap-1"><i data-v-8fe4d55d="" class="fas fa-history text-xs"></i><span data-v-8fe4d55d="">История</span></button><button data-v-8fe4d55d="" id="importBtn" title="Импорт HTML" class="prompt-label flex items-center gap-1"><i data-v-8fe4d55d="" class="fas fa-file-import text-xs"></i><span data-v-8fe4d55d="">Импорт</span></button><button data-v-8fe4d55d="" id="togglePanelBtn" class="control-btn p-1 sm:p-2 text-gray-500 hover:text-gray-200 rounded-lg transition" title="Развернуть (Shift+H)"><i data-v-8fe4d55d="" class="fas fa-angle-up text-sm sm:text-base"></i></button></div></div></div><div data-v-8fe4d55d="" id="historyModal" class="hidden fixed inset-0 bg-gray-300/10 flex items-center justify-center z-50 p-4"><div data-v-8fe4d55d="" class="bg-gray-800 rounded-lg shadow-xl w-full max-w-6xl h-[80vh] max-h-[80vh] w-[95%] overflow-hidden flex flex-col"><div data-v-8fe4d55d="" class="flex items-center justify-between p-4 border-b border-gray-700"><h3 data-v-8fe4d55d="" class="text-lg font-medium text-white">История запросов</h3><button data-v-8fe4d55d="" id="hideHistoryBtn" class="text-gray-400 hover:text-white"><svg data-v-8fe4d55d="" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path data-v-8fe4d55d="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div><div data-v-8fe4d55d="" class="flex flex-1 overflow-hidden"><div data-v-8fe4d55d="" class="w-1/3 p-4 overflow-y-auto scrollbar-hide relative" style="scrollbar-width: none;"><div data-v-8fe4d55d="" class="text-center text-gray-400 py-8"> История запросов пуста </div><div data-v-8fe4d55d="" class="sticky bottom-0 left-0 right-0 bg-gray-800/80 backdrop-blur-sm pt-2 pb-4 px-4"><!----></div></div><div data-v-8fe4d55d="" class="w-2/3 border-l border-gray-700 flex flex-col"><div data-v-8fe4d55d="" class="p-4 border-b border-gray-700"><h3 data-v-8fe4d55d="" class="text-lg font-medium text-white">Результат</h3></div><div data-v-8fe4d55d="" class="flex-1 relative"><!----><iframe data-v-8fe4d55d="" class="w-full h-full bg-white fade-in" sandbox="allow-scripts allow-same-origin allow-forms allow-modals" style="display: none;"></iframe><div data-v-8fe4d55d="" class="absolute inset-0 flex items-center justify-center text-gray-400">Выберите запрос из списка для просмотра результата</div><div data-v-8fe4d55d="" class="absolute bottom-4 right-4 z-10"><!----></div></div></div></div></div></div><div data-v-8fe4d55d="" id="importModal" class="hidden fixed inset-0 bg-gray-300/10 flex items-center justify-center z-50 p-4"><div data-v-8fe4d55d="" class="bg-gray-800 rounded-lg shadow-xl w-full max-w-6xl h-[80vh] max-h-[80vh] w-[95%] overflow-hidden flex flex-col"><div data-v-8fe4d55d="" class="flex items-center justify-between p-4 border-b border-gray-700"><h3 data-v-8fe4d55d="" class="text-lg font-medium text-white">Импорт HTML</h3><button data-v-8fe4d55d="" id="hideImportBtn" class="text-gray-400 hover:text-white"><svg data-v-8fe4d55d="" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path data-v-8fe4d55d="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div><div data-v-8fe4d55d="" class="flex-1 relative"><div data-v-8fe4d55d="" id="aceEditor" class="absolute inset-0"></div></div><div data-v-8fe4d55d="" class="p-4 border-t border-gray-700 flex justify-end"><button data-v-8fe4d55d="" id="importToEditorBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md transition"> Забрать в редактор </button></div></div></div><div data-v-8fe4d55d="" id="promptEditModal" class="hidden fixed inset-0 bg-gray-300/10 flex items-center justify-center z-50 p-4"><div data-v-8fe4d55d="" class="bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl h-[70vh] flex flex-col"><div data-v-8fe4d55d="" class="p-4 border-b border-gray-700"><h3 data-v-8fe4d55d="" class="text-lg font-medium text-white">Редактирование промпта</h3></div><div data-v-8fe4d55d="" class="flex-1 p-4 overflow-hidden"><textarea data-v-8fe4d55d="" id="promptEditTextarea" class="w-full h-full bg-gray-700 text-gray-200 p-3 rounded-lg resize-none" placeholder="Введите ваш промпт здесь..."></textarea></div><div data-v-8fe4d55d="" class="p-4 border-t border-gray-700 flex justify-end gap-2"><button data-v-8fe4d55d="" id="hidePromptEditModalBtn" class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-md transition"> Отмена </button><button data-v-8fe4d55d="" id="applyPromptEditBtn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition"> Применить </button></div></div></div><div data-v-8fe4d55d="" id="insufficientFundsModal" class="hidden fixed inset-0 bg-gray-900/90 flex items-center justify-center z-50 p-4"><div data-v-8fe4d55d="" class="bg-gray-800 rounded-lg shadow-xl w-full max-w-md p-6 border border-red-500/30"><div data-v-8fe4d55d="" class="flex items-center justify-between mb-4"><h3 data-v-8fe4d55d="" class="text-lg font-medium text-white flex items-center"><i data-v-8fe4d55d="" class="fas fa-exclamation-circle text-red-500 mr-2"></i> Недостаточно средств </h3><button data-v-8fe4d55d="" class="text-gray-400 hover:text-white"><svg data-v-8fe4d55d="" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path data-v-8fe4d55d="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div><div data-v-8fe4d55d="" class="mb-6"><p data-v-8fe4d55d="" class="text-gray-300 mb-4">Недостаточно средств на балансе для генерации контента</p><div data-v-8fe4d55d="" class="bg-gray-700/50 p-3 rounded-lg border border-gray-600/50 mb-4"><p data-v-8fe4d55d="" class="text-sm text-gray-300">Для продолжения работы с сервисом необходимо пополнить баланс.</p></div></div><div data-v-8fe4d55d="" class="flex justify-between"><button data-v-8fe4d55d="" class="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-md transition"> Закрыть </button><button data-v-8fe4d55d="" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-md transition"> Пополнить баланс </button></div></div></div><div data-v-8fe4d55d="" id="topUpModal" class="hidden fixed inset-0 bg-gray-900/90 flex items-center justify-center z-50 p-4"><div data-v-8fe4d55d="" class="bg-gray-800 rounded-lg shadow-xl w-full max-w-md"><div data-v-8fe4d55d="" class="flex items-center justify-between p-4 border-b border-gray-700"><h3 data-v-8fe4d55d="" class="text-lg font-medium text-white">Пополнение баланса</h3><button data-v-8fe4d55d="" id="hideTopUpBtn" class="text-gray-400 hover:text-white"><svg data-v-8fe4d55d="" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path data-v-8fe4d55d="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div><div data-v-8fe4d55d="" class="p-6"><div data-v-8fe4d55d="" class="mb-4"><label data-v-8fe4d55d="" for="amountInput" class="block text-sm font-medium text-gray-300 mb-2">Сумма пополнения (руб.)</label><input data-v-8fe4d55d="" type="number" id="amountInput" min="50" max="15000" step="50" class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Введите сумму от 50 до 15000"><p data-v-8fe4d55d="" class="mt-1 text-xs text-gray-400">Минимальная сумма: 50 ₽, максимальная: 15000 ₽</p></div><div data-v-8fe4d55d="" class="mb-4 text-xs text-gray-400"><p data-v-8fe4d55d="" class="mb-2">Правила безопасных платежей:</p><ul data-v-8fe4d55d="" class="list-disc pl-4 space-y-1"><li data-v-8fe4d55d="">Вы совершаете платеж через защищенное соединение</li><li data-v-8fe4d55d="">Все данные передаются в зашифрованном виде</li><li data-v-8fe4d55d="">Для платежей используется сервис ЮKassa</li></ul></div><div data-v-8fe4d55d="" class="mb-4 flex items-start"><div data-v-8fe4d55d="" class="flex items-center h-5"><input data-v-8fe4d55d="" id="termsCheckbox" type="checkbox" class="w-4 h-4 border border-gray-600 rounded bg-gray-700 focus:ring-indigo-500 focus:ring-offset-gray-800"></div><label data-v-8fe4d55d="" for="termsCheckbox" class="ml-2 text-xs text-gray-300"> Я подтверждаю, что ознакомлен с <a data-v-8fe4d55d="" href="/terms" class="text-indigo-400 hover:text-indigo-300">условиями оказания услуг</a> и даю согласие на обработку персональных данных </label></div><button data-v-8fe4d55d="" id="payBtn" disabled="" class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"> Оплатить </button></div></div></div><div data-v-8fe4d55d="" id="settingsPanel" class="hidden fixed bottom-28 left-1/2 transform -translate-x-1/2 w-full sm:w-[90%] lg:w-[70%] xl:w-[54%] px-4 z-40"><div data-v-8fe4d55d="" class="bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-xl p-4 text-gray-300 border border-gray-600"><div data-v-8fe4d55d="" class="text-sm text-gray-400 mb-2">Настройки</div><div data-v-8fe4d55d="" class="space-y-3"></div></div></div><!----><button data-v-8fe4d55d="" id="showPanelBtn" class="fixed bottom-5 right-5 w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white shadow-lg z-50 transition-all hover:bg-indigo-700" title="Показать панель (Shift+H)"><i data-v-8fe4d55d="" class="fas fa-angle-up"></i></button></div></div>
+
+
+  <script type="text/javascript">
+    ;(function (m, e, t, r, i, k, a) {
+      m[i] =
+        m[i] ||
+        function () {
+          ;(m[i].a = m[i].a || []).push(arguments)
+        }
+      m[i].l = 1 * new Date()
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) {
+          return
+        }
+      }
+      ;(k = e.createElement(t)),
+        (a = e.getElementsByTagName(t)[0]),
+        (k.async = 1),
+        (k.src = r),
+        a.parentNode.insertBefore(k, a)
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
+
+    ym(101904266, 'init', {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: true,
+    })
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/101904266" style="position: absolute; left: -9999px" alt="" /></div
+  ></noscript>
+  <!-- /Yandex.Metrika counter -->
+
+<div class="sn-notifications-container sn-is-right sn-is-bottom" style="--sn-notifications-padding: 20px; --sn-notifications-gap: 20px;"></div></body><!-- Yandex.Metrika counter --></html>
+
     <script src="{% static "js/jquery_catalog.js" %}"></script>
 {% endblock %}

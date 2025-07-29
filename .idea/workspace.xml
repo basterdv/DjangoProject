@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="ФронтЭнд часть 5, работа с формами">
+      <change beforePath="$PROJECT_DIR$/goods/templates/goods/catalog.html" beforeDir="false" afterPath="$PROJECT_DIR$/goods/templates/goods/catalog.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/goods/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/goods/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/basterdv/DjangoProject.git&quot;,
+    &quot;accountId&quot;: &quot;6074f4b7-1675-4ea0-a7ee-7e8cb4b32dd3&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2zS2iSSwMTOD0Fi2Gz8WY9d23xI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.DjangoProject.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.All in generated-requests.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #2.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Home/Documents/Workshop/Python_project/DjangoProject/exchange_things/static/imajes&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\exchange_things\static\imajes" />
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\exchange_things\static\css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\orders\templates\orders" />
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\goods\templates\goods" />
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\goods\templates\advert" />
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject" />
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\main\templates\main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django Server.DjangoProject">
+    <configuration name="All in generated-requests" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#2" index="2" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="DjangoProject" type="Python.DjangoServer" factoryName="Django server">
+      <module name="DjangoProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="DjangoProject.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #1" />
+        <item itemvalue="HTTP Request.generated-requests | #2" />
+        <item itemvalue="HTTP Request.All in generated-requests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-PY-251.26927.90" />
+        <option value="bundled-python-sdk-41e8cd69c857-64d779b69b7a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-251.26927.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="" />
+      <created>1751710281011</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1751710281011</updated>
+      <workItem from="1751710282092" duration="19019000" />
+      <workItem from="1751768999188" duration="522000" />
+      <workItem from="1751772438879" duration="7605000" />
+      <workItem from="1751793598399" duration="9662000" />
+      <workItem from="1751848720985" duration="392000" />
+      <workItem from="1751869640831" duration="1029000" />
+      <workItem from="1751879109769" duration="16544000" />
+      <workItem from="1751933363510" duration="57000" />
+      <workItem from="1751970313896" duration="9404000" />
+      <workItem from="1751983870613" duration="80000" />
+      <workItem from="1752051856719" duration="2273000" />
+      <workItem from="1752077955613" duration="3849000" />
+      <workItem from="1752143324835" duration="1373000" />
+      <workItem from="1752581666399" duration="284000" />
+      <workItem from="1752584913532" duration="5206000" />
+      <workItem from="1752625329270" duration="565000" />
+      <workItem from="1752625980888" duration="55000" />
+      <workItem from="1752658839546" duration="12525000" />
+      <workItem from="1752753907520" duration="316000" />
+      <workItem from="1752754718636" duration="2465000" />
+      <workItem from="1752885350430" duration="359000" />
+      <workItem from="1752898274661" duration="1408000" />
+      <workItem from="1752909672348" duration="1256000" />
+      <workItem from="1753088200061" duration="18448000" />
+      <workItem from="1753177651894" duration="595000" />
+      <workItem from="1753178476668" duration="1428000" />
+      <workItem from="1753187406409" duration="690000" />
+      <workItem from="1753188234989" duration="7822000" />
+      <workItem from="1753267887645" duration="5727000" />
+      <workItem from="1753334296230" duration="2812000" />
+      <workItem from="1753611883115" duration="120000" />
+      <workItem from="1753691384467" duration="25486000" />
+      <workItem from="1753743148527" duration="901000" />
+      <workItem from="1753778981724" duration="1921000" />
+      <workItem from="1753793408294" duration="1330000" />
+    </task>
+    <task id="LOCAL-00001" summary="ФронтЭнд">
+      <option name="closed" value="true" />
+      <created>1751732407823</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1751732407823</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ФронтЭнд часть 2">
+      <option name="closed" value="true" />
+      <created>1751848765796</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1751848765796</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ФронтЭнд часть 3">
+      <option name="closed" value="true" />
+      <created>1751933403441</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1751933403441</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1751983919039</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1751983919039</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1752082045338</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1752082045338</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1752625383836</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1752625383836</updated>
+    </task>
+    <task id="LOCAL-00007" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1752671416473</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1752671416473</updated>
+    </task>
+    <task id="LOCAL-00008" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1753108638178</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1753108638178</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1753715532583</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1753715532583</updated>
+    </task>
+    <task id="LOCAL-00010" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1753716410706</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1753716410706</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ФронтЭнд часть 5, работа с формами">
+      <option name="closed" value="true" />
+      <created>1753717721440</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1753717721440</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="ФронтЭнд" />
+    <MESSAGE value="ФронтЭнд часть 2" />
+    <MESSAGE value="ФронтЭнд часть 3" />
+    <MESSAGE value="ФронтЭнд часть 5, работа с формами" />
+    <option name="LAST_COMMIT_MESSAGE" value="ФронтЭнд часть 5, работа с формами" />
+  </component>
+</project>
