@@ -6,8 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView
 
-from main.forms import RegisterUserForm
-
+from users.forms import RegisterUserForm
 
 class Login(LoginView):
     template_name = 'users/login.html'
@@ -37,7 +36,8 @@ def logout(request):
 class RegisterUser(FormView):
     template_name = 'users/registration.html'
     form_class = RegisterUserForm
-    success_url = '/'
+    # success_url = reverse_lazy('home')
+    # success_url = '/'
 
     def get_context_data(self, **kwargs):
         context = super(RegisterUser, self).get_context_data(**kwargs)
@@ -45,8 +45,8 @@ class RegisterUser(FormView):
         return context
 
     def form_valid(self, form):
-        username = form.save()
-        login(self.request, username)
+        # username = form.save()
+        # login(self.request, username)
         return super().form_valid(form)
 
 def profile(request):

@@ -1,20 +1,28 @@
 {% extends "base.html" %}
-{% load static %}
+{#{% load static %}#}
+{% block title %}Главная{% endblock title %}
 
-{#{% block css %}#}
-{#    <link href="{% static 'css/catalog_styles.css' %}" rel="stylesheet">#}
-{#{% endblock css %}#}
-
-{#    <script src="https://cdn.tailwindcss.com"></script>#}
-{#<link href="{% static 'css/font-awesome_6.4.0_css_all.css' %}" rel="stylesheet">#}
-{#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">#}
 
 {% block content %}
-    <body class="bg-gray-100">
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Обменивайте ненужное на нужное!</h1>
+            <p class="text-xl mb-10">Первая платформа для честного и удобного обмена вещами без денег</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-white text-purple-800 px-6 py-3 rounded-lg font-bold hover:bg-purple-100 smooth-transition">
+                    Разместить объявление
+                </button>
+                <button class="bg-purple-700 text-white px-6 py-3 rounded-lg font-bold hover:bg-purple-600 smooth-transition">
+                    Найти товары
+                </button>
+            </div>
+        </div>
+    </section>
 
     <!-- How it works -->
-    <section class="gradient-bg text-white py-16">
-{#    <section class="py-16 bg-white">#}
+    <section class="py-16 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-16">Как это работает?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -23,21 +31,21 @@
                         <i class="fas fa-plus text-purple-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Разместите объявление</h3>
-                    <p class="text-white-600">Добавьте фото и описание вещи, которую хотите обменять</p>
+                    <p class="text-gray-600">Добавьте фото и описание вещи, которую хотите обменять</p>
                 </div>
                 <div class="text-center px-4">
                     <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-search text-purple-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Найдите нужное</h3>
-                    <p class="text-white-600">Просматривайте предложения других пользователей</p>
+                    <p class="text-gray-600">Просматривайте предложения других пользователей</p>
                 </div>
                 <div class="text-center px-4">
                     <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-exchange-alt text-purple-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Совершите обмен</h3>
-                    <p class="text-white-600">Обсудите детали и договоритесь о встрече</p>
+                    <p class="text-gray-600">Обсудите детали и договоритесь о встрече</p>
                 </div>
             </div>
         </div>
@@ -267,7 +275,6 @@
         </div>
     </section>
 
-    <script src="{% static "js/jquery_main.js" %}"></script>
-
-    </body>
 {% endblock %}
+
+

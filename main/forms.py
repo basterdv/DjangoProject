@@ -1,20 +1,18 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.forms import forms
 from django import forms
 
+from goods.models import Advert
 from users.models import CustomUser
-from goods.models import  Advert
 
 
-class RegisterUserForm(UserCreationForm):
-    class Meta:
-        model = CustomUser
-        fields = [
-            'username',
-            'email',
-            'password1',
-            'password2'
-        ]
+# class RegisterUserForm(UserCreationForm):
+#     class Meta:
+#         model = CustomUser
+#         fields = [
+#             'username',
+#             'email',
+#             'password1',
+#             'password2'
+#         ]
 
 
 class AdvertForm(forms.ModelForm):
