@@ -15,6 +15,11 @@ class Login(LoginView):
     redirect_authenticated_user = True
     success_url = reverse_lazy('home')
 
+    def get_context_data(self, **kwargs):
+        context = super(Login, self).get_context_data(**kwargs)
+        context['title'] = 'Регистрация | Обменник'
+        return context
+
     def form_valid(self, form):
         # Perform custom actions here before calling super().form_valid()
         login(self.request, form.get_user())  # Log the user in
@@ -33,6 +38,11 @@ class RegisterUser(FormView):
     template_name = 'users/registration.html'
     form_class = RegisterUserForm
     success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super(RegisterUser, self).get_context_data(**kwargs)
+        context['title'] = 'Регистрация | Обменник'
+        return context
 
     def form_valid(self, form):
         username = form.save()

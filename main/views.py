@@ -12,7 +12,7 @@ from users.models import CustomUser
 def index(request):
     try:
         context = {
-            'title': 'Home - Главная',
+            'title': 'Обменяй - Бартерная платформа для обмена вещами',
             'context':'Обмен'
         }
 

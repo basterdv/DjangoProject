@@ -1,13 +1,13 @@
-from django.shortcuts import render,get_list_or_404
+from django.shortcuts import render, get_list_or_404
 from goods.models import Advert
 from goods.utils import q_search
+
 
 def catalog(request, category_slug=None):
     page = request.GET.get('page', 1)
     on_sale = request.GET.get('on_sale', None)
     order_by = request.GET.get('order_by', None)
     query = request.GET.get('q', None)
-
 
     # if category_slug == 'all_goods':
     #     goods = Advert.objects.all()
@@ -24,15 +24,12 @@ def catalog(request, category_slug=None):
     # paginator = Paginator(goods, 3)
     # current_page = paginator.page(int(page))
 
-
-
     context: dict[str, str] = {
-        'title': 'Home - Каталог',
+        'title': 'Каталог товаров на обмен | Торговая площадка',
         # 'goods': current_page,
         'slug_url': category_slug
     }
     return render(request, 'goods/catalog.html', context)
-
 
 # def product(request, product_slug):
 #     product = Products.objects.get(slug=product_slug)

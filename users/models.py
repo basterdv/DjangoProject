@@ -1,7 +1,7 @@
-from django.db import models
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.db import models
+
 
 # class User(models.Model):
 #     id = models.AutoField(primary_key=True)
@@ -13,7 +13,8 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 
 class CustomUser(AbstractUser):
 
-    user = None
+    # user = None
+    username = models.CharField(max_length=150,null=True, blank=True)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -21,7 +22,7 @@ class CustomUser(AbstractUser):
     )
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     # objects = MyUserManager()
 
