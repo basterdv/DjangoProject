@@ -6,12 +6,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView
 
-from users.forms import RegisterUserForm, ProfileForm
+from users.forms import RegisterUserForm, ProfileForm, LoginUserForm
 from users.models import CustomUser
 
 
 class Login(LoginView):
     template_name = 'users/login.html'
+    authentication_form = LoginUserForm
 
     redirect_authenticated_user = True
     success_url = reverse_lazy('home')
@@ -23,6 +24,7 @@ class Login(LoginView):
 
     def form_valid(self, form):
         # Perform custom actions here before calling super().form_valid()
+
         login(self.request, form.get_user())  # Log the user in
         return super().form_valid(form)
 
@@ -54,29 +56,6 @@ class RegisterUserView(FormView):
         return super().form_valid(form)
 
 
-# def registration(request):
-#     if request.method == 'POST':
-#         form = RegisterUserForm(data=request.POST)
-#         if form.is_valid():
-#             form.save()
-#
-#             session_key = request.session.session_key
-#
-#             user = form.instance
-#             auth.login(request, user)
-#
-#             if session_key:
-#                 Cart.objects.filter(session_key=session_key).update(user=user)
-#             messages.success(request, f"{user.username}, Вы успешно зарегистрированы и вошли в аккаунт")
-#             return HttpResponseRedirect(reverse('main:index'))
-#     else:
-#         form = UserRegistrationForm()
-#
-#     context = {
-#         'title': 'Home - Регистрация',
-#         'form': form
-#     }
-#     return render(request, 'users/registration.html', context)
 
 @login_required
 def profile(request):

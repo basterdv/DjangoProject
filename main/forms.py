@@ -4,16 +4,6 @@ from goods.models import Advert
 from users.models import CustomUser
 
 
-# class RegisterUserForm(UserCreationForm):
-#     class Meta:
-#         model = CustomUser
-#         fields = [
-#             'username',
-#             'email',
-#             'password1',
-#             'password2'
-#         ]
-
 
 class AdvertForm(forms.ModelForm):
     class Meta:

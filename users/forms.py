@@ -1,10 +1,52 @@
-from django.contrib.auth.forms import UserCreationForm, forms, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, forms, UserChangeForm, AuthenticationForm
 
 from users.models import CustomUser
 
 
-class RegisterUserForm(UserCreationForm):
+class LoginUserForm(AuthenticationForm):
+    email = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+    class Meta:
+        model = CustomUser
+        fields = (
+            'email',
+            'password',
+        )
+
+        labels = {
+            'email': 'Email',
+            'password': 'Password',
+        }
+        widgets = {
+            'email': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Enter your email'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+        }
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+
+            self.fields['email'].widget.attrs.update({
+                'required': 'true',
+                'name': 'email',
+                'id': 'email',
+                'type': 'email',
+                'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                'placeholder': 'your@email.com',
+            })
+
+
+            self.fields['password'].widget.attrs.update({
+                'required': 'true',
+                'name': 'password1',
+                'id': 'password1',
+                'type': 'password',
+                'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                'placeholder': 'Password',
+            })
+
+
+class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.CharField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -88,7 +130,7 @@ class RegisterUserForm(UserCreationForm):
             'name': 'password2',
             'id': 'password2',
             'type': 'password',
-            'class':'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
             'placeholder': 'Password confirmation',
         })
 
@@ -103,6 +145,7 @@ class RegisterUserForm(UserCreationForm):
 
     # self.fields['username'].widget.attrs.update({'class':'form-control'})
 
+
 class ProfileForm(UserChangeForm):
     class Meta:
         model = CustomUser
@@ -112,4 +155,3 @@ class ProfileForm(UserChangeForm):
             'email',
 
         ]
-
