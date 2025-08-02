@@ -15,7 +15,7 @@
                             <i class="fas fa-user text-blue-600 text-2xl"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold">Иван Иванов</h3>
+                            <h3 class="font-bold">{{ user.first_name }} {{ user.last_name }}</h3>
                             <span class="text-sm text-gray-500">На сервисе 1 год</span>
                         </div>
                     </div>
@@ -51,7 +51,6 @@
                            class="block px-3 py-2 text-gray-600 hover:bg-blue-50 rounded hover:text-blue-600">
                             <i class="fas fa-sign-out-alt mr-2"></i> Выйти
                         </a>
-                        {#                        <li><a href="{% url 'logout' %}" class="text-white">Выход</a></li>#}
                     </nav>
                 </div>
 

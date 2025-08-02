@@ -3,7 +3,7 @@ from django.urls import path
 from users import views
 
 from django.urls import path
-from users.views import Login, RegisterUser, profile, logout  # , Logout
+from users.views import Login, RegisterUserView, profile, logout  # , Logout
 
 app_name = 'users'
 
@@ -18,6 +18,6 @@ urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     # path('logout/', Logout.as_view(), name='logout'),
     path('logout/', logout, name='logout'),
-    path('register/', RegisterUser.as_view(), name='register'),
+    path('registr/', RegisterUserView.as_view(), name='registration'),
     path('profile/',views.profile, name='profile'),
 ]

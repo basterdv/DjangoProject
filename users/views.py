@@ -2,11 +2,13 @@ from django.contrib import auth
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView
 
-from users.forms import RegisterUserForm
+from users.forms import RegisterUserForm, ProfileForm
+from users.models import CustomUser
+
 
 class Login(LoginView):
     template_name = 'users/login.html'
@@ -24,6 +26,7 @@ class Login(LoginView):
         login(self.request, form.get_user())  # Log the user in
         return super().form_valid(form)
 
+
 # class Logout(LogoutView):
 #     next_page = '/'
 
@@ -33,21 +36,71 @@ def logout(request):
     auth.logout(request)
     return redirect(reverse('main:index'))
 
-class RegisterUser(FormView):
+
+class RegisterUserView(FormView):
     template_name = 'users/registration.html'
     form_class = RegisterUserForm
     # success_url = reverse_lazy('home')
-    # success_url = '/'
+    success_url = '/'
 
     def get_context_data(self, **kwargs):
-        context = super(RegisterUser, self).get_context_data(**kwargs)
+        context = super(RegisterUserView, self).get_context_data(**kwargs)
         context['title'] = 'Регистрация | Обменник'
         return context
 
     def form_valid(self, form):
-        # username = form.save()
-        # login(self.request, username)
+        username = form.save()
+        login(self.request, username)
         return super().form_valid(form)
 
+
+# def registration(request):
+#     if request.method == 'POST':
+#         form = RegisterUserForm(data=request.POST)
+#         if form.is_valid():
+#             form.save()
+#
+#             session_key = request.session.session_key
+#
+#             user = form.instance
+#             auth.login(request, user)
+#
+#             if session_key:
+#                 Cart.objects.filter(session_key=session_key).update(user=user)
+#             messages.success(request, f"{user.username}, Вы успешно зарегистрированы и вошли в аккаунт")
+#             return HttpResponseRedirect(reverse('main:index'))
+#     else:
+#         form = UserRegistrationForm()
+#
+#     context = {
+#         'title': 'Home - Регистрация',
+#         'form': form
+#     }
+#     return render(request, 'users/registration.html', context)
+
+@login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    if request.method == 'POST':
+        form = ProfileForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+
+            return redirect(request, 'users/profile.html')
+    else:
+        form = ProfileForm(instance=request.user)
+
+    # user = get_object_or_404(CustomUser, pk=user_id)
+
+    # user = CustomUser.objects.get(pk=request.user.pk)
+    # user = CustomUser.objects.filter(username=request.user.username).first()
+    user_id = request.user
+    # user = CustomUser.objects.filter(user_id=request.user)
+    print(user_id)
+
+    context = {
+        # 'user': user,
+        'form': form,
+        'title': 'Ghjabkm'
+    }
+    return render(request, 'users/profile.html', context)
+    # return render(request, 'users/profile.html', context)
