@@ -4,46 +4,45 @@ from users.models import CustomUser
 
 
 class LoginUserForm(AuthenticationForm):
-    email = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = CustomUser
         fields = (
-            'email',
+            'username',
             'password',
         )
 
         labels = {
-            'email': 'Email',
-            'password': 'Password',
+            'username': 'Username',
+            'password': 'Пароль',
         }
         widgets = {
-            'email': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Enter your email'}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
         }
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-            self.fields['email'].widget.attrs.update({
-                'required': 'true',
-                'name': 'email',
-                'id': 'email',
-                'type': 'email',
-                'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-                'placeholder': 'your@email.com',
-            })
+        self.fields['username'].widget.attrs.update({
+            'required': 'true',
+            'name': 'username',
+            'id': 'username',
+            'type': 'username',
+            'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            'placeholder': 'your@email.com',
+        })
 
-
-            self.fields['password'].widget.attrs.update({
-                'required': 'true',
-                'name': 'password1',
-                'id': 'password1',
-                'type': 'password',
-                'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-                'placeholder': 'Password',
-            })
+        self.fields['password'].widget.attrs.update({
+            'required': 'true',
+            'name': 'password',
+            'id': 'password',
+            'type': 'password',
+            'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            'placeholder': 'Password',
+        })
 
 
 class RegisterUserForm(UserCreationForm):
@@ -103,7 +102,8 @@ class RegisterUserForm(UserCreationForm):
             'id': 'username',
             'type': 'text',
             # 'class': 'form-control block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-            'class': 'form-control block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            # 'class': 'form-control block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+            'class': 'form-control ps-4" id="email placeholder="your@email.com"',
             'placeholder': 'Username',
         })
 

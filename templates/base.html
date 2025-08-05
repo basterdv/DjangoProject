@@ -10,17 +10,20 @@
 
     <title>{{ title }}</title>
 
+    <!-- Custom CSS -->
+    <link href="{% static '/css/styles.css' %}" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
     <!-- Стиль для страниц -->
     {% block css %}    {% endblock css %}
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome для иконок -->
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static  'css/styles.css' %}" rel="stylesheet">
 
 </head>
 
@@ -28,7 +31,7 @@
 <!-- Header -->
 <header class="gradient-bg text-white navbar-container">
     <!-- Fixed Navbar -->
-    <nav class="navbar navbar-expand-lg py-3 fixed-navbar gradient-bg">
+    <nav class="navbar navbar-expand-lg py-3 sticky-top fixed-navbar gradient-bg">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
                 <i class="fas fa-exchange-alt fa-lg me-2 text-white"></i>
@@ -60,12 +63,13 @@
                 <div class="d-flex ms-3">
                     {% if user.is_authenticated %}
                         <div class="d-flex align-items-center">
-{#                            <a href="#" class="nav-link me-3"><i class="fas fa-search"></i></a>#}
-                            <a href="{% url 'users:profile' %}" class="nav-link me-3 text-white"><i class="fas fa-user"></i></a>
-{#                            <a href="#" class="nav-link position-relative">#}
-{#                                <i class="fas fa-heart"></i>#}
-{#                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>#}
-{#                            </a>#}
+                            {#                            <a href="#" class="nav-link me-3"><i class="fas fa-search"></i></a>#}
+                            <a href="{% url 'users:profile' %}" class="nav-link me-3 text-white"><i
+                                    class="fas fa-user"></i></a>
+                            {#                            <a href="#" class="nav-link position-relative">#}
+                            {#                                <i class="fas fa-heart"></i>#}
+                            {#                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>#}
+                            {#                            </a>#}
                         </div>
                     {% else %}
                         <a class="btn bg-white text-blue-800 me-2 fw-medium" href="{% url 'users:login' %}">Войти</a>

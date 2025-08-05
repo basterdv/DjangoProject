@@ -5,26 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="ФронтЭнд  работа с формами">
-      <change afterPath="$PROJECT_DIR$/users/templates/users/login_.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/all.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/registration_.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goods/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goods/migrations/0002_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/goods/migrations/0003_category_slug.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/migrations/0002_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/index_.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/index_.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.min.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main_styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
@@ -83,7 +76,7 @@
     &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Home/Documents/Workshop/Python_project/DjangoProject/exchange_things/static/imajes&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Home/Documents/Workshop/Python_project/DjangoProject/static/css&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -97,6 +90,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\css" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\exchange_things\static\imajes" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\exchange_things\static\css" />
     </key>
@@ -211,7 +205,15 @@
       <workItem from="1754034437674" duration="17713000" />
       <workItem from="1754059430172" duration="1188000" />
       <workItem from="1754093340907" duration="1429000" />
-      <workItem from="1754116567532" duration="10061000" />
+      <workItem from="1754116567532" duration="10159000" />
+      <workItem from="1754183676161" duration="622000" />
+      <workItem from="1754184916143" duration="189000" />
+      <workItem from="1754186193172" duration="745000" />
+      <workItem from="1754217528514" duration="24000" />
+      <workItem from="1754217633911" duration="468000" />
+      <workItem from="1754296526142" duration="8468000" />
+      <workItem from="1754386186178" duration="1232000" />
+      <workItem from="1754391209257" duration="6776000" />
     </task>
     <task id="LOCAL-00001" summary="ФронтЭнд">
       <option name="closed" value="true" />
@@ -325,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754094771875</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ФронтЭнд  работа с формами">
+      <option name="closed" value="true" />
+      <created>1754145403417</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1754145403417</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

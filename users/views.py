@@ -2,25 +2,33 @@ from django.contrib import auth
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView
 
 from users.forms import RegisterUserForm, ProfileForm, LoginUserForm
-from users.models import CustomUser
 
 
 class Login(LoginView):
     template_name = 'users/login.html'
-    authentication_form = LoginUserForm
+    # form_class = AuthenticationForm
+    form_class = LoginUserForm
 
-    redirect_authenticated_user = True
-    success_url = reverse_lazy('home')
+    # redirect_authenticated_user = True
+    # success_url = reverse_lazy('home')
+    # success_url = '/'
 
     def get_context_data(self, **kwargs):
         context = super(Login, self).get_context_data(**kwargs)
         context['title'] = 'Регистрация | Обменник'
         return context
+
+    def get_success_url(self):
+        return reverse_lazy('main:index')
+
+    # def form_invalid(self, form):
+    #     messages.error(self.request, 'Invalid username or password')
+    #     return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
         # Perform custom actions here before calling super().form_valid()
