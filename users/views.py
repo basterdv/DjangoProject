@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
@@ -91,3 +92,19 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
     # return render(request, 'users/profile.html', context)
+
+class PasswordReset(FormView):
+    template_name = 'users/password-reset.html'
+    form_class = PasswordResetForm
+
+    def get_context_data(self, **kwargs):
+        context = super(PasswordReset, self).get_context_data(**kwargs)
+        context['title'] = 'Восстановление пароля | Обменник'
+        return context
+
+
+
+
+#
+#
+

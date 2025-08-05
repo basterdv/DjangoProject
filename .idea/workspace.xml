@@ -4,21 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="ФронтЭнд  работа с формами">
-      <change afterPath="$PROJECT_DIR$/static/css/all.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/registration_.html" afterDir="false" />
+    <list default="true" id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="работа с формами login and register">
+      <change afterPath="$PROJECT_DIR$/static/css/password_reset.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/custom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/jquery_password_reset.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/templates/main/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/registration_styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/sign-in.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/sticky-footer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_login.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jquery_login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jquery_registration.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/login_.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/password-reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/password-reset.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/profile_.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/registration_.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,9 +36,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -95,8 +98,8 @@
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\exchange_things\static\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\css\bootstrap" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\css" />
+      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\css\bootstrap" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\orders\templates\orders" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\goods\templates\goods" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\goods\templates\advert" />
@@ -213,7 +216,7 @@
       <workItem from="1754217633911" duration="468000" />
       <workItem from="1754296526142" duration="8468000" />
       <workItem from="1754386186178" duration="1232000" />
-      <workItem from="1754391209257" duration="6776000" />
+      <workItem from="1754391209257" duration="9838000" />
     </task>
     <task id="LOCAL-00001" summary="ФронтЭнд">
       <option name="closed" value="true" />
@@ -335,7 +338,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754145403417</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="работа с формами login and register">
+      <option name="closed" value="true" />
+      <created>1754399627810</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1754399627810</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,6 +369,7 @@
     <MESSAGE value="ФронтЭнд часть 3" />
     <MESSAGE value="ФронтЭнд часть 5, работа с формами" />
     <MESSAGE value="ФронтЭнд  работа с формами" />
-    <option name="LAST_COMMIT_MESSAGE" value="ФронтЭнд  работа с формами" />
+    <MESSAGE value="работа с формами login and register" />
+    <option name="LAST_COMMIT_MESSAGE" value="работа с формами login and register" />
   </component>
 </project>
