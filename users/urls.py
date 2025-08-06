@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from users import views
 from users.views import Login, RegisterUserView, profile, logout, PasswordReset  # , Logout
@@ -14,9 +14,11 @@ app_name = 'users'
 
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
+
+    path('login_vk/', include('social_django.urls', namespace='social')),
     # path('logout/', Logout.as_view(), name='logout'),
     path('logout/', logout, name='logout'),
     path('registr/', RegisterUserView.as_view(), name='registration'),
     path('passwordreset/', PasswordReset.as_view(), name='password_reset'),
-    path('profile/',views.profile, name='profile'),
+    path('profile/', views.profile, name='profile'),
 ]

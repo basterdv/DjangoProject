@@ -11,6 +11,7 @@ urlpatterns = [
     path('', include('main.urls')),
     path('users/',include('users.urls')),
     path('goods/',include('goods.urls')),
+
     # path('advert/', views.advert, name='advert'),
     # path('advert_edit/', views.advert_edit, name='advert_edit')
     # path('exchange/', views.exchange, name='exchange'),

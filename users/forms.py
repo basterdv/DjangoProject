@@ -44,6 +44,9 @@ class LoginUserForm(AuthenticationForm):
             'placeholder': 'Password',
         })
 
+    # def form_invalid(self, form):
+    #     print('ffffffffffffffffffffffffffffffffffff')
+
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}))

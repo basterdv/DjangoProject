@@ -1,4 +1,4 @@
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
@@ -27,9 +27,9 @@ class Login(LoginView):
     def get_success_url(self):
         return reverse_lazy('main:index')
 
-    # def form_invalid(self, form):
-    #     messages.error(self.request, 'Invalid username or password')
-    #     return self.render_to_response(self.get_context_data(form=form))
+    def form_invalid(self, form):
+        messages.error(self.request, "Неверный логин или пароль")  # Добавляем сообщение об ошибке
+        return self.render_to_response(self.get_context_data(context={'form': form}))
 
     def form_valid(self, form):
         # Perform custom actions here before calling super().form_valid()
@@ -65,7 +65,6 @@ class RegisterUserView(FormView):
         return super().form_valid(form)
 
 
-
 @login_required
 def profile(request):
     if request.method == 'POST':
@@ -83,7 +82,7 @@ def profile(request):
     # user = CustomUser.objects.filter(username=request.user.username).first()
     user_id = request.user
     # user = CustomUser.objects.filter(user_id=request.user)
-    print(user_id)
+    # print(user_id)
 
     context = {
         # 'user': user,
@@ -92,6 +91,7 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
     # return render(request, 'users/profile.html', context)
+
 
 class PasswordReset(FormView):
     template_name = 'users/password-reset.html'
@@ -102,9 +102,5 @@ class PasswordReset(FormView):
         context['title'] = 'Восстановление пароля | Обменник'
         return context
 
-
-
-
 #
 #
-

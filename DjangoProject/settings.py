@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     "debug_toolbar",
     'crispy_forms',
+    'social_django'
 
     'main',
     'goods',
@@ -94,8 +95,14 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+SOCIAL_AUTH_VK_OAUTH2_KEY = 'your_vk_app_id'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'your_vk_app_secret'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
 
-
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -147,10 +154,13 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 # AUTH_USER_MODEL = 'exchange_things.CustomUser'
 AUTH_USER_MODEL = 'users.CustomUser'
+
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # LOGIN_URL = 'login'
