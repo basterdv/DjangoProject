@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="работа с формами login and register">
-      <change afterPath="$PROJECT_DIR$/static/css/modals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/login_styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/login_styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/js_vk_auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/js_vk_auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,8 +24,8 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
-        <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -214,6 +207,7 @@
       <workItem from="1754402715213" duration="31000" />
       <workItem from="1754433872915" duration="1407000" />
       <workItem from="1754478186515" duration="12864000" />
+      <workItem from="1754608955965" duration="1397000" />
     </task>
     <task id="LOCAL-00001" summary="ФронтЭнд">
       <option name="closed" value="true" />
@@ -351,7 +345,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754402729346</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="работа с формами login and register">
+      <option name="closed" value="true" />
+      <created>1754579706914</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1754579706914</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
