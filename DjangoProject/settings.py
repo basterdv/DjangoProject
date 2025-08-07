@@ -77,7 +77,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-
+                'social_django.context_processors.backends',
                 'django.template.context_processors.debug',
             ],
         },
@@ -95,20 +95,21 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-SOCIAL_AUTH_VK_OAUTH2_KEY = 'your_vk_app_id'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'your_vk_app_secret'
+# SOCIAL_AUTH_VK_OAUTH2_KEY = 'ea9651f2ea9651f2ea9651f232e9ae78b2eea96ea9651f282053dd392b55a74f6d0d517'
+# SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Y5HW8tHPpImF7oi8sKd9'
+SOCIAL_AUTH_VK_OAUTH2_KEY = '54015625' #'ID приложения'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'xVWmzYNCFEr1ZyUPOxpi' #'Защищённый ключ'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_URL_NAMESPACE = 'users:social'
 SOCIAL_AUTH_REQUIRE_POST = True
 
-
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.vk.VKOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2', # бекенд авторизации через ВКонтакте
+    'django.contrib.auth.backends.ModelBackend',# бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
     'social_core.backends.open_id.OpenIdAuth',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.vk.BaseOAuth2'
+    # 'social_core.backends.vk.BaseOAuth2'
 
 )
 

@@ -15,7 +15,7 @@ app_name = 'users'
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
 
-    path('login_vk/', include('social_django.urls', namespace='social')),
+    path('login_vk/', include('social_django.urls', namespace='social',)),
     # path('logout/', Logout.as_view(), name='logout'),
     path('logout/', logout, name='logout'),
     path('registr/', RegisterUserView.as_view(), name='registration'),
