@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     "debug_toolbar",
     'crispy_forms',
-    'social_django'
+    'social_django',
 
     'main',
     'goods',
@@ -98,10 +98,18 @@ DATABASES = {
 SOCIAL_AUTH_VK_OAUTH2_KEY = 'your_vk_app_id'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'your_vk_app_secret'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_REQUIRE_POST = True
+
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.vk.BaseOAuth2'
+
 )
 
 # Password validation
@@ -139,8 +147,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-       os.path.join(BASE_DIR, 'static')
-   ]
+    os.path.join(BASE_DIR, 'static')
+]
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static/'
 #     ]
@@ -148,7 +156,6 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media/'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
