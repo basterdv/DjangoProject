@@ -6,8 +6,8 @@ VKID.Config.init({
     app: 54015625, // Идентификатор приложения.
     redirectUrl: 'http://localhost/users/vk_auth_callback', // Адрес для перехода после авторизации.
     responseMode: VKID.ConfigResponseMode.Callback,
-    state: 'state', // Произвольная строка состояния приложения.
-    codeVerifier: 'codeVerifier', // Параметр в виде случайной строки. Обеспечивает защиту передаваемых данных.
+    state: '1WYhJUS_NETi_eUCLGrGPVv5yVY6fYiXVAxrmdVqXfY', // Произвольная строка состояния приложения.
+    codeChallenge: 'tLSph3W3GZ8n4YzjVqkgwCmETptZSNXGULm4FkZ4VQ0', // Параметр в виде случайной строки. Обеспечивает защиту передаваемых данных.
     scope: 'email phone first_name last_name', // Список прав доступа, которые нужны приложению.
     mode: VKID.ConfigAuthMode.InNewWindow,
 });
@@ -20,34 +20,34 @@ authButton.onclick = () => {
     VKID.Auth.login();
 
 
-    fetch('http://localhost/users/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
-    })
-        .catch(console.error)
-        .then((response) => response.json())
-        .then((data) => {
-            localStorage.setItem('access_token', data.access_token);
-            localStorage.setItem('username', data.refresh_token);
-            document.getElementById('printable_area').innerHTML = 'code';
-            window.location.reload();
-
-
-            // //настройки обработчика успешной авторизации
-            // VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-            //     const code = payload.code;
-            //     const deviceId = payload.device_id;
-            //     document.getElementById('printable_area').innerHTML = code;
-            //`
-            //     VKID.Auth.exchangeCode(code, deviceId)
-            //         .then(onSuccessHandler)
-            //         .catch(onErrorHandler);
-            // };
-
-        });
+    // fetch('http://localhost/users/login', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({}),
+    // })
+    //     .catch(console.error)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         localStorage.setItem('access_token', data.access_token);
+    //         localStorage.setItem('username', data.refresh_token);
+    //         document.getElementById('printable_area').innerHTML = 'code';
+    //         window.location.reload();
+    //
+    //
+    //         // //настройки обработчика успешной авторизации
+    //         // VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
+    //         //     const code = payload.code;
+    //         //     const deviceId = payload.device_id;
+    //         //     document.getElementById('printable_area').innerHTML = code;
+    //         //`
+    //         //     VKID.Auth.exchangeCode(code, deviceId)
+    //         //         .then(onSuccessHandler)
+    //         //         .catch(onErrorHandler);
+    //         // };
+    //
+    //     });
 
 };
 
