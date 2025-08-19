@@ -207,8 +207,9 @@ def vk_auth_callback(request):
             )
 
         print(user)
+        print(response)
 
-        login(request, user)  # Логинимся
+        login(response, user)  # Логинимся
 
         # return redirect(request, 'index.html')
     else:
