@@ -1,3 +1,4 @@
+import requests
 from django.contrib import auth, messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -5,6 +6,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView
 
 from users.forms import RegisterUserForm, ProfileForm, LoginUserForm
@@ -19,6 +21,22 @@ class Login(LoginView):
     # success_url = reverse_lazy('home')
     # success_url = '/'
 
+    # def get(self,request, *args, **kwargs):
+    #     code = request.GET.get('code')
+    #     expires_in = request.GET.get('expires_in')
+    #     device_id = request.GET.get('device_id')
+    #     state = request.GET.get('state')
+    #     ext_id = request.GET.get('ext_id')
+    #     type =  request.GET.get('type')
+    #
+    #     print(f'code - {code}')
+    #     print(f'expires_in - {expires_in}')
+    #     print(f'device_id - {device_id}')
+    #     print(f'state - {state}')
+    #     print(f'ext_id - {ext_id}')
+    #     print(f'type - {type}')
+
+    # return super(Login, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(Login, self).get_context_data(**kwargs)
@@ -103,5 +121,73 @@ class PasswordReset(FormView):
         context['title'] = 'Восстановление пароля | Обменник'
         return context
 
+@csrf_exempt
+def vk_auth_callback(request):
+    code = request.GET.get('code')
+    device_id = request.GET.get('device_id')
+    _type = request.GET.get('type')
+    expires_in =request.GET.get('expires_in')
+    # print(code)
+    # print(device_id)
+    # print(_type)
+    # print(expires_in)
+
+    TOKEN_EXCHANGE_URL = 'https://id.vk.com/oauth2/auth'
+    payload = {
+        # 'client_id': client_id,
+        # 'client_secret': client_secret,
+        # 'redirect_uri': redirect_uri,
+        'grant_type': 'authorization_code',
+        'client_id': 54015625,
+        'device_id': device_id,
+        'code': code,
+        'redirect_uri': 'http://localhost/users/vk_auth_callback',
+        'verifier': 'code_verifier',
+        # 'grant_type': 'authorization_code'
+    }
+
+    # Отправляем POST-запрос к VK API
+    # print(payload)
+    response = requests.post(TOKEN_EXCHANGE_URL, data=payload)
+    print(response.json())
+
+    template_name = 'users/vk_auth_callback.html'
+
+    # if not code:
+    #     print("Ошибка авторизации: отсутствует код")
+    # return HttpResponse("Ошибка авторизации: отсутствует код")
+    # return redirect(request, 'users/profile.html')
+    return render(request, template_name)
+    # return redirect(request, 'users/vk_auth_callback.html')
+
+#     # vk_session = VkApi(app_id=settings.VK_APP_ID, app_secret=settings.VK_APP_SECRET,
+#     #                    redirect_uri=settings.VK_REDIRECT_URI)
+#     # try:
+#     #     vk_session.auth(code=code)
+#     # except Exception as e:
+#     #     # return HttpResponse(f"Ошибка авторизации: {e}")
+#     #     print('fault')
+#
+#     # vk = vk_session.get_api()
+#     # try:
+#         user_info = vk.users.get(fields='first_name,last_name,photo_max_orig')  # Получение данных пользователя
+#         # Обработка данных пользователя
+#         # Создание или вход пользователя в Django
+#         # Например:
+#         # user, created = User.objects.get_or_create(username=user_info[0]['id'])
+#         # user.first_name = user_info[0]['first_name']
+#         # user.last_name = user_info[0]['last_name']
+#         # user.save()
+#         # login(request, user)
+#
+#     # except Exception as e:
+#     #     print('fault')
+#         # return HttpResponse(f"Ошибка получения данных пользователя: {e}")
+#
+#     # return HttpResponse("Авторизация успешна! Данные пользователя: {}".format(user_info))
 #
 #
+# # def vk_auth_start(request):
+# #     vk_session = VkApi(app_id=settings.VK_APP_ID, scope='email')
+# #     auth_url = vk_session.get_auth_url(settings.VK_REDIRECT_URI, get_random_id())
+# #     return redirect(auth_url)

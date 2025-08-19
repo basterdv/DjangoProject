@@ -39,12 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # 'exchange_things.apps.ExchangeThingsConfig',
-    # 'exchange_things',
+
     'fontawesomefree',
     "debug_toolbar",
-    'crispy_forms',
-    'social_django',
+
 
     'main',
     'goods',
@@ -77,7 +75,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'social_django.context_processors.backends',
                 'django.template.context_processors.debug',
             ],
         },
@@ -97,19 +94,15 @@ DATABASES = {
 }
 # SOCIAL_AUTH_VK_OAUTH2_KEY = 'ea9651f2ea9651f2ea9651f232e9ae78b2eea96ea9651f282053dd392b55a74f6d0d517'
 # SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Y5HW8tHPpImF7oi8sKd9'
-SOCIAL_AUTH_VK_OAUTH2_KEY = '54015625' #'ID приложения'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'xVWmzYNCFEr1ZyUPOxpi' #'Защищённый ключ'
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
-SOCIAL_AUTH_URL_NAMESPACE = 'users:social'
-SOCIAL_AUTH_REQUIRE_POST = True
+# SOCIAL_AUTH_VK_OAUTH2_KEY = '54015625' #'ID приложения'
+# SOCIAL_AUTH_VK_OAUTH2_SECRET = 'xVWmzYNCFEr1ZyUPOxpi' #'Защищённый ключ'
+# SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
+# SOCIAL_AUTH_URL_NAMESPACE = 'users:social'
+# SOCIAL_AUTH_REQUIRE_POST = True
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.vk.VKOAuth2', # бекенд авторизации через ВКонтакте
     'django.contrib.auth.backends.ModelBackend',# бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.vk.BaseOAuth2'
+
 
 )
 
@@ -172,3 +165,7 @@ LOGOUT_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # LOGIN_URL = 'login'
+
+# VK_APP_ID = '54015625'
+# VK_APP_SECRET = 'xVWmzYNCFEr1ZyUPOxpi'
+# VK_REDIRECT_URI = 'http://localhost:8000/vk_auth_callback/'  # URL для перенаправления после авторизации
