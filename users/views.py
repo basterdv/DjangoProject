@@ -1,11 +1,15 @@
+from urllib import request
+
 import requests
 from django.contrib import auth, messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import LoginView
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView
 
@@ -13,31 +17,28 @@ from users.forms import RegisterUserForm, ProfileForm, LoginUserForm
 from users.models import CustomUser
 
 
+# @method_decorator(csrf_exempt, name='dispatch')
 class Login(LoginView):
     template_name = 'users/login.html'
     # form_class = AuthenticationForm
+    # redirect_authenticated_user = True
     form_class = LoginUserForm
 
     # redirect_authenticated_user = True
     # success_url = reverse_lazy('home')
     # success_url = '/'
+    def login_vk(self, *args, **kwargs):
+        login(self, *args, **kwargs)
+        print('args - kwargs - ',*args, **kwargs)
+        return HttpResponseRedirect(self.get_success_url())
 
-    # def get(self,request, *args, **kwargs):
-    #     code = request.GET.get('code')
-    #     expires_in = request.GET.get('expires_in')
-    #     device_id = request.GET.get('device_id')
-    #     state = request.GET.get('state')
-    #     ext_id = request.GET.get('ext_id')
-    #     type =  request.GET.get('type')
-    #
-    #     print(f'code - {code}')
-    #     print(f'expires_in - {expires_in}')
-    #     print(f'device_id - {device_id}')
-    #     print(f'state - {state}')
-    #     print(f'ext_id - {ext_id}')
-    #     print(f'type - {type}')
 
-    # return super(Login, self).get(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        code = request.GET.get('code')
+        print(f'code - {code}')
+        login_data = request.session.get('login_data')
+        print(f'login data - {login_data}')
+        return super(Login, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(Login, self).get_context_data(**kwargs)
@@ -123,7 +124,16 @@ class PasswordReset(FormView):
         return context
 
 
-@csrf_exempt
+def google_auth_callback(request):
+    email = 'baster1@list.ru'
+    user = CustomUser.objects.get(email=email)
+    print(user)
+    login(request, user)
+    return render(request, 'users/login.html')
+    # return redirect(request, 'users/login.html')
+
+
+# @csrf_exempt
 def vk_auth_callback(request):
     code = request.GET.get('code')
     device_id = request.GET.get('device_id')
@@ -134,11 +144,9 @@ def vk_auth_callback(request):
 
     code_verifier = 'b5i9j_JQn3YeOlghVuS4WgdKcjoMIpJ7jFiOBO7QKSAxXa42HKu90hpMWQTL6F1KyoRrCD7Uw2H2u6mCQTJm-FMHro-NOYyhaPTsZqdkyFAvM85WGu0wa4g47SNOdyXW'
 
-
     TOKEN_EXCHANGE_URL = 'https://id.vk.com/oauth2/auth'
     USER_PUBLIC_DATA_EXCHANGE_URL = 'https://id.vk.com/oauth2/public_info'
     USER_INFO_DATA_EXCHANGE_URL = 'https://id.vk.com/oauth2/user_info'
-
 
     payload = {
         'grant_type': 'authorization_code',
@@ -156,6 +164,7 @@ def vk_auth_callback(request):
     response = requests.post(TOKEN_EXCHANGE_URL, data=payload,
                              headers={'Content-Type': 'application/x-www-form-urlencoded'})
     data = response.json()
+
     if 'access_token' in data:
         # print(response.json())
         access_token = data['access_token']
@@ -182,8 +191,11 @@ def vk_auth_callback(request):
             'access_token': access_token,
         }
 
-        response = requests.post(USER_INFO_DATA_EXCHANGE_URL, data=payload,
-                                 headers={'Content-Type': 'application/x-www-form-urlencoded'})
+        response = requests.post(
+            USER_INFO_DATA_EXCHANGE_URL,
+            data=payload,
+            headers={'Content-Type': 'application/x-www-form-urlencoded'}
+        )
         data_user_info = response.json()
 
         user_id = data_user_info['user']['user_id']
@@ -201,21 +213,19 @@ def vk_auth_callback(request):
             # login(request, username) # Логинимся
         except:
             print(f'Пользователь с потной {email} не найден')
-            user = CustomUser.objects.create_user (
+            user = CustomUser.objects.create_user(
                 username=first_name,
                 email=email
             )
+        # Логинимся
+        request.session['username'] = 'baster1@list.ru'
+        Login.login_vk(request, user)
 
-        print(user)
-        print(response)
-
-        login(response, user)  # Логинимся
-
-        # return redirect(request, 'index.html')
     else:
         print('error')
 
     template_name = 'users/vk_auth_callback.html'
+    # template_name = 'users/login.html'
 
     # if not code:
     #     print("Ошибка авторизации: отсутствует код")

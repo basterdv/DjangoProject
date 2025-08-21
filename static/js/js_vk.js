@@ -18,38 +18,41 @@ const authButton = document.getElementById('VKAuthButton');
 authButton.onclick = () => {
     // После авторизации будет редирект на адрес, указанный в параметре redirectUrl
     VKID.Auth.login();
-
-
-    // fetch('http://localhost/users/login', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({}),
-    // })
-    //     .catch(console.error)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         localStorage.setItem('access_token', data.access_token);
-    //         localStorage.setItem('username', data.refresh_token);
-    //         document.getElementById('printable_area').innerHTML = 'code';
-    //         window.location.reload();
-    //
-    //
-    //         // //настройки обработчика успешной авторизации
-    //         // VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-    //         //     const code = payload.code;
-    //         //     const deviceId = payload.device_id;
-    //         //     document.getElementById('printable_area').innerHTML = code;
-    //         //`
-    //         //     VKID.Auth.exchangeCode(code, deviceId)
-    //         //         .then(onSuccessHandler)
-    //         //         .catch(onErrorHandler);
-    //         // };
-    //
-    //     });
-
+    window.location.reload();
 };
+
+
+
+// fetch('http://localhost/users/login', {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({}),
+// })
+//     .catch(console.error)
+//     .then((response) => response.json())
+//     .then((data) => {
+//         localStorage.setItem('access_token', data.access_token);
+//         localStorage.setItem('username', data.refresh_token);
+//         document.getElementById('printable_area').innerHTML = 'code';
+//         window.location.reload();
+//
+//
+//         // //настройки обработчика успешной авторизации
+//         // VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
+//         //     const code = payload.code;
+//         //     const deviceId = payload.device_id;
+//         //     document.getElementById('printable_area').innerHTML = code;
+//         //`
+//         //     VKID.Auth.exchangeCode(code, deviceId)
+//         //         .then(onSuccessHandler)
+//         //         .catch(onErrorHandler);
+//         // };
+//
+//     });
+
+// };
 
 // const tryAuth = () => {
 //     const urlParams = new URLSearchParams(window.location.search);

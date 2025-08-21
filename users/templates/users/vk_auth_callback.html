@@ -42,6 +42,7 @@
     <div class="success-message">Вы успешно авторизованы!</div>
 </div>
 </body>
+
 <script>
     const tryAuth = () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -57,7 +58,8 @@
 
 
     window.onload = function () {
-        window.alert(tryAuth.code);
+        {#window.postMessage('message','http://example.com');#}
+        {#window.alert(tryAuth.code);#}
         setTimeout(function () {
             window.close();
         }, 1000); // Закрывает окно через 1 секунду после редиректа
