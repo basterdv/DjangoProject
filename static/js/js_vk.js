@@ -17,10 +17,23 @@ const authButton = document.getElementById('VKAuthButton');
 
 authButton.onclick = () => {
     // После авторизации будет редирект на адрес, указанный в параметре redirectUrl
+
     VKID.Auth.login();
     window.location.reload();
 };
 
+function checkTabClosed() {
+    if (localStorage.getItem('tabClosed') === 'true') {
+        localStorage.removeItem('tabClosed');
+        location.reload();  // Обновляем страницу
+    }
+}
+
+// Проверяем при загрузке страницы
+window.addEventListener('load', checkTabClosed);
+
+// Периодически проверяем каждые 1000 мс (1 секунда)
+setInterval(checkTabClosed, 1000);
 
 
 // fetch('http://localhost/users/login', {

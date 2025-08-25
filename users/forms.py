@@ -49,6 +49,8 @@ class LoginUserForm(AuthenticationForm):
 
 
 class RegisterUserForm(UserCreationForm):
+    first_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.CharField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -58,16 +60,22 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = [
+            'first_name',
+            'last_name',
             'username',
             'email',
             'password1',
             'password2'
         ]
         labels = {
+            'first_name': 'First Name',
+            'last_name': 'Last Name',
             'username': 'username',
             'email': 'Email',
         }
         widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'username': forms.TextInput(attrs={'class': 'form-input'}),
             'email': forms.EmailInput(attrs={'class': 'form-input'}),
             'password1': forms.PasswordInput(attrs={'class': 'form-input'}),
@@ -97,6 +105,15 @@ class RegisterUserForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['first_name'].widget.attrs.update({
+            'required': 'true',
+            'name': 'first_name',
+            'id': 'first_name',
+            'type': 'text',
+            'class': 'form-control',
+            'placeholder': 'Имя',
+        })
 
         self.fields['username'].widget.attrs.update({
             # 'class': 'form-control',
@@ -153,8 +170,8 @@ class ProfileForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = [
-
+            'first_name',
+            'last_name',
             'username',
             'email',
-
         ]

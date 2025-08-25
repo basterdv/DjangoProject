@@ -20,24 +20,24 @@ from users.models import CustomUser
 # @method_decorator(csrf_exempt, name='dispatch')
 class Login(LoginView):
     template_name = 'users/login.html'
-    # form_class = AuthenticationForm
-    # redirect_authenticated_user = True
     form_class = LoginUserForm
 
-    # redirect_authenticated_user = True
-    # success_url = reverse_lazy('home')
-    # success_url = '/'
-    def login_vk(self, *args, **kwargs):
-        login(self, *args, **kwargs)
-        print('args - kwargs - ',*args, **kwargs)
-        return HttpResponseRedirect(self.get_success_url())
+    # def post(self, request, *args, **kwargs):
+    #     form = self.form_class(request.POST)
+    #     if form.is_valid():
+    #         username = form.cleaned_data['username']
+    #         password = form.cleaned_data['password']
+    #         user = auth.authenticate(username=username, password=password)
+    #         if user is not None:
+    #             auth.login(request, user)
+    #             return HttpResponseRedirect(reverse('home'))
+    #         else:
+    #             pass
 
 
     def get(self, request, *args, **kwargs):
-        code = request.GET.get('code')
-        print(f'code - {code}')
-        login_data = request.session.get('login_data')
-        print(f'login data - {login_data}')
+        if request.user.is_authenticated:
+            return redirect(reverse('main:index'))  # Перенаправлять на главную страницу
         return super(Login, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -99,16 +99,19 @@ def profile(request):
 
     # user = get_object_or_404(CustomUser, pk=user_id)
 
-    # user = CustomUser.objects.get(pk=request.user.pk)
+    user = CustomUser.objects.get(pk=request.user.pk)
     # user = CustomUser.objects.filter(username=request.user.username).first()
-    user_id = request.user
+    # user_id = request.user
+    # print(f'gjgjgjj {user_id}')
     # user = CustomUser.objects.filter(user_id=request.user)
-    # print(user_id)
+    print(user.username)
+    print(user.first_name)
+    print(user.last_name)
 
     context = {
         # 'user': user,
         'form': form,
-        'title': 'Ghjabkm'
+        'title': 'Профиль пользователя'
     }
     return render(request, 'users/profile.html', context)
     # return render(request, 'users/profile.html', context)
@@ -133,7 +136,7 @@ def google_auth_callback(request):
     # return redirect(request, 'users/login.html')
 
 
-# @csrf_exempt
+@csrf_exempt
 def vk_auth_callback(request):
     code = request.GET.get('code')
     device_id = request.GET.get('device_id')

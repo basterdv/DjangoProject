@@ -23,14 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "django-insecure-rq&+8@6!b^m_8p(16iu^8o8#jnprr0i7v4ux_%u-qi36$+mu@)"
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY','rq&+8@6!b^m_8p(16iu^8o8#jnprr0i7v4ux_%u-qi36$+mu@')
+SECRET_KEY = "django-insecure-rq&+8@6!b^m_8p(16iu^8o8#jnprr0i7v4ux_%u-qi36$+mu@)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = bool(
-    os.environ.get('DJANGO_DEBUG',True)
-)
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -43,12 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # 'exchange_things.apps.ExchangeThingsConfig',
-    # 'exchange_things',
+
     'fontawesomefree',
     "debug_toolbar",
-    'crispy_forms',
-    'social_django',
+
 
     'main',
     'goods',
@@ -81,7 +75,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'social_django.context_processors.backends',
                 'django.template.context_processors.debug',
             ],
         },
@@ -101,19 +94,15 @@ DATABASES = {
 }
 # SOCIAL_AUTH_VK_OAUTH2_KEY = 'ea9651f2ea9651f2ea9651f232e9ae78b2eea96ea9651f282053dd392b55a74f6d0d517'
 # SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Y5HW8tHPpImF7oi8sKd9'
-SOCIAL_AUTH_VK_OAUTH2_KEY = '54015625' #'ID приложения'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'xVWmzYNCFEr1ZyUPOxpi' #'Защищённый ключ'
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
-SOCIAL_AUTH_URL_NAMESPACE = 'users:social'
-SOCIAL_AUTH_REQUIRE_POST = True
+# SOCIAL_AUTH_VK_OAUTH2_KEY = '54015625' #'ID приложения'
+# SOCIAL_AUTH_VK_OAUTH2_SECRET = 'xVWmzYNCFEr1ZyUPOxpi' #'Защищённый ключ'
+# SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
+# SOCIAL_AUTH_URL_NAMESPACE = 'users:social'
+# SOCIAL_AUTH_REQUIRE_POST = True
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.vk.VKOAuth2', # бекенд авторизации через ВКонтакте
     'django.contrib.auth.backends.ModelBackend',# бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.vk.BaseOAuth2'
+
 
 )
 
@@ -177,47 +166,15 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # LOGIN_URL = 'login'
 
-# Настройка сессий
-SESSION_COOKIE_SECURE = True # Установите True для HTTPS
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_REFERRER_POLICY = 'no-referrer-when-downgrade'
+# VK_APP_ID = '54015625'
+# VK_APP_SECRET = 'xVWmzYNCFEr1ZyUPOxpi'
+# VK_REDIRECT_URI = 'http://localhost:8000/vk_auth_callback/'  # URL для перенаправления после авторизации
+
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Использование базы данных для сессий
 SESSION_COOKIE_AGE = 1209600  # Время жизни сессии в секундах (2 недели)
+SESSION_COOKIE_SECURE = False  # Установите True для HTTPS
 SESSION_COOKIE_HTTPONLY = True
-
-#Настройки для отправки электронной почты
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yourmailserver.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@example.com'
-EMAIL_HOST_PASSWORD = 'your-email-password'
-
 
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'WARNING',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'django_warnings.log'),
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'WARNING',
-            'propagate': True,
-        },
-    },
-}

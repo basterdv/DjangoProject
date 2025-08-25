@@ -35,6 +35,13 @@
             color: #333;
         }
     </style>
+    <script>
+        const channel = new BroadcastChannel('tab-channel');
+
+        window.addEventListener('beforeunload', function () {
+            channel.postMessage('tab-closed');
+        });
+    </script>
 </head>
 <body>
 <div class="success-container">
@@ -44,19 +51,6 @@
 </body>
 
 <script>
-    const tryAuth = () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        const deviceId = urlParams.get('device_Id');
-        const responseType = urlParams.get('type');
-
-        if (deviceId && responseType === 'code_v2') {
-            VKID.Auth.exchangeCode(code, deviceId)
-                .then((result) => VKID.userInfo(result.access_token))
-        }
-    }
-
-
     window.onload = function () {
         {#window.postMessage('message','http://example.com');#}
         {#window.alert(tryAuth.code);#}

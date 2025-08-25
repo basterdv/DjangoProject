@@ -12,8 +12,9 @@ from django.db import models
 #     USERNAME_FIELD = 'email'
 
 class CustomUser(AbstractUser):
-
     # user = None
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
     username = models.CharField(max_length=150,null=True, blank=True)
     email = models.EmailField(
         verbose_name='email address',

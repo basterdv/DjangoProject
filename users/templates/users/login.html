@@ -7,7 +7,17 @@
 {% endblock css %}
 
 {% block content %}
+    <!-- Добавляем мета-тег для CSRF токена -->
+{#    <meta name="csrf-token" content="{{ csrf_token }}">#}
+    <script>
+        const channel = new BroadcastChannel('tab-channel');
 
+        channel.onmessage = function (event) {
+            if (event.data === 'tab-closed') {
+                location.reload();  // Обновляем страницу
+            }
+        };
+    </script>
     <!-- Main Content -->
     <main class="py-5">
         <div class="container">
@@ -29,7 +39,7 @@
                                     <div id="printable_area"></div>
                                     <div id="userInfo"></div>
 
-                                    <form method="post">
+                                    <form method="post" id="vk">
                                         {% csrf_token %}
                                         <!-- Social Login Buttons -->
                                         <div class="row g-3 mb-4">
@@ -47,16 +57,18 @@
                                                 </a>
                                             </div>
                                         </div>
+                                    </form>
 
 
-                                        <!-- Divider -->
-                                        <div class="d-flex align-items-center mb-4 divider">
-                                            <div class="flex-grow-1"></div>
-                                            <span class="divider-text text-muted">или</span>
-                                            <div class="flex-grow-1"></div>
-                                        </div>
+                                    <!-- Divider -->
+                                    <div class="d-flex align-items-center mb-4 divider">
+                                        <div class="flex-grow-1"></div>
+                                        <span class="divider-text text-muted">или</span>
+                                        <div class="flex-grow-1"></div>
+                                    </div>
 
-
+                                    <form method="post">
+                                        {% csrf_token %}
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
                                             <div class="input-group">
@@ -67,14 +79,14 @@
                                             </div>
                                         </div>
 
-                                        {% if form.errors %}
-                                            <script>
-                                                document.addEventListener("DOMContentLoaded", function () {
-                                                    var myModal = new bootstrap.Modal(document.getElementById("errorModal"));
-                                                    myModal.show();
-                                                });
-                                            </script>
-                                        {% endif %}
+{#                                        {% if form.errors %}#}
+{#                                            <script>#}
+{#                                                document.addEventListener("DOMContentLoaded", function () {#}
+{#                                                    var myModal = new bootstrap.Modal(document.getElementById("errorModal"));#}
+{#                                                    myModal.show();#}
+{#                                                });#}
+{#                                            </script>#}
+{#                                        {% endif %}#}
 
                                         <!-- Modal -->
                                         {% if messages %}
