@@ -219,7 +219,7 @@ def vk_auth_callback(request):
             )
         # Логинимся
         request.session['username'] = 'baster1@list.ru'
-        Login.login_vk(request, user)
+        login(request, user)
 
     else:
         print('error')
