@@ -39,8 +39,7 @@
                                     <div id="printable_area"></div>
                                     <div id="userInfo"></div>
 
-                                    <form method="post" id="vk">
-                                        {% csrf_token %}
+
                                         <!-- Social Login Buttons -->
                                         <div class="row g-3 mb-4">
 
@@ -51,13 +50,13 @@
                                                 </a>
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-6" id="GoogleAuthButton">
                                                 <a href="#" class="btn btn-outline-secondary w-100 social-btn">
                                                     <i class="fab fa-google text-danger me-2"></i> Google
                                                 </a>
                                             </div>
                                         </div>
-                                    </form>
+
 
 
                                     <!-- Divider -->
@@ -67,7 +66,7 @@
                                         <div class="flex-grow-1"></div>
                                     </div>
 
-                                    <form method="post">
+                                    <form method="post" action="{% url 'users:login' %}">
                                         {% csrf_token %}
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
@@ -79,14 +78,14 @@
                                             </div>
                                         </div>
 
-{#                                        {% if form.errors %}#}
-{#                                            <script>#}
-{#                                                document.addEventListener("DOMContentLoaded", function () {#}
-{#                                                    var myModal = new bootstrap.Modal(document.getElementById("errorModal"));#}
-{#                                                    myModal.show();#}
-{#                                                });#}
-{#                                            </script>#}
-{#                                        {% endif %}#}
+                                        {% if form.errors %}
+                                            <script>
+                                                document.addEventListener("DOMContentLoaded", function () {
+                                                    var myModal = new bootstrap.Modal(document.getElementById("errorModal"));
+                                                    myModal.show();
+                                                });
+                                            </script>
+                                        {% endif %}
 
                                         <!-- Modal -->
                                         {% if messages %}
@@ -110,9 +109,7 @@
                                                                 {{ message }}
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary"
-                                                                        data-bs-dismiss="modal">Закрыть
-                                                                </button>
+                                                                <a type="button" class="btn btn-primary" href="{% url 'users:login' %}">Закрыть</a>
                                                             </div>
                                                         </div>
                                                     </div>

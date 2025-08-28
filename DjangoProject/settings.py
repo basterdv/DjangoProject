@@ -171,9 +171,13 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # VK_REDIRECT_URI = 'http://localhost:8000/vk_auth_callback/'  # URL для перенаправления после авторизации
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Использование базы данных для сессий
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'  # Использует кэш для хранения сессий
+# SESSION_ENGINE = 'django.contrib.sessions.backends.file'  # Использует файлы для хранения сессий
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'  # Использует кэшированную базу данных для хранения сессий
 SESSION_COOKIE_AGE = 1209600  # Время жизни сессии в секундах (2 недели)
 SESSION_COOKIE_SECURE = False  # Установите True для HTTPS
 SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'  # Настройка SameSite для сессионных cookie
 
 INTERNAL_IPS = [
     '127.0.0.1',

@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from users import views
-from users.views import Login, RegisterUserView, profile, logout, PasswordReset  # , Logout
+from users.views import Login, RegisterUserView, profile, logout, PasswordReset,VKAuthView  # , Logout
 
 app_name = 'users'
 
@@ -17,6 +17,7 @@ urlpatterns = [
     # path('login_vk_redirect/', Login.as_view(), name='login_vk_redirect'),
     # path('vk_auth_start/', views.vk_auth_start, name='vk_auth_start'),
     path('vk_auth_callback/', views.vk_auth_callback, name='vk_auth_callback'),
+    # path('vk_auth_callback/',VKAuthView.as_view(), name='vk_auth_callback'),
     path('google_auth_callback/', views.google_auth_callback, name='google_auth_callback'),
     path('logout/', logout, name='logout'),
     path('registr/', RegisterUserView.as_view(), name='registration'),

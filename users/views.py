@@ -1,4 +1,5 @@
-from urllib import request
+import logging
+from datetime import datetime
 
 import requests
 from django.contrib import auth, messages
@@ -6,15 +7,18 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import LoginView
-from django.http.response import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, requires_csrf_token
 from django.views.generic import FormView
 
 from users.forms import RegisterUserForm, ProfileForm, LoginUserForm
 from users.models import CustomUser
+
+
+logger = logging.getLogger(__name__)
 
 
 # @method_decorator(csrf_exempt, name='dispatch')
@@ -22,20 +26,9 @@ class Login(LoginView):
     template_name = 'users/login.html'
     form_class = LoginUserForm
 
-    # def post(self, request, *args, **kwargs):
-    #     form = self.form_class(request.POST)
-    #     if form.is_valid():
-    #         username = form.cleaned_data['username']
-    #         password = form.cleaned_data['password']
-    #         user = auth.authenticate(username=username, password=password)
-    #         if user is not None:
-    #             auth.login(request, user)
-    #             return HttpResponseRedirect(reverse('home'))
-    #         else:
-    #             pass
-
 
     def get(self, request, *args, **kwargs):
+
         if request.user.is_authenticated:
             return redirect(reverse('main:index'))  # Перенаправлять на главную страницу
         return super(Login, self).get(request, *args, **kwargs)
@@ -49,8 +42,12 @@ class Login(LoginView):
         return reverse_lazy('main:index')
 
     def form_invalid(self, form):
+        print('invalid')
+        logout(self.request)
+        self.request.session.flush()
         messages.error(self.request, "Неверный логин или пароль")  # Добавляем сообщение об ошибке
-        return self.render_to_response(self.get_context_data(context={'form': form}))
+        return super().form_invalid(form)
+
 
     def form_valid(self, form):
         # Perform custom actions here before calling super().form_valid()
@@ -58,6 +55,8 @@ class Login(LoginView):
         login(self.request, form.get_user())  # Log the user in
         return super().form_valid(form)
 
+# def auth_error(request):
+#     return redirect('users:login')
 
 # class Logout(LogoutView):
 #     next_page = '/'
@@ -107,6 +106,8 @@ def profile(request):
     print(user.username)
     print(user.first_name)
     print(user.last_name)
+    print(user.avatar)
+    print(user.birthday)
 
     context = {
         # 'user': user,
@@ -128,7 +129,7 @@ class PasswordReset(FormView):
 
 
 def google_auth_callback(request):
-    email = 'baster1@list.ru'
+    email = 'baster12@list.ru'
     user = CustomUser.objects.get(email=email)
     print(user)
     login(request, user)
@@ -136,7 +137,93 @@ def google_auth_callback(request):
     # return redirect(request, 'users/login.html')
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class VKAuthView(LoginView):
+    template_name = 'users/login.html'
+
+    def post(self, request, *args, **kwargs):
+        access_token = request.POST.get('access_token')
+        id_token = request.POST.get('id_token')
+
+        if not access_token or not id_token:
+            logger.error('Access token or ID token missing')
+            return JsonResponse({'status': 'error', 'message': 'Access token or ID token missing'}, status=400)
+
+        # URL для обмена публичными данными пользователя
+        USER_PUBLIC_DATA_EXCHANGE_URL = 'https://api.vk.com/method/users.get'
+
+        # Параметры запроса для получения публичных данных пользователя
+        payload_public = {
+            'access_token': access_token,
+            'fields': 'first_name,last_name',
+            'v': '5.131',  # Укажите версию API ВКонтакте
+        }
+
+        # Отправляем GET-запрос для получения публичных данных пользователя
+        response_public = requests.get(USER_PUBLIC_DATA_EXCHANGE_URL, params=payload_public)
+
+        if response_public.status_code != 200:
+            logger.error('Error for public data request: %s', response_public.json())
+            return JsonResponse(
+                {'status': 'error', 'message': 'Error in public data request', 'details': response_public.json()},
+                status=response_public.status_code)
+
+        data_user_public_info = response_public.json()
+        # print(data_user_public_info)
+
+        if 'error' in data_user_public_info:
+            return JsonResponse({'status': 'error', 'message': 'Error in public data request',
+                                 'details': data_user_public_info['error']}, status=400)
+
+        # URL для обмена личными данными пользователя
+        USER_PRIVATE_DATA_EXCHANGE_URL = 'https://api.vk.com/method/users.get'
+
+        # Параметры запроса для получения личных данных пользователя
+        payload_private = {
+            'access_token': access_token,
+            'fields': 'email,bdate',
+            'v': '5.131',  # Укажите версию API ВКонтакте
+        }
+
+        # Отправляем GET-запрос для получения личных данных пользователя
+        response_private = requests.get(USER_PRIVATE_DATA_EXCHANGE_URL, params=payload_private)
+
+        if response_private.status_code != 200:
+            logger.error('Error for private data request: %s', response_private.json())
+            return JsonResponse(
+                {'status': 'error', 'message': 'Error in private data request', 'details': response_private.json()},
+                status=response_private.status_code)
+
+        data_user_private_info = response_private.json()
+        # print(data_user_private_info)
+
+        if 'error' in data_user_private_info:
+            return JsonResponse({'status': 'error', 'message': 'Error in private data request',
+                                 'details': data_user_private_info['error']}, status=400)
+
+        # Дополнительная логика для обработки данных
+        # ...
+
+        # Предполагается, что у вас есть пользовательская логика для создания или аутентификации пользователя
+        # Например, вы можете создать пользователя или аутентифицировать существующего пользователя
+        user = self.authenticate_via_vk(access_token, id_token)
+
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'status': 'success', 'url': reverse_lazy('main:index').url})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Failed to authenticate via VK'}, status=401)
+
+    def authenticate_via_vk(self, access_token, id_token):
+        # Ваша логика для аутентификации через VK
+        # Например, вы можете использовать данные из response_public и response_private
+        # для создания или поиска пользователя в базе данных
+        # Замените это на вашу реализацию
+        return None  # Возвращаем None, если аутентификация не удалась
+
+
 @csrf_exempt
+@requires_csrf_token
 def vk_auth_callback(request):
     code = request.GET.get('code')
     device_id = request.GET.get('device_id')
@@ -200,7 +287,7 @@ def vk_auth_callback(request):
             headers={'Content-Type': 'application/x-www-form-urlencoded'}
         )
         data_user_info = response.json()
-
+        # print(data_user_info)
         user_id = data_user_info['user']['user_id']
         email = data_user_info['user']['email']
         first_name = data_user_info['user']['first_name']
@@ -221,50 +308,21 @@ def vk_auth_callback(request):
                 email=email
             )
         # Логинимся
-        request.session['username'] = 'baster1@list.ru'
+        user.first_name = first_name
+        user.last_name = last_name
+        user.avatar = avatar
+        user.birthday = datetime.strptime(birthday, '%d.%m.%Y').date().strftime('%Y-%m-%d')
+
+        user.username = first_name
+        user.set_password(user_id)
+        user.save()
         login(request, user)
 
     else:
         print('error')
 
     template_name = 'users/vk_auth_callback.html'
-    # template_name = 'users/login.html'
 
-    # if not code:
-    #     print("Ошибка авторизации: отсутствует код")
-    # return HttpResponse("Ошибка авторизации: отсутствует код")
-    # return redirect(request, 'users/profile.html')
     return render(request, template_name)
-    # return redirect(request, 'users/vk_auth_callback.html')
 
-#     # vk_session = VkApi(app_id=settings.VK_APP_ID, app_secret=settings.VK_APP_SECRET,
-#     #                    redirect_uri=settings.VK_REDIRECT_URI)
-#     # try:
-#     #     vk_session.auth(code=code)
-#     # except Exception as e:
-#     #     # return HttpResponse(f"Ошибка авторизации: {e}")
-#     #     print('fault')
-#
-#     # vk = vk_session.get_api()
-#     # try:
-#         user_info = vk.users.get(fields='first_name,last_name,photo_max_orig')  # Получение данных пользователя
-#         # Обработка данных пользователя
-#         # Создание или вход пользователя в Django
-#         # Например:
-#         # user, created = User.objects.get_or_create(username=user_info[0]['id'])
-#         # user.first_name = user_info[0]['first_name']
-#         # user.last_name = user_info[0]['last_name']
-#         # user.save()
-#         # login(request, user)
-#
-#     # except Exception as e:
-#     #     print('fault')
-#         # return HttpResponse(f"Ошибка получения данных пользователя: {e}")
-#
-#     # return HttpResponse("Авторизация успешна! Данные пользователя: {}".format(user_info))
-#
-#
-# # def vk_auth_start(request):
-# #     vk_session = VkApi(app_id=settings.VK_APP_ID, scope='email')
-# #     auth_url = vk_session.get_auth_url(settings.VK_REDIRECT_URI, get_random_id())
-# #     return redirect(auth_url)
+

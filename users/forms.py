@@ -174,4 +174,5 @@ class ProfileForm(UserChangeForm):
             'last_name',
             'username',
             'email',
+            'avatar'
         ]

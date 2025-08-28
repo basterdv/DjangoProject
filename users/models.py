@@ -13,9 +13,11 @@ from django.db import models
 
 class CustomUser(AbstractUser):
     # user = None
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    username = models.CharField(max_length=150,null=True, blank=True)
+    first_name = models.CharField(max_length=30, blank=True) # Имя
+    last_name = models.CharField(max_length=30, blank=True) # Фамилия
+    username = models.CharField(max_length=150,null=True, blank=True) # Никнейм
+    avatar = models.ImageField(upload_to="avatar", null=True, blank=True)
+    birthday = models.DateField(null=True, blank=True)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
