@@ -16,7 +16,7 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=30, blank=True) # Имя
     last_name = models.CharField(max_length=30, blank=True) # Фамилия
     username = models.CharField(max_length=150,null=True, blank=True) # Никнейм
-    avatar = models.ImageField(upload_to="avatar", null=True, blank=True)
+    avatar = models.ImageField(upload_to="user_avatar", null=True, blank=True, verbose_name='Аватар')
     birthday = models.DateField(null=True, blank=True)
     email = models.EmailField(
         verbose_name='email address',
@@ -26,6 +26,11 @@ class CustomUser(AbstractUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+    class Meta:
+        db_table = 'user'
+        verbose_name = 'Пользователя'
+        verbose_name_plural = 'Пользователи'
 
     # objects = MyUserManager()
 

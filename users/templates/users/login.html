@@ -7,8 +7,8 @@
 {% endblock css %}
 
 {% block content %}
-    <!-- Добавляем мета-тег для CSRF токена -->
-{#    <meta name="csrf-token" content="{{ csrf_token }}">#}
+
+
     <script>
         const channel = new BroadcastChannel('tab-channel');
 
@@ -40,23 +40,25 @@
                                     <div id="userInfo"></div>
 
 
-                                        <!-- Social Login Buttons -->
-                                        <div class="row g-3 mb-4">
+                                    <!-- Social Login Buttons -->
+                                    <div class="row g-3 mb-4">
 
-                                            <div class="col-6" id="VKAuthButton">
-                                                <a href="#"
-                                                   class="btn btn-outline-secondary w-100 social-btn">
-                                                    <i class="fab fa-vk text-primary me-2"></i> ВКонтакте
-                                                </a>
-                                            </div>
-
-                                            <div class="col-6" id="GoogleAuthButton">
-                                                <a href="#" class="btn btn-outline-secondary w-100 social-btn">
-                                                    <i class="fab fa-google text-danger me-2"></i> Google
-                                                </a>
-                                            </div>
+                                        <div class="col-6" id="VKAuthButton">
+                                            <a href="#"
+                                               class="btn btn-outline-secondary w-100 social-btn">
+                                                <i class="fab fa-vk text-primary me-2"></i> ВКонтакте
+                                            </a>
                                         </div>
 
+                                        <!-- Кнопка для авторизации через Яндекс -->
+                                        <div id="YaAuthButton"></div>
+
+                                        <div class="col-6" id="YaAuthButton2">
+                                            <a href="#" class="btn btn-outline-secondary w-100 social-btn">
+                                                <i class="fab fa-yandex text-danger me-2"></i> Yandex
+                                            </a>
+                                        </div>
+                                    </div>
 
 
                                     <!-- Divider -->
@@ -109,7 +111,8 @@
                                                                 {{ message }}
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <a type="button" class="btn btn-primary" href="{% url 'users:login' %}">Закрыть</a>
+                                                                <a type="button" class="btn btn-primary"
+                                                                   href="{% url 'users:login' %}">Закрыть</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -186,7 +189,7 @@
     <!--  JS VK Auth -->
     <script src="https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js"></script>
     {#    <script src="{% static "/js/index.js" %}"></script>#}
-    {#    <script src="{% static "/js/js_vk_auth.js" %}"></script>#}
+    <script src="{% static "/js/js_yandex.js" %}"></script>
     <script src="{% static "/js/js_vk.js" %}"></script>
     {#    <script src="{% static "/js/js_temp.js" %}"></script>#}
 
