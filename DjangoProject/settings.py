@@ -26,9 +26,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-rq&+8@6!b^m_8p(16iu^8o8#jnprr0i7v4ux_%u-qi36$+mu@)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'advert-baster.amvera.io',
+    'http://advert-baster.amvera.io',
+    'https://advert-baster.amvera.io',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://advert-baster.amvera.io',
+    'https://advert-baster.amvera.io',
+]
 
 # Application definition
 
@@ -41,8 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     'fontawesomefree',
-    "debug_toolbar",
-
+    # "debug_toolbar",
 
     'main',
     'goods',
@@ -59,7 +69,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "DjangoProject.urls"
@@ -90,19 +100,14 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+        # "NAME": "/data/db.sqlite3",
     }
 }
-# SOCIAL_AUTH_VK_OAUTH2_KEY = 'ea9651f2ea9651f2ea9651f232e9ae78b2eea96ea9651f282053dd392b55a74f6d0d517'
-# SOCIAL_AUTH_VK_OAUTH2_SECRET = 'Y5HW8tHPpImF7oi8sKd9'
-# SOCIAL_AUTH_VK_OAUTH2_KEY = '54015625' #'ID приложения'
-# SOCIAL_AUTH_VK_OAUTH2_SECRET = 'xVWmzYNCFEr1ZyUPOxpi' #'Защищённый ключ'
-# SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']  # Пример: запрашиваем доступ к email
-# SOCIAL_AUTH_URL_NAMESPACE = 'users:social'
-# SOCIAL_AUTH_REQUIRE_POST = True
+
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',# бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
-
+    'django.contrib.auth.backends.ModelBackend',
+# бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
 
 )
 
@@ -138,18 +143,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATIC_ROOT = BASE_DIR.parent / "data/static/"
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'data/static')
+# ]
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static/'
 #     ]
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'data/media/'
 
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR.parent / 'data/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -162,13 +169,10 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # LOGIN_URL = 'login'
 
-# VK_APP_ID = '54015625'
-# VK_APP_SECRET = 'xVWmzYNCFEr1ZyUPOxpi'
-# VK_REDIRECT_URI = 'http://localhost:8000/vk_auth_callback/'  # URL для перенаправления после авторизации
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Использование базы данных для сессий
 # SESSION_ENGINE = 'django.contrib.sessions.backends.cache'  # Использует кэш для хранения сессий

@@ -5,13 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="работа с формами login and register">
-      <change afterPath="$PROJECT_DIR$/users/templates/users/yandex_auth_callback.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/templates/main/temp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/DjangoProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DjangoProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/js_vk_auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/js_yandex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/advert_images/krokusy-v-luchakh-solntsa-s-dnem-rozhdeniya-otkrytka.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/advert_images/телевизор.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/advert_images/телевизор_Znhg9wB.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/all.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/catalog_styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/font-awesome_6.4.0_css_all.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/login_styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/modals.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/password_reset.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/profile_styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style_404.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/error404.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/noimage.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/color-modes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/custom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_catalog.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_password_reset.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_profile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/jquery_registration.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/js_temp.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/js_vk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/js_yandex.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/snippets.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +62,8 @@
       <list>
         <option value="Python Script" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -73,33 +108,39 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Home/Documents/Workshop/Python_project/DjangoProject/static/css&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Василий/PycharmProjects/DjangoProject&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Василий\PycharmProjects\DjangoProject" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\css" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\exchange_things\static\imajes" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\exchange_things\static\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Василий\PycharmProjects\DjangoProject\data" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\js\jquery" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\css" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\static\css\bootstrap" />
       <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\orders\templates\orders" />
-      <recent name="C:\Users\Home\Documents\Workshop\Python_project\DjangoProject\goods\templates\goods" />
     </key>
   </component>
   <component name="RunManager" selected="Django Server.DjangoProject">
@@ -168,7 +209,6 @@
         <env name="DJANGO_SETTINGS_MODULE" value="DjangoProject.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.13" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -299,7 +339,17 @@
       <workItem from="1756288485093" duration="9305000" />
       <workItem from="1756380966681" duration="8971000" />
       <workItem from="1756389983862" duration="2521000" />
-      <workItem from="1756467887755" duration="6742000" />
+      <workItem from="1756467887755" duration="6872000" />
+      <workItem from="1756534442327" duration="11000" />
+      <workItem from="1756534926702" duration="564000" />
+      <workItem from="1756536443910" duration="941000" />
+      <workItem from="1756545927079" duration="2837000" />
+      <workItem from="1756557731722" duration="615000" />
+      <workItem from="1756564848164" duration="3807000" />
+      <workItem from="1756604905262" duration="4390000" />
+      <workItem from="1756636288435" duration="1849000" />
+      <workItem from="1756647769636" duration="7290000" />
+      <workItem from="1756683372467" duration="2017000" />
     </task>
     <task id="LOCAL-00001" summary="ФронтЭнд">
       <option name="closed" value="true" />
@@ -541,7 +591,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756392494045</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="работа с формами login and register">
+      <option name="closed" value="true" />
+      <created>1756474867976</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1756474867976</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
