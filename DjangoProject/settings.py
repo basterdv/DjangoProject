@@ -10,22 +10,35 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
+import logging
 from pathlib import Path
 
 from django.conf.urls.static import static
 from django.template.context_processors import media
 
+logger = logging.getLogger(__name__)
+
+# Получаем секрет
+amvera_var = os.environ.get("AMVERA",'')
+secret_key = os.environ.get("SECRET_KEY")
+
+if amvera_var == '1':
+    logger.info("AMVERA environment variable set to 1. Работаю в облаке Амвера")
+    SECRET_KEY = secret_key
+    # DEBUG = False
+else:
+    logger.info("AMVERA environment variable set to 0. Работаю локально")
+    SECRET_KEY = "django-insecure-rq&+8@6!b^m_8p(16iu^8o8#jnprr0i7v4ux_%u-qi36$+mu@)"
+    # DEBUG = True
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-rq&+8@6!b^m_8p(16iu^8o8#jnprr0i7v4ux_%u-qi36$+mu@)"
+# SECRET_KEY = "django-insecure-rq&+8@6!b^m_8p(16iu^8o8#jnprr0i7v4ux_%u-qi36$+mu@)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = amvera_var == '1'
 DEBUG = False
 
 ALLOWED_HOSTS = [
@@ -69,6 +82,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
@@ -95,19 +110,22 @@ WSGI_APPLICATION = "DjangoProject.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+if amvera_var == '1':
+    db_path = '/data/db.sqlite3'
+else:
+    db_path = BASE_DIR / "db.sqlite3"
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        # "NAME": "/data/db.sqlite3",
+        # "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": db_path,
     }
 }
 
-
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-# бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+    # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
 
 )
 
@@ -143,9 +161,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR.parent / "data/static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'data/static')
@@ -154,9 +172,9 @@ STATIC_ROOT = BASE_DIR.parent / "data/static/"
 #     BASE_DIR / 'static/'
 #     ]
 
-MEDIA_URL = 'data/media/'
+MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR.parent / 'data/media/'
+MEDIA_ROOT = BASE_DIR / 'data/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

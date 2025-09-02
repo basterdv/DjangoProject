@@ -5,49 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9eac6e65-f0b5-4995-ba86-1f2dbb36ff25" name="Changes" comment="работа с формами login and register">
-      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/templates/main/temp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DjangoProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DjangoProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/advert_images/krokusy-v-luchakh-solntsa-s-dnem-rozhdeniya-otkrytka.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/advert_images/телевизор.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/advert_images/телевизор_Znhg9wB.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoProject/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/wsgi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/all.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap/bootstrap.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/catalog_styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/font-awesome_6.4.0_css_all.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/login_styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/modals.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/password_reset.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/profile_styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/style_404.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/error404.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/noimage.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/bootstrap.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/bootstrap.bundle.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/color-modes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/custom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery_catalog.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery_login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery_main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery_password_reset.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery_profile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery_registration.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/js_temp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/js_vk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/js_yandex.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/snippets.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/users/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -349,7 +312,10 @@
       <workItem from="1756604905262" duration="4390000" />
       <workItem from="1756636288435" duration="1849000" />
       <workItem from="1756647769636" duration="7290000" />
-      <workItem from="1756683372467" duration="2017000" />
+      <workItem from="1756683372467" duration="2067000" />
+      <workItem from="1756724570613" duration="1997000" />
+      <workItem from="1756805113256" duration="6000000" />
+      <workItem from="1756813301897" duration="9567000" />
     </task>
     <task id="LOCAL-00001" summary="ФронтЭнд">
       <option name="closed" value="true" />
@@ -599,7 +565,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756474867976</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="работа с формами login and register">
+      <option name="closed" value="true" />
+      <created>1756692123504</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1756692123504</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
