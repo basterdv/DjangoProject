@@ -321,4 +321,10 @@ def vk_auth_callback(request):
         template_name = 'users/login.html'
         return render(request, template_name)
 
+def yandex_auth_callback(request):
+    print(request)
+    if request.GET.get('access_token'):
+        return redirect('/users/login')
+    return render(request, 'users/yandex_auth_callback.html')
+
 
