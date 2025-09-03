@@ -39,7 +39,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = amvera_var == '1'
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -163,11 +163,12 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR / "static"
+# STATIC_ROOT = BASE_DIR / "static"
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'data/static')
-# ]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static/'
 #     ]
@@ -201,6 +202,6 @@ SESSION_COOKIE_SECURE = False  # Установите True для HTTPS
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = 'Lax'  # Настройка SameSite для сессионных cookie
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+# Внутренние IP-адреса для отладки
+if DEBUG:
+    INTERNAL_IPS = ['127.0.0.1']

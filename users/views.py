@@ -13,10 +13,12 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt, requires_csrf_token
 from django.views.generic import FormView
+from django.views.generic.edit import BaseFormView
 
+from users.auth.providers.yandex import YandexProvider
+from users.auth.providers.vk import VkProvider
 from users.forms import RegisterUserForm, ProfileForm, LoginUserForm
 from users.models import CustomUser
-
 
 logger = logging.getLogger(__name__)
 
@@ -26,9 +28,7 @@ class Login(LoginView):
     template_name = 'users/login.html'
     form_class = LoginUserForm
 
-
     def get(self, request, *args, **kwargs):
-
         if request.user.is_authenticated:
             return redirect(reverse('main:index'))  # Перенаправлять на главную страницу
         return super(Login, self).get(request, *args, **kwargs)
@@ -48,18 +48,12 @@ class Login(LoginView):
         messages.error(self.request, "Неверный логин или пароль")  # Добавляем сообщение об ошибке
         return super().form_invalid(form)
 
-
     def form_valid(self, form):
         # Perform custom actions here before calling super().form_valid()
 
         login(self.request, form.get_user())  # Log the user in
         return super().form_valid(form)
 
-# def auth_error(request):
-#     return redirect('users:login')
-
-# class Logout(LogoutView):
-#     next_page = '/'
 
 @login_required
 def logout(request):
@@ -99,7 +93,6 @@ def profile(request):
     # user = get_object_or_404(CustomUser, pk=user_id)
 
     user = CustomUser.objects.get(pk=request.user.pk)
-
 
     context = {
         # 'user': user,
@@ -248,6 +241,7 @@ def vk_auth_callback(request):
                                  headers={'Content-Type': 'application/x-www-form-urlencoded'})
         data = response.json()
 
+        print(data)
         if 'access_token' in data:
             # print(response.json())
             access_token = data['access_token']
@@ -309,6 +303,7 @@ def vk_auth_callback(request):
             user.username = first_name
             user.set_password(user_id)
             user.save()
+
             login(request, user)
 
         else:
@@ -319,12 +314,67 @@ def vk_auth_callback(request):
         return render(request, template_name)
     except:
         template_name = 'users/login.html'
+        logger.error(f'error')
         return render(request, template_name)
 
-def yandex_auth_callback(request):
-    print(request)
-    if request.GET.get('access_token'):
+
+class OAuthBaseView(BaseFormView):
+    provider_class = None
+
+    def get(self, request):
+        provider = self.provider_class()
+        auth_url = provider.get_auth_url()
+        return redirect(auth_url)
+
+
+class YandexOAuthView(OAuthBaseView):
+    provider_class = YandexProvider
+
+
+class VKOAuthView(OAuthBaseView):
+    provider_class = VkProvider
+
+
+class OAuthCallbackView(BaseFormView):
+    def get(self, request):
+        code = self.request.GET.get('code')
+        cid = request.GET.get('cid')
+
+        user_data = YandexProvider().get_user_info(code)
+
+        if user_data is not None:
+            user_id = int(user_data['id'])
+            email = user_data['email']
+            first_name = user_data['first_name']
+            last_name = user_data['last_name']
+            avatar = user_data['default_avatar_id']
+            birthday = user_data['birthday']
+            username = user_data['login']
+
+            # Поиск или создание пользователя в базе данных
+            try:
+                user = CustomUser.objects.get(email=email)
+                logger.info(f'Пользователь с почтой {email} найден')
+            except:
+                logger.error(f'Пользователь с почтой {email} не найден')
+                user = CustomUser.objects.create_user(
+                    username=username,
+                    email=email
+                )
+
+            # Логинимся
+            try:
+                user.first_name = first_name
+                user.last_name = last_name
+                user.avatar = avatar
+                user.birthday = birthday
+                # user.birthday = datetime.strptime(birthday, '%d.%m.%Y').date().strftime('%Y-%m-%d')
+
+                user.username = username
+                user.set_password(str(user_id))
+                user.save()
+                login(request, user)
+            except:
+                logger.error(f'Ошибка авторизации')
+
         return redirect('/users/login')
-    return render(request, 'users/yandex_auth_callback.html')
-
-

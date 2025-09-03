@@ -7,7 +7,6 @@
 {% endblock css %}
 
 {% block content %}
-    <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
 
     <script>
         const channel = new BroadcastChannel('tab-channel');
@@ -50,12 +49,10 @@
                                             </a>
                                         </div>
 
-                                        <!-- Кнопка для авторизации через Яндекс -->
-                                        {#                                        <div id="YaAuthButton"></div>#}
 
                                         <div class="col-6" id="YaAuthButton">
-
-                                            <a href="https://oauth.yandex.ru/authorize?response_type=token&client_id=b7986b6acead461082b4bbf881148c8f" class="btn btn-outline-secondary w-100 social-btn">
+                                            <a href="{% url 'users:yandex_login' %}"
+                                               class="btn btn-outline-secondary w-100 social-btn">
                                                 <i class="fab fa-yandex text-danger me-2"></i> Yandex
                                             </a>
                                         </div>
@@ -191,9 +188,9 @@
 
     <!--  JS VK Auth -->
     <script src="https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js"></script>
-    {#    <script src="{% static "/js/index.js" %}"></script>#}
-    <script src="{% static "/js/js_yandex.js" %}"></script>
-    {#    <script src="{% static "/js/js_vk.js" %}"></script>#}
-    {#    <script src="{% static "/js/js_temp.js" %}"></script>#}
+
+
+    <script src="{% static "/js/js_vk.js" %}"></script>
+
 
 {% endblock content %}
