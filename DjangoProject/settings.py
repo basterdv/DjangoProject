@@ -185,8 +185,8 @@ if DEBUG:
 
 # Настройки для статических файлов
 STATIC_URL = '/static/'  # URL для статических файлов
-# STATICFILES_DIRS = [BASE_DIR / 'static', ]  # Директории со статическими файлами
-STATIC_ROOT = BASE_DIR / 'static'  # Директория для сбора статических файлов
+STATICFILES_DIRS = [BASE_DIR / 'static', ]  # Директории со статическими файлами
+# STATIC_ROOT = BASE_DIR / 'static'  # Директория для сбора статических файлов
 
 # Настройки для медиа-файлов
 MEDIA_URL = '/media/'  # URL для медиа-файлов
@@ -243,11 +243,15 @@ OAUTH_PROVIDERS = {
     'vk': {
         'client_id': config('VK_OAUTH_CLIENT_ID', default=''),
         'client_secret': config('VK_OAUTH_CLIENT_SECRET', default=''),
-        'authorize_url': 'https://accounts.google.com/o/oauth2/auth',
-        'token_url': 'https://oauth2.googleapis.com/token',
-        'userinfo_url': 'https://www.googleapis.com/oauth2/v3/userinfo',
-        'scopes': ['openid', 'email', 'profile'],
-        'redirect_uri': config('VK_REDIRECT_URI', default='http://localhost:8000/oauth/google/callback/')
+        'authorize_url': 'https://id.vk.ru/authorize',
+        'token_url': 'https://id.vk.ru/oauth2/auth',
+        'userinfo_url': 'https://id.vk.ru/oauth2/user_info',
+        'public_info': 'https://id.vk.ru/oauth2/public_info',
+        'scope': ['vkid.personal_info email'],
+        'redirect_uri': config('VK_REDIRECT_URI', default='http://localhost/users/auth_callback/vk'),
+        'state': config('VK_OAUTH_STATE', default=''),
+        'code_challenge': config('VK_CODE_CHALLENGE', default=''),
+        'code_verifier': config('VK_CODE_VERIFIER', default=''),
     },
     'yandex': {
         'client_id': config('YANDEX_OAUTH_CLIENT_ID', default=''),
@@ -256,7 +260,7 @@ OAUTH_PROVIDERS = {
         'token_url': 'https://oauth.yandex.ru/token',
         'userinfo_url': 'https://login.yandex.ru/info',
         'scopes': ['login:email', 'login:info'],
-        'redirect_uri': config('YANDEX_REDIRECT_URI', default='http://localhost/users/yandex_auth_callback')
+        'redirect_uri': config('YANDEX_REDIRECT_URI', default='http://localhost/users/auth_callback/yandex')
     }
 }
 
@@ -266,21 +270,21 @@ OAUTH_FAILURE_REDIRECT_URL = config('OAUTH_FAILURE_REDIRECT_URL', default='http:
 
 # ===== Настройки аутентификации =====
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',# Бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+    'django.contrib.auth.backends.ModelBackend',
+    # Бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
     # 'authentication.oauth.backends.OAuthBackend',
 ]
 
-
 # Настройки email
-EMAIL_BACKEND = config('EMAIL_BACKEND')               # Используемый бекенд
-EMAIL_HOST = config('EMAIL_HOST')                     # SMTP-сервер
-EMAIL_PORT = config('EMAIL_PORT', cast=int)           # Порт для SMTP
-EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)    # Использование SSL
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')           # Логин SMTP
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')   # Пароль SMTP
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER                  # Email отправителя
-SERVER_EMAIL = EMAIL_HOST_USER                        # Email для системных уведомлений
-EMAIL_ADMIN = EMAIL_HOST_USER                         # Email администратора
+EMAIL_BACKEND = config('EMAIL_BACKEND')  # Используемый бекенд
+EMAIL_HOST = config('EMAIL_HOST')  # SMTP-сервер
+EMAIL_PORT = config('EMAIL_PORT', cast=int)  # Порт для SMTP
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)  # Использование SSL
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Логин SMTP
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Пароль SMTP
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Email отправителя
+SERVER_EMAIL = EMAIL_HOST_USER  # Email для системных уведомлений
+EMAIL_ADMIN = EMAIL_HOST_USER  # Email администратора
 
 # Настройки для представления аутентификации
 LOGIN_REDIRECT_URL = '/'

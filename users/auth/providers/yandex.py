@@ -11,7 +11,8 @@ class YandexProvider:
             'response_type': 'code',
             # 'scope': ' '.join(settings.OAUTH_PROVIDERS['yandex']['scopes'])
         }
-        return f"https://oauth.yandex.ru/authorize?{urlencode(params)}"
+        return f"{settings.OAUTH_PROVIDERS['yandex']['authorize_url']}?{urlencode(params)}"
+
 
     def get_user_info(self, code):
 
@@ -22,7 +23,6 @@ class YandexProvider:
             'client_secret': settings.OAUTH_PROVIDERS['yandex']['client_secret'],
             'grant_type': 'authorization_code'
         }
-
 
         token_url = settings.OAUTH_PROVIDERS['yandex']['token_url']
 
@@ -46,7 +46,7 @@ class YandexProvider:
             'email': user_response.json()['default_email'],
             'first_name': user_response.json()['first_name'],
             'last_name': user_response.json()['last_name'],
-            'default_avatar_id': user_response.json()['default_avatar_id'],
+            'avatar_id': user_response.json()['default_avatar_id'],
             'login': user_response.json().get('login', ''),
             'birthday': user_response.json()['birthday'],
         }

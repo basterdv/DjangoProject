@@ -43,7 +43,8 @@
                                     <div class="row g-3 mb-4">
 
                                         <div class="col-6" id="VKAuthButton">
-                                            <a href="#"
+                                            {#                                            <a href="#"#}
+                                            <a href="{% url 'users:vk_login' %}"
                                                class="btn btn-outline-secondary w-100 social-btn">
                                                 <i class="fab fa-vk text-primary me-2"></i> ВКонтакте
                                             </a>
@@ -190,7 +191,7 @@
     <script src="https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js"></script>
 
 
-    <script src="{% static "/js/js_vk.js" %}"></script>
+{#    <script src="{% static "/js/js_vk.js" %}"></script>#}
 
 
 {% endblock content %}
