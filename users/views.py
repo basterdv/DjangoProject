@@ -13,7 +13,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt, requires_csrf_token
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 from django.views.generic.edit import BaseFormView
 from requests import Response
 
@@ -104,18 +104,36 @@ def profile(request):
     return render(request, 'users/profile.html', context)
     # return render(request, 'users/profile.html', context)
 
-class UserProfileView(View):
+
+class UserProfileView(TemplateView):
     template_name = 'users/profile.html'
 
     def get_context_data(self, **kwargs):
-        context = super(UserProfileView, self).get_context_data(**kwargs)
-        context['title'] = 'Регистрация | Обменник'
-        return context
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            try:
+                profile = CustomUser.objects.get(pk=user.pk)
+                context = {
+                    # 'user': user,
+                    'form': profile,
+                    'title': 'Профиль пользователя'
+                }
+            except CustomUser.DoesNotExist:
+                # Обработка случая, когда профиль пользователя не существует
+                logger.warning(f'Profile does not exist for user {user.username}')
+                context['profile'] = None
 
-    def get_object(self):
-        return CustomUser.objects.get(pk=self.request.user.pk)
+            return context
+        else:
+            # Обработка случая, когда пользователь не авторизован
+            logger.warning('Accessing user profile without authentication')
+            context['profile'] = None
 
 
+
+    # def get_object(self):
+    #     return CustomUser.objects.get(pk=self.request.user.pk)
 
 
 class PasswordReset(FormView):

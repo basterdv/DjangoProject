@@ -1,6 +1,8 @@
 import requests
 from django.conf import settings
+import logging
 
+logger = logging.getLogger(__name__)
 
 class YandexProvider:
     def get_auth_url(self):
@@ -15,40 +17,42 @@ class YandexProvider:
 
 
     def get_user_info(self, code):
+        try:
+            # Обмен code на токен
+            token_data = {
+                'code': code,
+                'client_id': settings.OAUTH_PROVIDERS['yandex']['client_id'],
+                'client_secret': settings.OAUTH_PROVIDERS['yandex']['client_secret'],
+                'grant_type': 'authorization_code'
+            }
 
-        # Обмен code на токен
-        token_data = {
-            'code': code,
-            'client_id': settings.OAUTH_PROVIDERS['yandex']['client_id'],
-            'client_secret': settings.OAUTH_PROVIDERS['yandex']['client_secret'],
-            'grant_type': 'authorization_code'
-        }
+            token_url = settings.OAUTH_PROVIDERS['yandex']['token_url']
 
-        token_url = settings.OAUTH_PROVIDERS['yandex']['token_url']
+            headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+            token_response = requests.post(token_url, data=token_data, headers=headers)
 
-        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-        token_response = requests.post(token_url, data=token_data, headers=headers)
+            token_response.raise_for_status()
+            access_token = token_response.json()['access_token']
 
-        token_response.raise_for_status()
-        access_token = token_response.json()['access_token']
+            # Получение данных пользователя
+            user_info_url =settings.OAUTH_PROVIDERS['yandex']['userinfo_url']
 
-        # Получение данных пользователя
-        user_info_url =settings.OAUTH_PROVIDERS['yandex']['userinfo_url']
+            user_response = requests.get(user_info_url,
+                headers={'Authorization': f'OAuth {access_token}'}
+            )
 
-        user_response = requests.get(user_info_url,
-            headers={'Authorization': f'OAuth {access_token}'}
-        )
+            user_response.raise_for_status()
 
-        user_response.raise_for_status()
-
-        return {
-            'id': user_response.json()['id'],
-            'email': user_response.json()['default_email'],
-            'first_name': user_response.json()['first_name'],
-            'last_name': user_response.json()['last_name'],
-            'avatar_id': user_response.json()['default_avatar_id'],
-            'login': user_response.json().get('login', ''),
-            'birthday': user_response.json()['birthday'],
-        }
+            return {
+                'id': user_response.json()['id'],
+                'email': user_response.json()['default_email'],
+                'first_name': user_response.json()['first_name'],
+                'last_name': user_response.json()['last_name'],
+                'avatar_id': user_response.json()['default_avatar_id'],
+                'login': user_response.json().get('login', ''),
+                'birthday': user_response.json()['birthday'],
+            }
+        except Exception as e:
+            logger.exception('Failed to get user info: {}'.format(e))
 
 

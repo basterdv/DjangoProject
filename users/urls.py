@@ -2,7 +2,7 @@ from django.urls import path
 
 from users import views
 from users.views import Login, RegisterUserView, logout, PasswordReset, YandexOAuthView, VKOAuthView, \
-    OAuthCallbackView
+    OAuthCallbackView, UserProfileView
 
 app_name = 'users'
 
@@ -15,5 +15,6 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('registr/', RegisterUserView.as_view(), name='registration'),
     path('passwordreset/', PasswordReset.as_view(), name='password_reset'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', UserProfileView.as_view(), name='profile'),
+    # path('profile/', views.profile, name='profile'),
 ]
