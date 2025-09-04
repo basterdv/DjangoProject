@@ -6,12 +6,11 @@ class YandexProvider:
     def get_auth_url(self):
         from urllib.parse import urlencode
         params = {
-            'client_id': 'b7986b6acead461082b4bbf881148c8f',
-            # 'redirect_uri': 'https://yandex.ru/callback',
+            'client_id': settings.OAUTH_PROVIDERS['yandex']['client_id'],
+            'redirect_uri': settings.OAUTH_PROVIDERS['yandex']['redirect_uri'],
             'response_type': 'code',
-            # 'scope': 'email',
+            # 'scope': ' '.join(settings.OAUTH_PROVIDERS['yandex']['scopes'])
         }
-
         return f"https://oauth.yandex.ru/authorize?{urlencode(params)}"
 
     def get_user_info(self, code):
@@ -19,12 +18,14 @@ class YandexProvider:
         # Обмен code на токен
         token_data = {
             'code': code,
-            'client_id': 'b7986b6acead461082b4bbf881148c8f',
-            'client_secret': '389a4e23017e454eb8b5a03cb9ed0d16',
+            'client_id': settings.OAUTH_PROVIDERS['yandex']['client_id'],
+            'client_secret': settings.OAUTH_PROVIDERS['yandex']['client_secret'],
             'grant_type': 'authorization_code'
         }
 
-        token_url = 'https://oauth.yandex.ru/token'
+
+        token_url = settings.OAUTH_PROVIDERS['yandex']['token_url']
+
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
         token_response = requests.post(token_url, data=token_data, headers=headers)
 
@@ -32,7 +33,8 @@ class YandexProvider:
         access_token = token_response.json()['access_token']
 
         # Получение данных пользователя
-        user_info_url = 'https://login.yandex.ru/info'
+        user_info_url =settings.OAUTH_PROVIDERS['yandex']['userinfo_url']
+
         user_response = requests.get(user_info_url,
             headers={'Authorization': f'OAuth {access_token}'}
         )

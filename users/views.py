@@ -14,6 +14,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt, requires_csrf_token
 from django.views.generic import FormView
 from django.views.generic.edit import BaseFormView
+from requests import Response
 
 from users.auth.providers.yandex import YandexProvider
 from users.auth.providers.vk import VkProvider
@@ -339,8 +340,15 @@ class OAuthCallbackView(BaseFormView):
     def get(self, request):
         code = self.request.GET.get('code')
         cid = request.GET.get('cid')
+        provider = request.GET.get('provider', 'google')
 
-        user_data = YandexProvider().get_user_info(code)
+        if provider == 'yandex':
+            user_data = YandexProvider().get_user_info(code)
+        elif provider == 'vk':
+            user_data = VkProvider().get_user_info(code)
+        else:
+            logger.error(f'error:Invalid provider')
+            return redirect('/users/login')
 
         if user_data is not None:
             user_id = int(user_data['id'])
